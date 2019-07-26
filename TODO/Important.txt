@@ -10,3 +10,4 @@ its fooled me!! didint worked! but why...
 Dear diary. this is the 6th webghook test commit, and its still dosent work. it hurts.
 now im trying something new to get it work.
 its a thing. im trying it. a setting. its says could not be secure. who cares.
+---here is the documentation about "how to set up a github webhook with some unnecessary settings changing"---
