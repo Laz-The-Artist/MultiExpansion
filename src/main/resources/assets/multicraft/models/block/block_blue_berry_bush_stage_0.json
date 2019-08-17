@@ -1,0 +1,6 @@
+{
+    "parent": "block/cross",
+    "textures": {
+        "cross": "multicraft:block/block_blue_berry_bush_stage_0"
+    }
+}
