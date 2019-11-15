@@ -33,6 +33,7 @@ public class PaintingRegistry {
 		
 		paintingRegistryEvent.getRegistry().registerAll(
 				
+				
 				ABSTRACT_1 = new PaintingType(32, 64).setRegistryName(Multicraft.multicraftLocation("painting_abstract_1_by_gama")),
 				ABSTRACT_2 = new PaintingType(32, 32).setRegistryName(Multicraft.multicraftLocation("painting_abstract_2_by_gama")),
 				CUBE = new PaintingType(32, 32).setRegistryName(Multicraft.multicraftLocation("painting_cube_by_koc")),
