@@ -1,0 +1,6 @@
+{
+    "parent": "block/cube_all",
+    "textures": {
+        "all": "multicraft:block/block_brick_terracotta_magenta"
+    }
+}

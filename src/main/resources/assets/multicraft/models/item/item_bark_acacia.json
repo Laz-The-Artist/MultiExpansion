@@ -1,0 +1,6 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "multicraft:item/item_bark_acacia"
+    }
+}
