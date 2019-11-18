@@ -1,5 +1,33 @@
 {
-	"death.attack.blueBerryBush": "%1$s was poked to death by a blue berry bush",
+	"item.multicraft.item_blue_berries": "Blue Berries",
+	"item.multicraft.item_bark_oak": "Oak Bark",
+	"item.multicraft.item_bark_spruce": "Spruce Bark",
+	"item.multicraft.item_bark_birch": "Birch Bark",
+	"item.multicraft.item_bark_jungle": "Jungle Bark",
+	"item.multicraft.item_bark_acacia": "Acacia Bark",
+	"item.multicraft.item_bark_dark_oak": "Dark Oak Bark",
+	
 	"block.multicraft.block_blue_berry_bush": "Blue Berry Bush",
-	"item.multicraft.item_blue_berries": "Blue Berries"
+	"block.multicraft.block_brick_mossy": "Mossy Bricks",
+	"block.multicraft.block_brick_terracotta": "Terracotta Bricks",
+	"block.multicraft.block_brick_terracotta_white": "White Terracotta Bricks",
+	"block.multicraft.block_brick_terracotta_orange": "Orange Terracotta Bricks",
+	"block.multicraft.block_brick_terracotta_magenta": "Magenta Terracotta Bricks",
+	"block.multicraft.block_brick_terracotta_light_blue": "Light Blue Terracotta Bricks",
+	"block.multicraft.block_brick_terracotta_yellow": "Yellow Terracotta Bricks",
+	"block.multicraft.block_brick_terracotta_lime": "Lime Terracotta Bricks",
+	"block.multicraft.block_brick_terracotta_pink": "Pink Terracotta Bricks",
+	"block.multicraft.block_brick_terracotta_gray": "Gray Terracotta Bricks",
+	"block.multicraft.block_brick_terracotta_light_gray": "Light Gray Terracotta Bricks",
+	"block.multicraft.block_brick_terracotta_cyan": "Cyan Terracotta Bricks",
+	"block.multicraft.block_brick_terracotta_purple": "Purple Terracotta Bricks",
+	"block.multicraft.block_brick_terracotta_blue": "Blue Terracotta Bricks",
+	"block.multicraft.block_brick_terracotta_brown": "Brown Terracotta Bricks",
+	"block.multicraft.block_brick_terracotta_green": "Green Terracotta Bricks",
+	"block.multicraft.block_brick_terracotta_red": "Red Terracotta Bricks",
+	"block.multicraft.block_brick_terracotta_black": "Black Terracotta Bricks",
+	
+	"itemGroup.multicraft": "MultiCraft",
+	
+	"death.attack.blueBerryBush": "%1$s was poked to death by a blue berry bush"
 }
