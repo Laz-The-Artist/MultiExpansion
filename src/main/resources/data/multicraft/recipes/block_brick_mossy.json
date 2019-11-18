@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients":
+	[
+        {
+            "item": "minecraft:bricks"
+        },
+        {
+            "item": "minecraft:vine"
+        }
+    ],
+    "result":
+	{
+        "item": "multicraft:block_brick_mossy",
+        "count": 1
+    }
+}

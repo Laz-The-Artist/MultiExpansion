@@ -1,0 +1,24 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern":
+	[
+        " B ",
+        "BLB",
+        " B "
+    ],
+    "key":
+	{
+        "B":
+		{
+            "item": "multicraft:item_bark_acacia"
+        },
+        "L":
+		{
+            "item": "minecraft:stripped_acacia_log"
+        }
+    },
+    "result": {
+        "item": "minecraft:acacia_log",
+        "count": 1
+    }
+}
