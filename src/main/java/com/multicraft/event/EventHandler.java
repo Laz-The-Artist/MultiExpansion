@@ -47,7 +47,7 @@ public class EventHandler {
 					newFox.setMotion(entity.getMotion());
 					newFox.setVariantType(((FoxEntity) entity).getVariantType());
 					
-					for(String s : entity.getTags()) {
+					for (String s : entity.getTags()) {
 						
 						newFox.getTags().add(s);
 						
