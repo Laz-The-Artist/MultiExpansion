@@ -1,5 +1,5 @@
 {
-    "variants": {
-        "": { "model": "multicraft:block/block_brick_terracotta_light_blue" }
-    }
+	"variants": {
+		"": { "model": "multicraft:block/block_light_blue_terracotta_bricks" }
+	}
 }
