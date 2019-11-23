@@ -1,0 +1,6 @@
+{
+    "parent": "block/flower_pot_cross",
+    "textures": {
+        "plant": "multicraft:block/block_potted_sweet_berry_bush"
+    }
+}
