@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " B ",
+    "BLB",
+	" B "
+  ],
+  "key": {
+    "B": {
+      "item": "multicraft:item_bark_birch"
+    },
+	"L": {
+      "item": "minecraft:stripped_birch_log"
+    }
+  },
+  "result": {
+    "item": "minecraft:birch_log"
+  }
+}
