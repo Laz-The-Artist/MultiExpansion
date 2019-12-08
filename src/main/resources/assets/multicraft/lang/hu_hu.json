@@ -1,5 +1,33 @@
 {
-	"death.attack.blueBerryBush": "%1$s-t halálra szúrta egy áfonya bokor",
+	"item.multicraft.item_blue_berries": "Áfonya",
+	"item.multicraft.item_bark_oak": "Tölgyfa kéreg",
+	"item.multicraft.item_bark_spruce": "Fenyőfa kéreg",
+	"item.multicraft.item_bark_birch": "Nírfa kéreg",
+	"item.multicraft.item_bark_jungle": "Trópusifa kéreg",
+	"item.multicraft.item_bark_acacia": "Akáciafa kéreg",
+	"item.multicraft.item_bark_dark_oak": "Sötét Tölgyfa kéreg",
+	
 	"block.multicraft.block_blue_berry_bush": "Áfonya bokor",
-	"item.multicraft.item_blue_berries": "Áfonya"
+	"block.multicraft.block_brick_mossy": "Mohás Tégla",
+	"block.multicraft.block_brick_terracotta": "Terrakotta Tégla",
+	"block.multicraft.block_brick_terracotta_white": "Fehér Terrakotta Tégla",
+	"block.multicraft.block_brick_terracotta_orange": "Narancssárga Terrakotta Tégla",
+	"block.multicraft.block_brick_terracotta_magenta": "Magenta Terrakotta Tégla",
+	"block.multicraft.block_brick_terracotta_light_blue": "Világoskék Terrakotta Tégla",
+	"block.multicraft.block_brick_terracotta_yellow": "Citromsárga Terrakotta Tégla",
+	"block.multicraft.block_brick_terracotta_lime": "Világoszöld Terrakotta Tégla",
+	"block.multicraft.block_brick_terracotta_pink": "Rózsaszín Terrakotta Tégla",
+	"block.multicraft.block_brick_terracotta_gray": "Szürke Terrakotta Tégla",
+	"block.multicraft.block_brick_terracotta_light_gray": "Világosszürke Terrakotta Tégla",
+	"block.multicraft.block_brick_terracotta_cyan": "Cián Terrakotta Tégla",
+	"block.multicraft.block_brick_terracotta_purple": "Lila Terrakotta Tégla",
+	"block.multicraft.block_brick_terracotta_blue": "Kék Terrakotta Tégla",
+	"block.multicraft.block_brick_terracotta_brown": "Barna Terrakotta Tégla",
+	"block.multicraft.block_brick_terracotta_green": "Zöld Terrakotta Tégla",
+	"block.multicraft.block_brick_terracotta_red": "Piros Terrakotta Tégla",
+	"block.multicraft.block_brick_terracotta_black": "Fekete Terrakotta Tégla",
+	
+	"itemGroup.multicraft": "MultiCraft",
+	
+	"death.attack.blueBerryBush": "%1$s halálra lett szúrva egy áfonyabokor álltal"
 }
