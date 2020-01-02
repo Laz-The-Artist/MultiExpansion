@@ -1,12 +1,12 @@
-modLoader="javafml" #mandatory
-loaderVersion="[28,)" #mandatory (26 is current forge version)
-[[mods]] #mandatory
-modId="multicraft" #mandatory
-version="1.0.0" #mandatory
-displayName="Multicraft" #mandatory
-logoFile="logo.png" #optional
-credits="Multicraft mod is made by Multiteam, specially by: Rellit [MAIN CODE], King_of_Creepers [TEXTURES/MODELS], and IAmGama [TEXTURES]" #optional
-authors="Rellit, King_of_Creepers, and IAmGama" #optional
+modLoader="javafml"
+loaderVersion="[28,)"
+[[mods]]
+modId="multicraft"
+version="0.3.0"
+displayName="Multicraft"
+logoFile="logo.png"
+credits="Multicraft mod is made by Multiteam, specially by: Rellit [MAIN CODE], MaroonShaded [CODE] King_of_Creepers [TEXTURES/MODELS], and IAmGama [TEXTURES]" #optional
+authors="Rellit, MaroonShaded, King_of_Creepers, and IAmGama"
 description='''This mod adds the things we've been missing from minecraft for a long time, and even some new exciting features!'''
 [[dependencies.multicraft]] #optional
     modId="forge" #mandatory
