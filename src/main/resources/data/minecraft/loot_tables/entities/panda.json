@@ -33,10 +33,11 @@
 						}
 					},
 					{
-						"function": "minecraft:looting_enchantment",
+						"function": "minecraft:looting_enchant",
 						"count": 1.0
 					}
-				]
+				],
+				"name": "multicraft:item_pelt_panda"
 			}
 		]
 	}
