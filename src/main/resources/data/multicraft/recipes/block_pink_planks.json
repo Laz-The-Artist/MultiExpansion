@@ -1,0 +1,15 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern":
+	[
+		"###",
+		"#D#",
+		"###"
+	],
+	"key":
+	{
+		"#": { "tag": "minecraft:planks" },
+		"D": { "item": "minecraft:pink_dye" }
+	},
+	"result": { "item": "multicraft:block_pink_planks", "count": 8 }
+}
