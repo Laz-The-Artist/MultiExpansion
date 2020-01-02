@@ -48,7 +48,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "multicraft:item_blue_berry"
+          "name": "multicraft:item_blue_berries"
         }
       ],
       "conditions": [
