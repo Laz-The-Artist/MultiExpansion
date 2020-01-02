@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "multicraft:block_block_blue_planks"
+          "name": "multicraft:block_blue_planks"
         }
       ],
       "conditions": [
