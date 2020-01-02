@@ -23,9 +23,10 @@ public class ItemRegistry {
 	public static Item JUNGLE_BARK;
 	public static Item ACACIA_BARK;
 	public static Item DARK_OAK_BARK;
+	public static Item POLAR_BEAR_PELT;
+	public static Item PANDA_PELT;
 	
 	public static Item MOSSY_BRICKS;
-	
 	public static Item TERRACOTTA_BRICKS;
 	public static Item WHITE_TERRACOTTA_BRICKS;
 	public static Item ORANGE_TERRACOTTA_BRICKS;
@@ -60,26 +61,27 @@ public class ItemRegistry {
 	public static Item GREEN_PLANKS;
 	public static Item RED_PLANKS;
 	public static Item BLACK_PLANKS;
-
-	public static Block RUBY_ORE;
-	public static Block RUBY_BLOCK;
+	
 	
 	@SubscribeEvent
 	public static void registerItems(final RegistryEvent.Register<Item> itemRegistryEvent) {
 		
 		itemRegistryEvent.getRegistry().registerAll(
 				
+				// Items
 				CREATIVE_TAB_ITEM = new Item((new Item.Properties())).setRegistryName(Multicraft.multicraftLocation("creative_tab_icon")),
 				BLUE_BERRIES = new BlockNamedItem(BlockRegistry.BLUE_BERRY_BUSH, (new Item.Properties()).group(Multicraft.MULTICRAFT).food(Foods.SWEET_BERRIES)).setRegistryName(Multicraft.multicraftLocation("item_blue_berries")),
-				registerItem(OAK_BARK, Multicraft.MULTICRAFT, "item_bark_oak"),
-				registerItem(SPRUCE_BARK, Multicraft.MULTICRAFT, "item_bark_spruce"),
-				registerItem(BIRCH_BARK, Multicraft.MULTICRAFT, "item_bark_birch"),
-				registerItem(JUNGLE_BARK, Multicraft.MULTICRAFT, "item_bark_jungle"),
-				registerItem(ACACIA_BARK , Multicraft.MULTICRAFT, "item_bark_acacia"),
-				registerItem(DARK_OAK_BARK, Multicraft.MULTICRAFT, "item_bark_dark_oak"),
+				registerItem(OAK_BARK       , Multicraft.MULTICRAFT, "item_bark_oak"),
+				registerItem(SPRUCE_BARK    , Multicraft.MULTICRAFT, "item_bark_spruce"),
+				registerItem(BIRCH_BARK     , Multicraft.MULTICRAFT, "item_bark_birch"),
+				registerItem(JUNGLE_BARK    , Multicraft.MULTICRAFT, "item_bark_jungle"),
+				registerItem(ACACIA_BARK    , Multicraft.MULTICRAFT, "item_bark_acacia"),
+				registerItem(DARK_OAK_BARK  , Multicraft.MULTICRAFT, "item_bark_dark_oak"),
+				registerItem(POLAR_BEAR_PELT, Multicraft.MULTICRAFT, "item_pelt_polar_bear"),
+				registerItem(PANDA_PELT     , Multicraft.MULTICRAFT, "item_pelt_panda"),
 				
+				// Blocks
 				registerBlockItem(BlockRegistry.MOSSY_BRICKS, Multicraft.MULTICRAFT),
-				
 				registerBlockItem(BlockRegistry.TERRACOTTA_BRICKS, Multicraft.MULTICRAFT),
 				registerBlockItem(BlockRegistry.WHITE_TERRACOTTA_BRICKS, Multicraft.MULTICRAFT),
 				registerBlockItem(BlockRegistry.ORANGE_TERRACOTTA_BRICKS, Multicraft.MULTICRAFT),
