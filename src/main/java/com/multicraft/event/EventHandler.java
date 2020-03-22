@@ -1,5 +1,8 @@
 package com.multicraft.event;
 
+import java.util.Random;
+
+import com.multicraft.Multicraft;
 import com.multicraft.block.PottedBerryBushBlock;
 import com.multicraft.block.properties.BerryType;
 import com.multicraft.entity.MoreBerryFoxEntity;
@@ -15,11 +18,13 @@ import net.minecraft.block.RotatedPillarBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.passive.FoxEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
@@ -29,6 +34,7 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 @EventBusSubscriber
 public class EventHandler {
 	
+	@SuppressWarnings("unchecked")
 	@SubscribeEvent
 	public void replaceFoxes(EntityJoinWorldEvent event) {
 		
@@ -129,60 +135,76 @@ public class EventHandler {
 	}
 	
 	@SubscribeEvent
-	public void potBerries(RightClickBlock event) {
-		
+	public void potBerries(RightClickBlock event)
+	{
 		World world = event.getWorld();
-		BlockPos flowerPotPos = event.getPos();
-		Block flowerPot = world.getBlockState(flowerPotPos).getBlock();
+		BlockPos pos = event.getPos();
+		Block pot = world.getBlockState(pos).getBlock();
 		
-		if (!world.isRemote()) {
-			System.out.print("OK1");
-			if (flowerPot instanceof FlowerPotBlock) {
-				System.out.print("OK2");
-				if (((FlowerPotBlock) flowerPot).func_220276_d() == Blocks.AIR) {
-					System.out.print("OK3");
-					if (event.getItemStack().getItem() == Items.SWEET_BERRIES) {
-						System.out.print("OK4");
-						world.setBlockState(flowerPotPos, BlockRegistry.POTTED_BERRY_BUSH.getDefaultState().with(PottedBerryBushBlock.BERRY_TYPE, BerryType.SWEET_BERRY_BUSH).with(PottedBerryBushBlock.IS_HARVESTED, Boolean.FALSE));
-						
-					}
+		if (!world.isRemote() && pot instanceof FlowerPotBlock)
+		{
+			if (((FlowerPotBlock)pot).func_220276_d() == Blocks.AIR)
+			{
+				if (event.getItemStack().getItem() == Items.SWEET_BERRIES)
+					world.setBlockState(pos, BlockRegistry.POTTED_BERRY_BUSH.getDefaultState());
+				
+				if (event.getItemStack().getItem() == ItemRegistry.BLUE_BERRIES)
+					world.setBlockState(pos, BlockRegistry.POTTED_BERRY_BUSH.getDefaultState().with(PottedBerryBushBlock.BERRY_TYPE, BerryType.BLUE_BERRY_BUSH));
+			}
+				
+			/**
+			if (player.isSneaking()) {
+				
+				
+				
+				if (((FlowerPotBlock) flowerPot).func_220276_d() == Blocks.SWEET_BERRY_BUSH) {
 					
-					
-					if (event.getItemStack().getItem() == ItemRegistry.BLUE_BERRIES) {
-						System.out.print("OK5");
-						world.setBlockState(flowerPotPos, BlockRegistry.POTTED_BERRY_BUSH.getDefaultState().with(PottedBerryBushBlock.BERRY_TYPE, BerryType.BLUE_BERRY_BUSH).with(PottedBerryBushBlock.IS_HARVESTED, Boolean.FALSE));
-						
-					}
+					Block.spawnAsEntity(world, flowerPotPos, new ItemStack(Items.SWEET_BERRIES, 1));
+					world.playSound((PlayerEntity)null, flowerPotPos, SoundEvents.ITEM_SWEET_BERRIES_PICK_FROM_BUSH, SoundCategory.BLOCKS, 1.0F, 0.8F + world.rand.nextFloat() * 0.4F);
+					world.setBlockState(flowerPotPos, BlockRegistry.POTTED_BERRY_BUSH_HARVESTED.getDefaultState().with(PottedBerryBushBlock.BERRY_TYPE, BerryType.SWEET_BERRY_BUSH));
 					
 				}
 				
-				/**
-				if (player.isSneaking()) {
+				if (((FlowerPotBlock) flowerPot).func_220276_d() == BlockRegistry.BLUE_BERRY_BUSH) {
 					
-					
-					/
-					if (((FlowerPotBlock) flowerPot).func_220276_d() == Blocks.SWEET_BERRY_BUSH) {
-						
-						Block.spawnAsEntity(world, flowerPotPos, new ItemStack(Items.SWEET_BERRIES, 1));
-						world.playSound((PlayerEntity)null, flowerPotPos, SoundEvents.ITEM_SWEET_BERRIES_PICK_FROM_BUSH, SoundCategory.BLOCKS, 1.0F, 0.8F + world.rand.nextFloat() * 0.4F);
-						world.setBlockState(flowerPotPos, BlockRegistry.POTTED_BERRY_BUSH_HARVESTED.getDefaultState().with(PottedBerryBushBlock.BERRY_TYPE, BerryType.SWEET_BERRY_BUSH));
-						
-					}
-					
-					if (((FlowerPotBlock) flowerPot).func_220276_d() == BlockRegistry.BLUE_BERRY_BUSH) {
-						
-						Block.spawnAsEntity(world, flowerPotPos, new ItemStack(ItemRegistry.BLUE_BERRIES, 1));
-						world.playSound((PlayerEntity)null, flowerPotPos, SoundEvents.ITEM_SWEET_BERRIES_PICK_FROM_BUSH, SoundCategory.BLOCKS, 1.0F, 0.8F + world.rand.nextFloat() * 0.4F);
-						world.setBlockState(flowerPotPos, BlockRegistry.POTTED_BERRY_BUSH_HARVESTED.getDefaultState().with(PottedBerryBushBlock.BERRY_TYPE, BerryType.BLUE_BERRY_BUSH));
-						
-					}
+					Block.spawnAsEntity(world, flowerPotPos, new ItemStack(ItemRegistry.BLUE_BERRIES, 1));
+					world.playSound((PlayerEntity)null, flowerPotPos, SoundEvents.ITEM_SWEET_BERRIES_PICK_FROM_BUSH, SoundCategory.BLOCKS, 1.0F, 0.8F + world.rand.nextFloat() * 0.4F);
+					world.setBlockState(flowerPotPos, BlockRegistry.POTTED_BERRY_BUSH_HARVESTED.getDefaultState().with(PottedBerryBushBlock.BERRY_TYPE, BerryType.BLUE_BERRY_BUSH));
 					
 				}
-				**/
+				
 			}
-			
+			**/
 		}
-		
 	}
 	
+	@SubscribeEvent
+	public void dropRoses(RightClickBlock event)
+	{
+		World world = event.getWorld();
+		BlockPos pos = event.getPos();
+		PlayerEntity player = event.getPlayer();
+		
+		if (world.getBlockState(pos) == Blocks.ROSE_BUSH.getDefaultState())
+		{
+			Multicraft.LOGGER.info("Block right clicked.");
+			if (player.isSneaking())
+			{
+				Multicraft.LOGGER.info("Player is sneaking");
+				
+				world.destroyBlock(pos, false);
+				Multicraft.LOGGER.info("Block destroyed.");
+				
+				int roseCount = MathHelper.nextInt(new Random(), 3, 6);
+				Block.spawnAsEntity(world, pos, new ItemStack(ItemRegistry.RED_ROSE, roseCount));
+				Multicraft.LOGGER.info("Items dropped.");
+				
+				if (player.getHeldItem(event.getHand()).getItem() != Items.SHEARS)
+				{
+					player.attackEntityFrom(Multicraft.ROSE_BUSH, 2);
+					Multicraft.LOGGER.info("Player damaged.");
+				}
+			}
+		}
+	}
 }
