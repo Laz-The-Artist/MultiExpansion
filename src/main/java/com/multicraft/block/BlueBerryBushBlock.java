@@ -117,7 +117,7 @@ public class BlueBerryBushBlock extends BushBlock implements IGrowable {
 			
 			spawnAsEntity(worldIn, pos, new ItemStack(ItemRegistry.BLUE_BERRIES, j + (flag ? 1 : 0)));
 			worldIn.playSound((PlayerEntity)null, pos, SoundEvents.ITEM_SWEET_BERRIES_PICK_FROM_BUSH, SoundCategory.BLOCKS, 1.0F, 0.8F + worldIn.rand.nextFloat() * 0.4F);
-			worldIn.setBlockState(pos, state.with(AGE, Integer.valueOf(1)), 2);
+			worldIn.setBlockState(pos, state.with(AGE, Integer.valueOf(1)));
 			
 			return true;
 			
