@@ -3,11 +3,15 @@ package com.multicraft.registries;
 import com.multicraft.Multicraft;
 import com.multicraft.block.BlueBerryBushBlock;
 import com.multicraft.block.PottedBerryBushBlock;
+import com.multicraft.block.RubyOreBlock;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.FlowerBlock;
 import net.minecraft.block.SoundType;
+import net.minecraft.block.TallFlowerBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
+import net.minecraft.potion.Effects;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
@@ -55,6 +59,18 @@ public class BlockRegistry {
 	
 	public static Block RUBY_ORE;
 	public static Block RUBY_BLOCK;
+
+	public static Block RED_ROSE;
+	public static Block PINK_ROSE;
+	public static Block PURPLE_ROSE;
+	public static Block YELLOW_ROSE;
+	public static Block BLUE_ROSE;
+	public static Block WHITE_ROSE;
+	public static Block PINK_ROSE_BUSH;
+	public static Block PURPLE_ROSE_BUSH;
+	public static Block YELLOW_ROSE_BUSH;
+	public static Block BLUE_ROSE_BUSH;
+	public static Block WHITE_ROSE_BUSH;
 	
 	@SubscribeEvent
 	public static void registerBlocks(final RegistryEvent.Register<Block> blockRegistryEvent) {
@@ -101,9 +117,20 @@ public class BlockRegistry {
 				RED_PLANKS = new Block(Block.Properties.create(Material.WOOD, MaterialColor.RED).hardnessAndResistance(2.0F, 3.0F).sound(SoundType.WOOD)).setRegistryName(Multicraft.multicraftLocation("block_red_planks")),
 				BLACK_PLANKS = new Block(Block.Properties.create(Material.WOOD, MaterialColor.BLACK).hardnessAndResistance(2.0F, 3.0F).sound(SoundType.WOOD)).setRegistryName(Multicraft.multicraftLocation("block_black_planks")),
 				
-				RUBY_ORE = new Block(Block.Properties.create(Material.ROCK).sound(SoundType.STONE)).setRegistryName(Multicraft.multicraftLocation("block_ruby_ore")),
-				RUBY_BLOCK = new Block(Block.Properties.create(Material.ROCK, MaterialColor.RED).sound(SoundType.STONE)).setRegistryName(Multicraft.multicraftLocation("block_ruby_block"))
+				RUBY_ORE = new RubyOreBlock(Block.Properties.create(Material.ROCK, MaterialColor.NETHERRACK).hardnessAndResistance(3.0F, 3.0F).sound(SoundType.STONE).harvestLevel(3)).setRegistryName(Multicraft.multicraftLocation("block_ruby_ore")),
+				RUBY_BLOCK = new Block(Block.Properties.create(Material.ROCK, MaterialColor.RED).hardnessAndResistance(10.0F, 5.0F).sound(SoundType.STONE)).setRegistryName(Multicraft.multicraftLocation("block_ruby_block")),
 				
+				RED_ROSE = new FlowerBlock(Effects.HEALTH_BOOST, 4, Block.Properties.create(Material.PLANTS).doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.PLANT)).setRegistryName(Multicraft.multicraftLocation("block_flower_rose_red")),
+				PINK_ROSE = new FlowerBlock(Effects.HEALTH_BOOST, 4, Block.Properties.create(Material.PLANTS).doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.PLANT)).setRegistryName(Multicraft.multicraftLocation("block_flower_rose_pink")),
+				PURPLE_ROSE = new FlowerBlock(Effects.NIGHT_VISION, 4, Block.Properties.create(Material.PLANTS).doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.PLANT)).setRegistryName(Multicraft.multicraftLocation("block_flower_rose_purple")),
+				YELLOW_ROSE = new FlowerBlock(Effects.UNLUCK, 4, Block.Properties.create(Material.PLANTS).doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.PLANT)).setRegistryName(Multicraft.multicraftLocation("block_flower_rose_yellow")),
+				BLUE_ROSE = new FlowerBlock(Effects.NIGHT_VISION, 4, Block.Properties.create(Material.PLANTS).doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.PLANT)).setRegistryName(Multicraft.multicraftLocation("block_flower_rose_blue")),
+				WHITE_ROSE = new FlowerBlock(Effects.GLOWING, 4, Block.Properties.create(Material.PLANTS).doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.PLANT)).setRegistryName(Multicraft.multicraftLocation("block_flower_rose_white")),
+				PINK_ROSE_BUSH   = new TallFlowerBlock(Block.Properties.create(Material.TALL_PLANTS).doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.PLANT)).setRegistryName("block_rose_bush_pink"),
+				PURPLE_ROSE_BUSH = new TallFlowerBlock(Block.Properties.create(Material.TALL_PLANTS).doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.PLANT)).setRegistryName("block_rose_bush_purple"),
+				YELLOW_ROSE_BUSH = new TallFlowerBlock(Block.Properties.create(Material.TALL_PLANTS).doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.PLANT)).setRegistryName("block_rose_bush_yellow"),
+				BLUE_ROSE_BUSH   = new TallFlowerBlock(Block.Properties.create(Material.TALL_PLANTS).doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.PLANT)).setRegistryName("block_rose_bush_blue"),
+				WHITE_ROSE_BUSH  = new TallFlowerBlock(Block.Properties.create(Material.TALL_PLANTS).doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.PLANT)).setRegistryName("block_rose_bush_white")
 		);
 		
 	}
