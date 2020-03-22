@@ -1,25 +1,5 @@
 package com.multicraft;
 
-import net.minecraft.block.Block;
-import net.minecraft.client.renderer.entity.FoxRenderer;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.item.PaintingType;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.client.registry.RenderingRegistry;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
-import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
-import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -31,8 +11,29 @@ import com.multicraft.registries.EntityRegistry;
 import com.multicraft.registries.FeatureRegistry;
 import com.multicraft.registries.ItemRegistry;
 import com.multicraft.registries.PaintingRegistry;
+import com.multicraft.registries.PotionRegistry;
 
-@Mod("multicraft")
+import net.minecraft.block.Block;
+import net.minecraft.client.renderer.entity.FoxRenderer;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.item.PaintingType;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.potion.Potion;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.gen.feature.Feature;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+
+@Mod(Multicraft.MODID)
 public class Multicraft {
 	
 	public static final String MODID = "multicraft";
@@ -40,14 +41,13 @@ public class Multicraft {
 	public static final Logger LOGGER = LogManager.getLogger();
 	
 	public static final DamageSource BLUEBERRY_BUSH = new DamageSource("blueBerryBush");
+	public static final DamageSource ROSE_BUSH = new DamageSource("roseBush");
 	
 	public static final ItemGroup MULTICRAFT = new MulticraftItemGroup("multicraft");
 	
 	public Multicraft() {
 		
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
-		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueueIMC);
-		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::processIMC);
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
 		
 		MinecraftForge.EVENT_BUS.register(this);
@@ -55,21 +55,11 @@ public class Multicraft {
 		
 	}
 	
-	private void setup(final FMLCommonSetupEvent event) {
-		
-	}
+	private void setup(final FMLCommonSetupEvent event) {}
 	
 	private void doClientStuff(final FMLClientSetupEvent event) {
 		
 		RenderingRegistry.registerEntityRenderingHandler(MoreBerryFoxEntity.class, FoxRenderer::new);
-		
-	}
-	
-	private void enqueueIMC(final InterModEnqueueEvent event) {
-		
-	}
-	
-	private void processIMC(final InterModProcessEvent event) {
 		
 	}
 	
@@ -119,6 +109,16 @@ public class Multicraft {
 			LOGGER.info("Registering Features");
 			FeatureRegistry.registerFeatures(featureRegistryEvent);
 			
+		}
+		
+		@SubscribeEvent
+		public void onPotionRegistry(final RegistryEvent.Register<Potion> event)
+		{
+			event.getRegistry().registerAll
+			(
+					PotionRegistry.LEVITATION,
+					PotionRegistry.LONG_LEVITATION
+			);
 		}
 		
 	}
