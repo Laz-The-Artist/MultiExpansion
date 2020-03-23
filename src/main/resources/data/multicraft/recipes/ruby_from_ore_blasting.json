@@ -1,0 +1,7 @@
+{
+	"type": "minecraft:blasting",
+	"ingredient": { "item": "multicraft:block_ruby_ore" },
+	"result": "multicraft:item_ruby",
+	"experience": 1,
+	"cookingtime": 100
+}
