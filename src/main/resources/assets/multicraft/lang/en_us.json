@@ -1,5 +1,6 @@
 {
 	"item.multicraft.item_blue_berries": "Blue Berries",
+	"item.multicraft.item_ruby": "Ruby",
 	"item.multicraft.item_bark_oak": "Oak Bark",
 	"item.multicraft.item_bark_spruce": "Spruce Bark",
 	"item.multicraft.item_bark_birch": "Birch Bark",
@@ -8,6 +9,10 @@
 	"item.multicraft.item_bark_dark_oak": "Dark Oak Bark",
 	"item.multicraft.item_pelt_polar_bear": "Polar Bear Pelt",
 	"item.multicraft.item_pelt_panda": "Panda Pelt",
+	"item.multicraft.item_pelt_ocelot": "Ocelot Pelt",
+	"item.multicraft.item_bat_wing": "Bat Wing",
+	"item.multicraft.item_meat_raw_parrot": "Raw Parrot Meat",
+	"item.multicraft.item_meat_cooked_parrot": "Cooked Parrot Meat",
 	
 	"block.multicraft.block_blue_berry_bush": "Blue Berry Bush",
 	"block.multicraft.block_brick_mossy": "Mossy Bricks",
@@ -46,8 +51,21 @@
 	"block.multicraft.block_black_planks": "Black Planks",
 	"block.multicraft.block_ruby_ore": "Ruby Ore",
 	"block.multicraft.block_ruby_block": "Block of Ruby",
+	"block.multicraft.block_flower_rose_red": "Red Rose",
+	"block.multicraft.block_flower_rose_pink": "Pink Rose",
+	"block.multicraft.block_flower_rose_purple": "Purple Rose",
+	"block.multicraft.block_flower_rose_yellow": "Yellow Rose",
+	"block.multicraft.block_flower_rose_blue": "Blue Rose",
+	"block.multicraft.block_flower_rose_white": "White Rose",
+	"block.minecraft.rose_bush": "Red Rose Bush",
+	"block.multicraft.block_rose_bush_pink": "Pink Rose Bush",
+	"block.multicraft.block_rose_bush_purple": "Purple Rose Bush",
+	"block.multicraft.block_rose_bush_yellow": "Yellow Rose Bush",
+	"block.multicraft.block_rose_bush_blue": "Blue Rose Bush",
+	"block.multicraft.block_rose_bush_white": "White Rose Bush",
 	
 	"itemGroup.multicraft": "MultiCraft",
 	
-	"death.attack.blueBerryBush": "%1$s was poked to death by a blue berry bush"
+	"death.attack.blueBerryBush": "%1$s was poked to death by a blue berry bush",
+	"death.attack.roseBush": "%1$s was poked to death by a rose bush"
 }
