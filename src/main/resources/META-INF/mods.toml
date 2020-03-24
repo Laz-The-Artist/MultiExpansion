@@ -2,16 +2,17 @@ modLoader="javafml"
 loaderVersion="[28,)"
 [[mods]]
 modId="multicraft"
-version="0.3.0"
+version="0.4.0"
 displayName="Multicraft"
 logoFile="logo.png"
-credits="Multicraft mod is made by Multiteam, specially by: Rellit [MAIN CODE], MaroonShaded [CODE] King_of_Creepers [TEXTURES/MODELS], and IAmGama [TEXTURES]" #optional
-authors="Rellit, MaroonShaded, King_of_Creepers, and IAmGama"
+credits="Multicraft mod is made by Multiteam, specially by: Rellit [MAIN CODE], MaroonShaded [CODE] King_of_Creepers [TEXTURES/MODELS], and IAmGama [TEXTURES]"
+authors="Rellit, MaroonShaded, King_of_Creepers, IAmGama, and Reoseah"
 description='''This mod adds the things we've been missing from minecraft for a long time, and even some new exciting features!'''
-[[dependencies.multicraft]] #optional
-    modId="forge" #mandatory
-    mandatory=true #mandatory
-    versionRange="[28,)" #mandatory
+
+[[dependencies.multicraft]]
+    modId="forge"
+    mandatory=true
+    versionRange="[28,)"
     ordering="NONE"
     side="BOTH"
 [[dependencies.multicraft]]
