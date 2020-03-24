@@ -12,7 +12,9 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.HopperBlock;
 import net.minecraft.block.IGrowable;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -78,9 +80,14 @@ public class PottedBerryBushBlock extends Block implements IGrowable {
 				
 				Block.spawnAsEntity(world, pos, new ItemStack(berry));
 				world.playSound((PlayerEntity)null, pos, SoundEvents.ITEM_SWEET_BERRIES_PICK_FROM_BUSH, SoundCategory.BLOCKS, 1.0F, 0.8F + world.rand.nextFloat() * 0.4F);
-				world.setBlockState(pos, player.isSneaking() ? Blocks.FLOWER_POT.getDefaultState() : BlockRegistry.POTTED_BERRY_BUSH.getDefaultState().with(BERRY_TYPE, state.get(BERRY_TYPE)).with(PottedBerryBushBlock.IS_HARVESTED, Boolean.TRUE));
+				world.setBlockState(pos, player.isSneaking() ? Blocks.FLOWER_POT.getDefaultState() : state.with(IS_HARVESTED, Boolean.TRUE));
 			}
-			else world.setBlockState(pos, Blocks.FLOWER_POT.getDefaultState());
+			else if (player.getHeldItem(handIn).getItem() != Items.BONE_MEAL)
+			{
+				world.setBlockState(pos, Blocks.FLOWER_POT.getDefaultState());
+				world.playSound((PlayerEntity)null, pos, SoundEvents.ITEM_SWEET_BERRIES_PICK_FROM_BUSH, SoundCategory.BLOCKS, 1.0F, 0.8F + world.rand.nextFloat() * 0.4F);
+			}
+			else return false;
 		}
 		
 		return true;
@@ -121,47 +128,25 @@ public class PottedBerryBushBlock extends Block implements IGrowable {
 	@Override
 	public void grow(World world, Random rand, BlockPos pos, BlockState state) {
 		
-		if (!world.isRemote) world.setBlockState(pos, BlockRegistry.POTTED_BERRY_BUSH.getDefaultState().with(BERRY_TYPE, state.get(BERRY_TYPE)).with(IS_HARVESTED, Boolean.FALSE));
+		if (!world.isRemote)
+		{
+			world.setBlockState(pos, BlockRegistry.POTTED_BERRY_BUSH.getDefaultState().with(BERRY_TYPE, state.get(BERRY_TYPE)).with(IS_HARVESTED, Boolean.FALSE));
 			
-			/**
-			if (world.getBlockState(pos.down()).getBlock() instanceof HopperBlock) {
+			if (world.getBlockState(pos.down()).getBlock() instanceof HopperBlock)
+			{
+				ItemEntity itemEntity = new ItemEntity(world, pos.getX() + 0.5, pos.getY() - 0.3, pos.getZ() + 0.5, ItemStack.EMPTY);
 				
-				ItemEntity itementity = new ItemEntity(world, (double)pos.getX() + 0.5, (double)pos.getY() - 0.3, (double)pos.getZ() + 0.5, new ItemStack(Items.SWEET_BERRIES));
+				if (state.get(BERRY_TYPE) == BerryType.SWEET_BERRY_BUSH)
+					itemEntity = new ItemEntity(world, pos.getX() + 0.5, pos.getY() - 0.3, pos.getZ() + 0.5, new ItemStack(Items.SWEET_BERRIES));
 				
-				if (this.getDefaultState().with(PottedBerryBushBlock.BERRY_TYPE, BerryType.SWEET_BERRY_BUSH) == state) {
-					
-					itementity = new ItemEntity(world, (double)pos.getX() + 0.5, (double)pos.getY() - 0.3, (double)pos.getZ() + 0.5, new ItemStack(Items.SWEET_BERRIES));
-					
-				}
+				if (state.get(BERRY_TYPE) == BerryType.BLUE_BERRY_BUSH)
+					itemEntity = new ItemEntity(world, pos.getX() + 0.5, pos.getY() - 0.3, pos.getZ() + 0.5, new ItemStack(ItemRegistry.BLUE_BERRIES));
 				
-				if (this.getDefaultState().with(PottedBerryBushBlock.BERRY_TYPE, BerryType.BLUE_BERRY_BUSH) == state) {
-					
-					itementity = new ItemEntity(world, (double)pos.getX() + 0.5, (double)pos.getY() - 0.3, (double)pos.getZ() + 0.5, new ItemStack(ItemRegistry.BLUE_BERRIES));
-					
-				}
-				
-				itementity.setDefaultPickupDelay();
-				world.addEntity(itementity);
+				itemEntity.setDefaultPickupDelay();
+				world.addEntity(itemEntity);
 				world.playSound((PlayerEntity)null, pos, SoundEvents.ITEM_SWEET_BERRIES_PICK_FROM_BUSH, SoundCategory.BLOCKS, 1.0F, 0.8F + world.rand.nextFloat() * 0.4F);
-				world.setBlockState(pos, BlockRegistry.POTTED_BERRY_BUSH_HARVESTED.getDefaultState().with(PottedBerryBushBlock.BERRY_TYPE, state.get(PottedBerryBushBlock.BERRY_TYPE)));
-				
-			} else {
-				
-				if (this.getDefaultState().with(PottedBerryBushBlock.BERRY_TYPE, BerryType.SWEET_BERRY_BUSH) == state) {
-					
-					world.setBlockState(pos, BlockRegistry.POTTED_SWEET_BERRY_BUSH.getDefaultState());
-					
-				}
-				
-				if (this.getDefaultState().with(PottedBerryBushBlock.BERRY_TYPE, BerryType.BLUE_BERRY_BUSH) == state) {
-					
-					world.setBlockState(pos, BlockRegistry.POTTED_BLUE_BERRY_BUSH.getDefaultState());
-					
-				}
-				
+				world.setBlockState(pos, state.with(IS_HARVESTED, Boolean.valueOf(true)));
 			}
-			**/
-		
+		}
 	}
-	
 }
