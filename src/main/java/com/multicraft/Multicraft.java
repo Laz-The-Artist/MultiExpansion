@@ -6,6 +6,7 @@ import org.apache.logging.log4j.Logger;
 import com.multicraft.entity.MoreBerryFoxEntity;
 import com.multicraft.event.EventHandler;
 import com.multicraft.itemgroup.MulticraftItemGroup;
+import com.multicraft.potion.BrewingRecipeHandler;
 import com.multicraft.registries.BlockRegistry;
 import com.multicraft.registries.EntityRegistry;
 import com.multicraft.registries.FeatureRegistry;
@@ -55,7 +56,10 @@ public class Multicraft {
 		
 	}
 	
-	private void setup(final FMLCommonSetupEvent event) {}
+	private void setup(final FMLCommonSetupEvent event)
+	{
+		BrewingRecipeHandler.registerBrewingRecipes();
+	}
 	
 	private void doClientStuff(final FMLClientSetupEvent event) {
 		
@@ -112,7 +116,7 @@ public class Multicraft {
 		}
 		
 		@SubscribeEvent
-		public void onPotionRegistry(final RegistryEvent.Register<Potion> event)
+		public static void onPotionRegistry(final RegistryEvent.Register<Potion> event)
 		{
 			event.getRegistry().registerAll
 			(
@@ -125,7 +129,7 @@ public class Multicraft {
 	
 	public static ResourceLocation multicraftLocation(String name) {
 		
-		return new ResourceLocation(MODID + ":" + name);
+		return new ResourceLocation(MODID, name);
 		
 	}
 	
