@@ -1,0 +1,4 @@
+{
+  "parent": "block/flower_pot_cross",
+  "textures": { "plant": "multicraft:block/block_flower_rose_red" }
+}
