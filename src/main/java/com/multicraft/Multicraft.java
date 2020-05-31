@@ -1,37 +1,22 @@
 package com.multicraft;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import com.multicraft.entity.MoreBerryFoxEntity;
-import com.multicraft.event.EventHandler;
-import com.multicraft.itemgroup.MulticraftItemGroup;
-import com.multicraft.potion.BrewingRecipeHandler;
-import com.multicraft.registries.BlockRegistry;
-import com.multicraft.registries.EntityRegistry;
-import com.multicraft.registries.FeatureRegistry;
-import com.multicraft.registries.ItemRegistry;
-import com.multicraft.registries.PaintingRegistry;
-import com.multicraft.registries.PotionRegistry;
-
-import net.minecraft.block.Block;
+import com.multicraft.registries.*;
+import net.minecraft.block.ComposterBlock;
+import net.minecraft.block.FlowerPotBlock;
 import net.minecraft.client.renderer.entity.FoxRenderer;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.item.PaintingType;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
-import net.minecraft.potion.Potion;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.gen.feature.Feature;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.DeferredWorkQueue;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 @Mod(Multicraft.MODID)
@@ -39,98 +24,44 @@ public class Multicraft {
 	
 	public static final String MODID = "multicraft";
 	
-	public static final Logger LOGGER = LogManager.getLogger();
+	public static final ItemGroup MULTICRAFT = new ItemGroup("multicraft")
+    {
+        @OnlyIn(Dist.CLIENT)
+        @Override
+        public ItemStack createIcon() { return new ItemStack(ItemRegistry.CREATIVE_TAB_ITEM.get()); }
+    };
 	
 	public static final DamageSource BLUEBERRY_BUSH = new DamageSource("blueBerryBush");
 	public static final DamageSource ROSE_BUSH = new DamageSource("roseBush");
 	
-	public static final ItemGroup MULTICRAFT = new MulticraftItemGroup("multicraft");
-	
-	public Multicraft() {
-		
-		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
-		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
+	public Multicraft()
+	{
+		IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+
+		modEventBus.addListener(this::setup);
+		modEventBus.addListener(this::doClientStuff);
+
+		BlockRegistry.BLOCKS.register(modEventBus);
+		ItemRegistry.ITEMS.register(modEventBus);
+		EntityRegistry.ENTITIES.register(modEventBus);
+		FeatureRegistry.FEATURES.register(modEventBus);
+		PaintingRegistry.PAINTINGS.register(modEventBus);
+		PotionRegistry.POTIONS.register(modEventBus);
 		
 		MinecraftForge.EVENT_BUS.register(this);
-		MinecraftForge.EVENT_BUS.register(new EventHandler());
-		
 	}
 	
 	private void setup(final FMLCommonSetupEvent event)
 	{
-		BrewingRecipeHandler.registerBrewingRecipes();
+		DeferredWorkQueue.runLater(FeatureRegistry::generateFeatures);
+		PotionRegistry.registerBrewingRecipes();
+		ComposterBlock.registerCompostable(0.3F, ItemRegistry.BLUE_BERRIES.get());
+		ComposterBlock.registerCompostable(1.0F, ItemRegistry.BLUE_BERRY_PIE.get());
+		ComposterBlock.registerCompostable(1.0F, ItemRegistry.SWEET_BERRY_PIE.get());
 	}
 	
-	private void doClientStuff(final FMLClientSetupEvent event) {
-		
+	private void doClientStuff(final FMLClientSetupEvent event)
+	{
 		RenderingRegistry.registerEntityRenderingHandler(MoreBerryFoxEntity.class, FoxRenderer::new);
-		
 	}
-	
-	@SubscribeEvent
-	public void onServerStarting(FMLServerStartingEvent event) {
-		
-	}
-	
-	@Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
-	public static class RegistryEvents {
-		
-		@SubscribeEvent
-		public static void onItemsRegistry(final RegistryEvent.Register<Item> itemRegistryEvent) {
-			
-			LOGGER.info("Registering Items");
-			ItemRegistry.registerItems(itemRegistryEvent);
-			
-		}
-		
-		@SubscribeEvent
-		public static void onBlocksRegistry(final RegistryEvent.Register<Block> blockRegistryEvent) {
-			
-			LOGGER.info("Registering Blocks");
-			BlockRegistry.registerBlocks(blockRegistryEvent);
-			
-		}
-		
-		@SubscribeEvent
-		public static void onEntityRegistry(final RegistryEvent.Register<EntityType<?>> entityRegistryEvent) {
-			
-			LOGGER.info("Registering Entities");
-			EntityRegistry.registerEntities(entityRegistryEvent);
-			
-		}
-		
-		@SubscribeEvent
-		public static void onPaintingRegistry(final RegistryEvent.Register<PaintingType> paintingRegistryEvent) {
-			
-			LOGGER.info("Registering Paintings");
-			PaintingRegistry.registerPaintings(paintingRegistryEvent);
-			
-		}
-		
-		@SubscribeEvent
-		public static void onFeatureRegistry(final RegistryEvent.Register<Feature<?>> featureRegistryEvent) {
-			
-			LOGGER.info("Registering Features");
-			FeatureRegistry.registerFeatures(featureRegistryEvent);
-			
-		}
-		
-		@SubscribeEvent
-		public static void onPotionRegistry(final RegistryEvent.Register<Potion> event)
-		{
-			event.getRegistry().registerAll
-			(
-					PotionRegistry.LEVITATION,
-					PotionRegistry.LONG_LEVITATION
-			);
-		}
-		
-	}
-	
-	public static ResourceLocation multicraftLocation(String name) {
-		
-		return new ResourceLocation(MODID, name);
-		
-	}
-	
 }
