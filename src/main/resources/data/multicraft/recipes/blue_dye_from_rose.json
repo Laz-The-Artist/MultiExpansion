@@ -1,0 +1,6 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "blue_dye",
+  "ingredients": [ { "item": "multicraft:block_flower_rose_blue" } ],
+  "result": { "item": "minecraft:blue_dye" }
+}

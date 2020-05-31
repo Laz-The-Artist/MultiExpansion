@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern":
+    [
+        "BBB",
+        "WSW",
+        "BEB"
+    ],
+    "key":
+    {
+        "B": { "item": "minecraft:sweet_berries" },
+        "W": { "item": "minecraft:wheat" },
+        "S": { "item": "minecraft:sugar" },
+        "E": { "item": "minecraft:egg" }
+    },
+    "result": { "item": "multicraft:item_pie_sweet_berry" }
+}

@@ -1,0 +1,6 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "purple_dye",
+  "ingredients": [ { "item": "multicraft:block_flower_rose_purple" } ],
+  "result": { "item": "minecraft:purple_dye" }
+}
