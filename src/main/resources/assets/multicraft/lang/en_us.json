@@ -13,6 +13,8 @@
 	"item.multicraft.item_bat_wing": "Bat Wing",
 	"item.multicraft.item_meat_raw_parrot": "Raw Parrot Meat",
 	"item.multicraft.item_meat_cooked_parrot": "Cooked Parrot Meat",
+	"item.multicraft.item_pie_sweet_berry": "Sweet Berry Pie",
+	"item.multicraft.item_pie_blue_berry": "Blue Berry Pie",
 	
 	"block.multicraft.block_blue_berry_bush": "Blue Berry Bush",
 	"block.multicraft.block_brick_mossy": "Mossy Bricks",
@@ -64,8 +66,11 @@
 	"block.multicraft.block_rose_bush_blue": "Blue Rose Bush",
 	"block.multicraft.block_rose_bush_white": "White Rose Bush",
 	
-	"itemGroup.multicraft": "MultiCraft",
+	"itemGroup.multicraft": "Multicraft",
 	
 	"death.attack.blueBerryBush": "%1$s was poked to death by a blue berry bush",
-	"death.attack.roseBush": "%1$s was poked to death by a rose bush"
+	"death.attack.roseBush": "%1$s was poked to death by a rose bush",
+
+	"advancements.adventure.collect_every_flower.title": "A Single Pale Rose",
+	"advancements.adventure.collect_every_flower.description": "Collect every flower, including tall flowers, modded flowers, and wither rose."
 }
