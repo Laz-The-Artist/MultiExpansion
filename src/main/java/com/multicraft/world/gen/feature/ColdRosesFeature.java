@@ -26,11 +26,11 @@ public class ColdRosesFeature extends FlowersFeature
 		switch (flower)
 		{
 		case 0:
-			return BlockRegistry.PURPLE_ROSE.getDefaultState();
+			return BlockRegistry.PURPLE_ROSE.get().getDefaultState();
 		case 1:
-			return BlockRegistry.BLUE_ROSE.getDefaultState();
+			return BlockRegistry.BLUE_ROSE.get().getDefaultState();
 		case 2:
-			return BlockRegistry.WHITE_ROSE.getDefaultState();
+			return BlockRegistry.WHITE_ROSE.get().getDefaultState();
 		default: return Blocks.AIR.getDefaultState();
 		}
 	}
