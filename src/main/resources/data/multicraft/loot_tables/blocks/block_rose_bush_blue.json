@@ -1,0 +1,54 @@
+{
+  "type": "minecraft:block",
+  "pools":
+  [
+    {
+      "rolls": 1,
+      "entries":
+      [
+        {
+          "type": "minecraft:item",
+          "conditions":
+          [
+
+            {
+              "condition": "minecraft:block_state_property",
+              "block": "multicraft:block_rose_bush_blue",
+              "properties": { "half": "lower" }
+            },
+            {
+              "condition": "minecraft:alternative",
+              "terms":
+              [
+                {
+                  "condition": "minecraft:match_tool",
+                  "predicate": { "item": "minecraft:shears" }
+                },
+                {
+                  "condition": "minecraft:match_tool",
+                  "predicate":
+                  {
+                    "enchantments":
+                    [
+                      {
+                        "enchantment": "minecraft:silk_touch",
+                        "levels": { "min": 1 }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ],
+          "name": "multicraft:block_rose_bush_blue"
+        }
+      ],
+      "conditions":
+      [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ]
+    }
+  ]
+}
