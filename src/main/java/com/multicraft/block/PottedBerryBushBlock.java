@@ -41,17 +41,15 @@ public class PottedBerryBushBlock extends Block implements IGrowable {
 	
 	protected static final VoxelShape SHAPE = Block.makeCuboidShape(5.0D, 0.0D, 5.0D, 11.0D, 6.0D, 11.0D);
 	
-	public PottedBerryBushBlock(Block.Properties properties) {
+	public PottedBerryBushBlock(Block.Properties properties)
+	{
 		super(properties);
-		
 		this.setDefaultState(this.stateContainer.getBaseState().with(BERRY_TYPE, BerryType.SWEET_BERRY_BUSH).with(IS_HARVESTED, Boolean.TRUE));
-		
 	}
 	
-	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-		
+	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context)
+	{
 		return SHAPE;
-		
 	}
 	
 	@SuppressWarnings("deprecation")
@@ -63,10 +61,9 @@ public class PottedBerryBushBlock extends Block implements IGrowable {
 			this.grow(world, random, pos, state);
 	}
 	
-	public BlockRenderType getRenderType(BlockState state) {
-		
+	public BlockRenderType getRenderType(BlockState state)
+	{
 		return BlockRenderType.MODEL;
-		
 	}
 	
 	@Override
@@ -76,7 +73,7 @@ public class PottedBerryBushBlock extends Block implements IGrowable {
 		{
 			if (state.get(IS_HARVESTED) == Boolean.FALSE)
 			{
-				Item berry = state.get(BERRY_TYPE) == BerryType.SWEET_BERRY_BUSH ? Items.SWEET_BERRIES : ItemRegistry.BLUE_BERRIES;
+				Item berry = state.get(BERRY_TYPE) == BerryType.SWEET_BERRY_BUSH ? Items.SWEET_BERRIES : ItemRegistry.BLUE_BERRIES.get();
 				
 				Block.spawnAsEntity(world, pos, new ItemStack(berry));
 				world.playSound((PlayerEntity)null, pos, SoundEvents.ITEM_SWEET_BERRIES_PICK_FROM_BUSH, SoundCategory.BLOCKS, 1.0F, 0.8F + world.rand.nextFloat() * 0.4F);
@@ -94,22 +91,19 @@ public class PottedBerryBushBlock extends Block implements IGrowable {
 	}
 	
 	@SuppressWarnings("deprecation")
-	public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
-		
+	public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos)
+	{	
 		return facing == Direction.DOWN && !stateIn.isValidPosition(worldIn, currentPos) ? Blocks.AIR.getDefaultState() : super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
-		
 	}
 	
-	public BlockRenderLayer getRenderLayer() {
-		
+	public BlockRenderLayer getRenderLayer()
+	{
 		return BlockRenderLayer.CUTOUT;
-		
 	}
 	
-	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-		
+	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
+	{
 		builder.add(BERRY_TYPE, IS_HARVESTED);
-		
 	}
 	
 	@Override
@@ -119,18 +113,17 @@ public class PottedBerryBushBlock extends Block implements IGrowable {
 	}
 	
 	@Override
-	public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, BlockState state) {
-		
+	public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, BlockState state)
+	{
 		return true;
-		
 	}
 	
 	@Override
-	public void grow(World world, Random rand, BlockPos pos, BlockState state) {
-		
+	public void grow(World world, Random rand, BlockPos pos, BlockState state)
+	{
 		if (!world.isRemote)
 		{
-			world.setBlockState(pos, BlockRegistry.POTTED_BERRY_BUSH.getDefaultState().with(BERRY_TYPE, state.get(BERRY_TYPE)).with(IS_HARVESTED, Boolean.FALSE));
+			world.setBlockState(pos, BlockRegistry.POTTED_BERRY_BUSH.get().getDefaultState().with(BERRY_TYPE, state.get(BERRY_TYPE)).with(IS_HARVESTED, Boolean.FALSE));
 			
 			if (world.getBlockState(pos.down()).getBlock() instanceof HopperBlock)
 			{
@@ -140,7 +133,7 @@ public class PottedBerryBushBlock extends Block implements IGrowable {
 					itemEntity = new ItemEntity(world, pos.getX() + 0.5, pos.getY() - 0.3, pos.getZ() + 0.5, new ItemStack(Items.SWEET_BERRIES));
 				
 				if (state.get(BERRY_TYPE) == BerryType.BLUE_BERRY_BUSH)
-					itemEntity = new ItemEntity(world, pos.getX() + 0.5, pos.getY() - 0.3, pos.getZ() + 0.5, new ItemStack(ItemRegistry.BLUE_BERRIES));
+					itemEntity = new ItemEntity(world, pos.getX() + 0.5, pos.getY() - 0.3, pos.getZ() + 0.5, new ItemStack(ItemRegistry.BLUE_BERRIES.get()));
 				
 				itemEntity.setDefaultPickupDelay();
 				world.addEntity(itemEntity);
