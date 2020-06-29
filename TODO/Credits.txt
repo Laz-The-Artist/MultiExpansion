@@ -1,4 +1,5 @@
 Multicraft mod is made by Multiteam, specially by:
 -Rellit [MAIN CODE]
+-MaroonShaded [CODE]
 -King_of_Creepers [TEXTURES/MODELS]
 -IAmGama [TEXTURES]
