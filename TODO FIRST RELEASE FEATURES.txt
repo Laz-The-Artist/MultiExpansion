@@ -53,7 +53,7 @@ additional: if you walk on the hydrated farmland, you get damaged. if you crouch
 
 (the textures of the soulsand farmland block: there is only a new texture for the top. just like the normal farmland, the sides and the bottom will use the "source material" aka the soulsand texture)
 
-Not Doable [#0065b]
+Relies on other mod dev [#0065b]
 If the ghost pepper mod is present, the pepper will only be plantable on the soulsand farmland
 
 NOT DONE [#0066]
