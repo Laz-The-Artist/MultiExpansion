@@ -23,7 +23,6 @@ run
 
 # Files from Forge MDK
 forge*changelog.txt
-TODO FIRST RELEASE FEATURSE.txt
 src/main/resources/assets/multiexpansion/models/block/SpamJson_v1.0.0.jar
 src/main/resources/assets/multiexpansion/models/block/desktop.ini
 README.txt
@@ -38,4 +37,3 @@ CREDITS.txt
 changelog.txt
 build.gradle
 .gitattributes
-TODO FIRST RELEASE FEATURES.txt
