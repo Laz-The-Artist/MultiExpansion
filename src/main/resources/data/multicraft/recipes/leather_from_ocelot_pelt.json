@@ -1,9 +1,0 @@
-{
-    "type": "minecraft:crafting_shapeless",
-    "ingredients":
-	[
-        { "item": "multicraft:item_pelt_ocelot" },
-        { "item": "multicraft:item_pelt_ocelot" }
-    ],
-    "result": { "item": "minecraft:leather" }
-}

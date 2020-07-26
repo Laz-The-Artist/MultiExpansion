@@ -1,0 +1,307 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "condition": "minecraft:block_state_property",
+              "block": "multiexpansion:ghast_tear_crop",
+              "properties": {
+                "half": "lower"
+              }
+            },
+			{
+              "condition": "minecraft:block_state_property",
+              "block": "multiexpansion:ghast_tear_crop",
+              "properties": {
+                "age": "0"
+              }
+            }
+          ],
+          "name": "multiexpansion:ghast_tear_seeds"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ]
+    },
+	{
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "condition": "minecraft:block_state_property",
+              "block": "multiexpansion:ghast_tear_crop",
+              "properties": {
+                "half": "lower"
+              }
+            },
+			{
+              "condition": "minecraft:block_state_property",
+              "block": "multiexpansion:ghast_tear_crop",
+              "properties": {
+                "age": "1"
+              }
+            }
+          ],
+          "name": "multiexpansion:ghast_tear_seeds"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ]
+    },
+	{
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "condition": "minecraft:block_state_property",
+              "block": "multiexpansion:ghast_tear_crop",
+              "properties": {
+                "half": "lower"
+              }
+            },
+			{
+              "condition": "minecraft:block_state_property",
+              "block": "multiexpansion:ghast_tear_crop",
+              "properties": {
+                "age": "2"
+              }
+            }
+          ],
+          "name": "multiexpansion:ghast_tear_seeds"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ]
+    },
+	{
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "condition": "minecraft:block_state_property",
+              "block": "multiexpansion:ghast_tear_crop",
+              "properties": {
+                "half": "lower"
+              }
+            },
+			{
+              "condition": "minecraft:block_state_property",
+              "block": "multiexpansion:ghast_tear_crop",
+              "properties": {
+                "age": "3"
+              }
+            }
+          ],
+          "name": "multiexpansion:ghast_tear_seeds"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ]
+    },
+	{
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "condition": "minecraft:block_state_property",
+              "block": "multiexpansion:ghast_tear_crop",
+              "properties": {
+                "half": "lower"
+              }
+            },
+			{
+              "condition": "minecraft:block_state_property",
+              "block": "multiexpansion:ghast_tear_crop",
+              "properties": {
+                "age": "4"
+              }
+            },
+            {
+			  "condition": "minecraft:random_chance",
+              "chance": 0.5
+            }
+			
+          ],
+          "name": "minecraft:ghast_tear"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ]
+    },
+	{
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "condition": "minecraft:block_state_property",
+              "block": "multiexpansion:ghast_tear_crop",
+              "properties": {
+                "half": "lower"
+              }
+            },
+			{
+              "condition": "minecraft:block_state_property",
+              "block": "multiexpansion:ghast_tear_crop",
+              "properties": {
+                "age": "5"
+              }
+            },
+            {
+			  "condition": "minecraft:random_chance",
+              "chance": 0.5
+            }
+			
+          ],
+          "name": "minecraft:ghast_tear"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ]
+    },
+	{
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "condition": "minecraft:block_state_property",
+              "block": "multiexpansion:ghast_tear_crop",
+              "properties": {
+                "half": "lower"
+              }
+            },
+			{
+              "condition": "minecraft:block_state_property",
+              "block": "multiexpansion:ghast_tear_crop",
+              "properties": {
+                "age": "6"
+              }
+            }
+          ],
+          "name": "multiexpansion:ghast_tear_seeds"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ]
+    },
+	{
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+		  "functions": [
+            {
+              "function": "minecraft:apply_bonus",
+              "enchantment": "minecraft:fortune",
+              "formula": "minecraft:binomial_with_bonus_count",
+              "parameters": {
+                "extra": 1,
+                "probability": 0.5
+              }
+            }
+          ],
+          "conditions": [
+            {
+              "condition": "minecraft:block_state_property",
+              "block": "multiexpansion:ghast_tear_crop",
+              "properties": {
+                "half": "lower"
+              }
+            },
+			{
+              "condition": "minecraft:block_state_property",
+              "block": "multiexpansion:ghast_tear_crop",
+              "properties": {
+                "age": "6"
+              }
+            }
+          ],
+          "name": "minecraft:ghast_tear"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ]
+    },
+	{
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+		  "functions": [
+            {
+              "function": "minecraft:apply_bonus",
+              "enchantment": "minecraft:fortune",
+              "formula": "minecraft:binomial_with_bonus_count",
+              "parameters": {
+                "extra": 1,
+                "probability": 0.2
+              }
+            }
+          ],
+          "conditions": [
+            {
+              "condition": "minecraft:block_state_property",
+              "block": "multiexpansion:ghast_tear_crop",
+              "properties": {
+                "half": "lower"
+              }
+            },
+			{
+              "condition": "minecraft:block_state_property",
+              "block": "multiexpansion:ghast_tear_crop",
+              "properties": {
+                "age": "7"
+              }
+            }
+          ],
+          "name": "multiexpansion:ghast_tear_seeds"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ]
+    }
+  ]
+}

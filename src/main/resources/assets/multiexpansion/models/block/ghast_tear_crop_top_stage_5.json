@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/tinted_cross",
+  "textures": {
+    "cross": "multiexpansion:block/ghast_tear_crop_top_stage_5"
+  }
+}

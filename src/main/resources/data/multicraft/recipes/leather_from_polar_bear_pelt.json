@@ -1,8 +1,0 @@
-{
-	"type": "minecraft:crafting_shapeless",
-	"ingredients":
-	[
-		{ "item": "multicraft:item_pelt_polar_bear" }
-	],
-	"result": { "item": "minecraft:leather", "count": 2 }
-}

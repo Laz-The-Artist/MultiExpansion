@@ -1,4 +1,0 @@
-{
-	"parent": "block/cross",
-	"textures": { "cross": "multicraft:block/block_flower_rose_red" }
-}

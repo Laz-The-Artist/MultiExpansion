@@ -1,6 +1,0 @@
-{
-  "type": "minecraft:crafting_shapeless",
-  "group": "yellow_dye",
-  "ingredients": [ { "item": "multicraft:block_flower_rose_yellow" } ],
-  "result": { "item": "minecraft:yellow_dye" }
-}

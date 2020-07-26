@@ -1,7 +1,0 @@
-{
-	"variants":
-	{
-		"half=lower": { "model": "multicraft:block/block_rose_bush_bottom_purple" },
-		"half=upper":    { "model": "multicraft:block/block_rose_bush_top_purple" }
-	}
-}

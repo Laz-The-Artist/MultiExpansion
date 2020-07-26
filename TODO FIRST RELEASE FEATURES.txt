@@ -1,0 +1,97 @@
+100% DONE [#0008]
+The ruby ore. its a new ore whats generates in the nether. its functions will be the same as emerald.
+in some old minecraft lores, there was "when herobrine was banished to the nether, he ruined the pigmans, turned into zombie versions".... i always wanted to add things about the lore, there is the first part of it.
+-requires golden (or above) pickaxe leve to mine it 
+-generates very high in the nether's ceiling.
+-and you can craft block from the gem, i just forgot to place on the picture
+
+100% DONE [#0012]
+yet again, and olde feature: the glowstone force-feeding!
+you can right click with glowstone on any entity to apply 15 seconds of glowing effect on them.
+
+NOT DONE [#0035]
+introducing the gui of the pyrotechnist table.
+the numbers:
+1-first set of input slot "input markers"
+2-second set of input slot "input markers"
+3-input set changing buttons
+4-input slots
+5-type selector board (like in the loom)
+6-output slot
+7-type buttons (like in the loom)
+How it will work:
+the input set changing buttons will be above the input slots. click on one of them to switch between modes (sets)
+first set:
+if the player place a gunpowder into the first input slot, the "type buttons" will show up, and will display all possible fireworkcharge item in the game. you can hover over it, and will display the charge's infos in a form of a tooltip. and if you click on one of them, it will place the required items into the slots, if you have missing items, it will place the items in you have, but it will mark the missing items with red. like when you using the recipe book in crafting, but you have missing items.
+second set:
+you only need to place in the charge, a paper, and minimum 1 gunpowder. the other 2 is optional.
+In this "mode", there will be no "type buttons"
+
+NOT DONE [#0058]
+you know that when you place a dirt block next to a grassy one. 
+yes the grass grows on it, after a time, but, we will make it to be different:
+(everything stays, we just adds plus stuff. aka turbo mode for grass spreading)
+-x time is how much time is needed for grass to spread on dirt. x*2 is how much time it takes for tallgrass (the 1 block large) to spread on grassy dirt blocks.
+-flowers can spread too. if tallgrass is spreading, 25% chance for a flower to generate instead of a tallgrass.
+-if you mine a grassy dirt block with silk touch, or you just get it somehow (hmmm.. creative mode), and you place it, and there is no dirt or grassy dirt, after that x*2 (that time amount, from before) a tallgrass can spawn on it. or a flower with that 25% chance.
+-mycelium: i dont really know if it spreads in vanilla, but if not, make it spread on dirt. also mushrooms spread too. or just randomly grow one. (50-50% brown or red mushroom)
+-cactus can spread too. but with this, a sand block cant just randomly give birth to cactus, as grass do. so no free cactus.
+-sugar canes can spread too,  but just like cactus, it cant just spawn in from the nothing.
+-ferns, that generates in taiga biomes can be generated with the new spreading mechanic.
+-saplings. yes. but its diffrent from previous ones. the "logic" selects a random grassy dirt block in a chunk, and searches for trees (scans for logs that connects to leaves) in a 2 chunk radius. if this 2 conditions (grassy block, "tree") check for the selected grass block's biome, and place a sapling to corresponding to the biome the block is in. if the selected block is in a desert, it dosen't need to check for the tree's type, just place a dead bush. triggering this grassy block selection in chunks: after 100 ticks, the "logic" selects a random chunk around the player (if its multiplayer, it will select one chunk around all players) in a 4 chunk radius.
+
+NOT DONE [#0064]
+IAmGama™️ made these books a while ago, i just forgot about them...
+these are diffrrent enchanted book texture for enchant types and tiers(=level. i just forgot that the "level" word exist when i made the picture). type means wich item you can apply on (not all item is listed here, these are just examples).
+and a cursed book wich dosent have levels.
+
+100% DONE [#0065a] & [#0065b]
+Now using a golden hoe (only gold, others wont work) on soulsand creates soulsand framland. it will use lava to hydrate the farmland, and you can plant (later on the other new plants) the nether warts on it. from now, nether warts cant be placed on normal soul sand.
+lava hydrates the soulsand in a radius of 4 blocks, but only in the nether.
+in the overworld the radius decreses to 2 block
+additional: if you walk on the hydrated farmland, you get damaged. if you crouch you wont be damaged. just like magma blocks
+
+(the textures of the soulsand farmland block: there is only a new texture for the top. just like the normal farmland, the sides and the bottom will use the "source material" aka the soulsand texture)
+
+Not Doable [#0065b]
+If the ghost pepper mod is present, the pepper will only be plantable on the soulsand farmland
+
+NOT DONE [#0066]
+The ghast tear seed. Growing insane amount of ghast tears is not being disallowed, its just too dangerous to do.
+the seed is being crafted like this:
+W=wheat seed, P=pumpkin seed, B=beetroot seed, G=ghast tear
+WWW
+PGP
+BGB
+
+This recipe gives 3 seeds.
+this seed can be planted on the soulsand farmland
+
+NOT DONE [#0067]
+a very creepy plant, the ghastoid. its the "block version" of the Ghast tear seed.
+takes 8 minecraft days to grow fully (from stage 1 to stage 8)
+Every stage has its drop:
+stage 1: drops the seed back
+stage 2: same
+stage 3: it wont drop the seed back, so you just loose it.
+stage 4-5: still dropps nothing
+stage 6: when you broke it, it will spawn a ghast.
+stage 7: drops (always) 1 ghast tear.
+Stage 8 is a kind of corrupted form. the plant will become a ghast spawner. but these ghast will not drop tears or gunpowder, only some xp. if you break it, it will drop a seed with a chance of 20%.
+
+NOT DONE [#0070]
+Colored campfires. its speaks for itself. place a wool underneath the campfire, and its smoke will be colored. alos the smoke goes high as it would with hay blocks
+
+NOT DONE [#0089]
+Bottled obsidian tears. this is item will be used as part of a game mechanic that will be listed here later. Simply grab an empty bottle, find some crying obsidian and use the bottle on the block. The crying obsidian should turn into a normal obsidian, and you get bottled obsidian tear.
+
+NOT DONE [#0090]
+On this image, on the left side of the arrow, thats called a Soul Sprout. on the right side, thats the wisping soul.
+Soul Sprout: This deadbush-like sprout will be generating in soul sand valleys, there is always 1 chunk distance between 2 of these bushes. The new "soul" particle should spawn randomly above the sprout. 
+Wisping Soul: You can get this by right clicking with an empty bottle on the Soul sprout. Upon doing that, the soul sprout will break, so this means its a finite source.
+This item will be used to craft the ghast tear seeds from plan [#0066].
+The new recipe is this: B=Beetroot seeds; G=Ghast tear; W=Wisping soul
+BG
+WB
+
+This recipe gives 3 seeds.
