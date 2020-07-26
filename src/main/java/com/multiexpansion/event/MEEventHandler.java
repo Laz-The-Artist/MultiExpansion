@@ -10,6 +10,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.SoundCategory;
@@ -79,6 +80,15 @@ public class MEEventHandler {
 			if (world.getBlockState(pos).isIn(Blocks.SOUL_SAND)) {
 				
 				world.setBlockState(pos, MEBlocks.SOUL_SAND_FARMLAND.get().getDefaultState());
+				
+				for(int i = 0; i < world.rand.nextInt(4) + 3; ++i) {
+					
+					world.addParticle(ParticleTypes.field_239812_C_, pos.getX() + world.rand.nextDouble(), pos.getY() + 0.1D, pos.getZ() + world.rand.nextDouble(), 0, 0.04D, 0);
+					
+				}
+				
+				float f = world.rand.nextFloat() * 0.4F + world.rand.nextFloat() > 0.9F ? 0.6F : 0.0F;
+				player.playSound(SoundEvents.field_232831_nS_, f, 0.6F + world.rand.nextFloat() * 0.4F);
 				
 				world.playSound(player, pos, SoundEvents.ITEM_HOE_TILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
 				

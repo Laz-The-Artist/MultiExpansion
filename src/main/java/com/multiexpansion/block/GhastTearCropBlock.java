@@ -13,7 +13,6 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.CropsBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
