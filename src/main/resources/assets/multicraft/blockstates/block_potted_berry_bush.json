@@ -1,7 +1,7 @@
 {
     "multipart": [
         {   "when": { "is_harvested": "true" },
-            "apply": { "model": "multicraft:block/block_potted_berry" }
+            "apply": { "model": "multicraft:block/block_potted_berry_bush" }
         },
         {   "when": { "is_harvested": "false", "berry_type": "sweet_berry" },
             "apply": { "model": "multicraft:block/block_potted_sweet_berry" }

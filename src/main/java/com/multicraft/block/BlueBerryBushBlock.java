@@ -29,6 +29,7 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
+@SuppressWarnings("deprecation")
 public class BlueBerryBushBlock extends BushBlock implements IGrowable
 {
 	public static final IntegerProperty AGE = BlockStateProperties.AGE_0_3;
@@ -38,7 +39,7 @@ public class BlueBerryBushBlock extends BushBlock implements IGrowable
 	public BlueBerryBushBlock(Block.Properties properties)
 	{
 		super(properties);
-		this.setDefaultState(this.stateContainer.getBaseState().with(AGE, Integer.valueOf(0)));
+		this.setDefaultState(this.stateContainer.getBaseState().with(AGE, 0));
 	}
 	
 	public ItemStack getItem(IBlockReader worldIn, BlockPos pos, BlockState state)
@@ -63,14 +64,14 @@ public class BlueBerryBushBlock extends BushBlock implements IGrowable
 		int i = state.get(AGE);
 		
 		if (i < 3 && random.nextInt(5) == 0 && worldIn.getLightSubtracted(pos.up(), 0) >= 9)
-			worldIn.setBlockState(pos, state.with(AGE, Integer.valueOf(i + 1)), 2);
+			worldIn.setBlockState(pos, state.with(AGE, i + 1), 2);
 	}
 	
 	public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entityIn)
 	{
 		if (entityIn instanceof LivingEntity && entityIn.getType() != EntityType.FOX)
 		{
-			entityIn.setMotionMultiplier(state, new Vec3d((double)0.8F, 0.75D, (double)0.8F));
+			entityIn.setMotionMultiplier(state, new Vec3d(0.8F, 0.75D, 0.8F));
 			
 			if (!worldIn.isRemote && state.get(AGE) > 0 && (entityIn.lastTickPosX != entityIn.posX || entityIn.lastTickPosZ != entityIn.posZ))
 			{
@@ -83,8 +84,7 @@ public class BlueBerryBushBlock extends BushBlock implements IGrowable
 			}
 		}
 	}
-	
-	@SuppressWarnings("deprecation")
+
 	public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit)
 	{
 		if (!this.isMaxAge(state) && player.getHeldItem(handIn).getItem() == Items.BONE_MEAL) return false;
@@ -93,8 +93,8 @@ public class BlueBerryBushBlock extends BushBlock implements IGrowable
 			int berryCount = worldIn.rand.nextInt(2) + 1 + (this.isMaxAge(state) ? 1 : 0);
 			
 			spawnAsEntity(worldIn, pos, new ItemStack(ItemRegistry.BLUE_BERRIES.get(), berryCount));
-			worldIn.playSound((PlayerEntity)null, pos, SoundEvents.ITEM_SWEET_BERRIES_PICK_FROM_BUSH, SoundCategory.BLOCKS, 1.0F, 0.8F + worldIn.rand.nextFloat() * 0.4F);
-			worldIn.setBlockState(pos, state.with(AGE, Integer.valueOf(1)));
+			worldIn.playSound(null, pos, SoundEvents.ITEM_SWEET_BERRIES_PICK_FROM_BUSH, SoundCategory.BLOCKS, 1.0F, 0.8F + worldIn.rand.nextFloat() * 0.4F);
+			worldIn.setBlockState(pos, state.with(AGE, 1));
 			
 			return true;
 			
@@ -126,7 +126,7 @@ public class BlueBerryBushBlock extends BushBlock implements IGrowable
 	{
 		int i = Math.min(3, state.get(AGE) + 1);
 		
-		worldIn.setBlockState(pos, state.with(AGE, Integer.valueOf(i)), 2);
+		worldIn.setBlockState(pos, state.with(AGE, i), 2);
 	}
 	
 }

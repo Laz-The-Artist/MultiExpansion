@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+	"multicraft:block_white_planks",
+	"multicraft:block_orange_planks",
+	"multicraft:block_magenta_planks",
+	"multicraft:block_light_blue_planks",
+	"multicraft:block_yellow_planks",
+	"multicraft:block_lime_planks",
+	"multicraft:block_pink_planks",
+	"multicraft:block_gray_planks",
+	"multicraft:block_light_gray_planks",
+	"multicraft:block_cyan_planks",
+	"multicraft:block_purple_planks",
+	"multicraft:block_blue_planks",
+	"multicraft:block_brown_planks",
+	"multicraft:block_green_planks",
+	"multicraft:block_red_planks",
+	"multicraft:block_black_planks"
+  ]
+}

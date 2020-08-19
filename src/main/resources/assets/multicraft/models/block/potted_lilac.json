@@ -1,0 +1,8 @@
+{
+  "parent": "multicraft:block/tall_flower_pot_cross",
+  "textures":
+  {
+    "bottom": "minecraft:block/lilac_bottom",
+    "top": "minecraft:block/lilac_top"
+  }
+}

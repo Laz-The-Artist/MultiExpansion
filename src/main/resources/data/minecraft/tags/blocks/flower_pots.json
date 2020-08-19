@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "multicraft:potted_red_rose_bush",
+    "multicraft:potted_pink_rose_bush",
+    "multicraft:potted_purple_rose_bush",
+    "multicraft:potted_yellow_rose_bush",
+    "multicraft:potted_blue_rose_bush",
+    "multicraft:potted_white_rose_bush",
+    "multicraft:potted_sunflower",
+    "multicraft:potted_lilac",
+    "multicraft:potted_peony"
+  ]
+}

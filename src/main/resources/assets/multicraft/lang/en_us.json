@@ -65,7 +65,22 @@
 	"block.multicraft.block_rose_bush_yellow": "Yellow Rose Bush",
 	"block.multicraft.block_rose_bush_blue": "Blue Rose Bush",
 	"block.multicraft.block_rose_bush_white": "White Rose Bush",
-	
+	"block.multicraft.potted_red_rose": "Red Rose",
+	"block.multicraft.potted_pink_rose": "Pink Rose",
+	"block.multicraft.potted_purple_rose": "Purple Rose",
+	"block.multicraft.potted_yellow_rose": "Yellow Rose",
+	"block.multicraft.potted_blue_rose": "Blue Rose",
+	"block.multicraft.potted_white_rose": "White Rose",
+	"block.multicraft.potted_red_rose_bush": "Red Rose Bush",
+	"block.multicraft.potted_pink_rose_bush": "Pink Rose Bush",
+	"block.multicraft.potted_purple_rose_bush": "Purple Rose Bush",
+	"block.multicraft.potted_yellow_rose_bush": "Yellow Rose Bush",
+	"block.multicraft.potted_blue_rose_bush": "Blue Rose Bush",
+	"block.multicraft.potted_white_rose_bush": "White Rose Bush",
+	"block.multicraft.potted_sunflower": "Potted Sunflower",
+	"block.multicraft.potted_lilac": "Potted Lilac",
+	"block.multicraft.potted_peony": "Potted Peony",
+
 	"itemGroup.multicraft": "Multicraft",
 	
 	"death.attack.blueBerryBush": "%1$s was poked to death by a blue berry bush",

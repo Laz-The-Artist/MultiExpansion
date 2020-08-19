@@ -1,16 +1,16 @@
 package com.multicraft.registries;
 
 import com.multicraft.Multicraft;
-
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.BlockNamedItem;
-import net.minecraft.item.Food;
 import net.minecraft.item.Foods;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+
+import java.util.Objects;
 
 @SuppressWarnings("unused")
 public final class ItemRegistry
@@ -19,7 +19,7 @@ public final class ItemRegistry
 	
 	// Items
 	public static final RegistryObject<Item> CREATIVE_TAB_ITEM = ITEMS.register("creative_tab_icon", () -> new Item(new Item.Properties()));
-	public static final RegistryObject<Item> BLUE_BERRIES = ITEMS.register("item_blue_berries", () -> new BlockNamedItem(BlockRegistry.BLUE_BERRY_BUSH.get(), new Item.Properties().group(Multicraft.MULTICRAFT).food(Foods.SWEET_BERRIES)));
+	public static final RegistryObject<Item> BLUE_BERRIES = ITEMS.register("item_blue_berries", () -> new BlockNamedItem(Objects.requireNonNull(BlockRegistry.BLUE_BERRY_BUSH.get()), new Item.Properties().group(Multicraft.MULTICRAFT).food(Foods.SWEET_BERRIES)));
 	public static final RegistryObject<Item> RUBY = register("item_ruby");
 	public static final RegistryObject<Item> OAK_BARK = register("item_bark_oak");
 	public static final RegistryObject<Item> SPRUCE_BARK = register("item_bark_spruce");

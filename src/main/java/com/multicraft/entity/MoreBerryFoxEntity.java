@@ -25,6 +25,8 @@ import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
 
+import java.util.Objects;
+
 public class MoreBerryFoxEntity extends FoxEntity
 {
 	private static final DataParameter<Integer> FOX_TYPE = EntityDataManager.createKey(MoreBerryFoxEntity.class, DataSerializers.VARINT);
@@ -47,14 +49,14 @@ public class MoreBerryFoxEntity extends FoxEntity
 	{
 		super.registerGoals();
 		
-		this.goalSelector.addGoal(9, new MoreBerryFoxEntity.EatMoreBerriesGoal((double)1.2F, 12, 2));
+		this.goalSelector.addGoal(9, new MoreBerryFoxEntity.EatMoreBerriesGoal(1.2F, 12, 2));
 	}
 	
 	@Override
 	public MoreBerryFoxEntity createChild(AgeableEntity ageable)
 	{
-		MoreBerryFoxEntity foxEntity = (MoreBerryFoxEntity) EntityRegistry.MORE_BERRY_FOX.get().create(this.world);
-		foxEntity.setVariantType(this.rand.nextBoolean() ? this.getVariantType() : ((MoreBerryFoxEntity)ageable).getVariantType());
+		MoreBerryFoxEntity foxEntity = Objects.requireNonNull(EntityRegistry.MORE_BERRY_FOX.get()).create(this.world);
+		Objects.requireNonNull(foxEntity).setVariantType(this.rand.nextBoolean() ? this.getVariantType() : ((MoreBerryFoxEntity)ageable).getVariantType());
 		
 		return foxEntity;
 	}
@@ -74,13 +76,7 @@ public class MoreBerryFoxEntity extends FoxEntity
 	{
 		return stack.getItem() == Items.SWEET_BERRIES || stack.getItem() == ItemRegistry.BLUE_BERRIES.get();
 	}
-	
-	protected boolean shouldMoveTo(IWorldReader worldIn, BlockPos pos)
-	{
-		BlockState blockstate = worldIn.getBlockState(pos);
-		return (blockstate.getBlock() == Blocks.SWEET_BERRY_BUSH && blockstate.get(SweetBerryBushBlock.AGE) >= 2) || (blockstate.getBlock() == BlockRegistry.BLUE_BERRY_BUSH.get() && blockstate.get(BlueBerryBushBlock.AGE) >= 2);
-	}
-	
+
 	public class EatMoreBerriesGoal extends MoveToBlockGoal
 	{
 		protected int field_220731_g;
@@ -131,7 +127,7 @@ public class MoreBerryFoxEntity extends FoxEntity
 				if (blockstate.getBlock() == Blocks.SWEET_BERRY_BUSH)
 				{
 			 		int i = blockstate.get(SweetBerryBushBlock.AGE);
-			 		blockstate.with(SweetBerryBushBlock.AGE, Integer.valueOf(1));
+			 		blockstate.with(SweetBerryBushBlock.AGE, 1);
 			 		int j = 1 + MoreBerryFoxEntity.this.world.rand.nextInt(2) + (i == 3 ? 1 : 0);
 			 		ItemStack itemstack = MoreBerryFoxEntity.this.getItemStackFromSlot(EquipmentSlotType.MAINHAND);
 			 		
@@ -144,19 +140,18 @@ public class MoreBerryFoxEntity extends FoxEntity
 			 		if (j > 0) Block.spawnAsEntity(MoreBerryFoxEntity.this.world, this.destinationBlock, new ItemStack(Items.SWEET_BERRIES, j));
 			 		
 			 		MoreBerryFoxEntity.this.playSound(SoundEvents.ITEM_SWEET_BERRIES_PICK_FROM_BUSH, 1.0F, 1.0F);
-			 		MoreBerryFoxEntity.this.world.setBlockState(this.destinationBlock, blockstate.with(SweetBerryBushBlock.AGE, Integer.valueOf(1)), 2);
+			 		MoreBerryFoxEntity.this.world.setBlockState(this.destinationBlock, blockstate.with(SweetBerryBushBlock.AGE, 1), 2);
 				}
 				
 				if (blockstate.getBlock() == BlockRegistry.BLUE_BERRY_BUSH.get())
 				{
 			 		int i = blockstate.get(SweetBerryBushBlock.AGE);
-			 		blockstate.with(SweetBerryBushBlock.AGE, Integer.valueOf(1));
+			 		blockstate.with(SweetBerryBushBlock.AGE, 1);
 			 		int j = 1 + MoreBerryFoxEntity.this.world.rand.nextInt(2) + (i == 3 ? 1 : 0);
 			 		ItemStack itemstack = MoreBerryFoxEntity.this.getItemStackFromSlot(EquipmentSlotType.MAINHAND);
 			 		
 			 		if (itemstack.isEmpty())
 			 		{
-			 			
 			 			MoreBerryFoxEntity.this.setItemStackToSlot(EquipmentSlotType.MAINHAND, new ItemStack(ItemRegistry.BLUE_BERRIES.get()));
 			 			j--;
 			 		}
@@ -164,7 +159,7 @@ public class MoreBerryFoxEntity extends FoxEntity
 			 		if (j > 0) Block.spawnAsEntity(MoreBerryFoxEntity.this.world, this.destinationBlock, new ItemStack(ItemRegistry.BLUE_BERRIES.get(), j));
 			 		
 			 		MoreBerryFoxEntity.this.playSound(SoundEvents.ITEM_SWEET_BERRIES_PICK_FROM_BUSH, 1.0F, 1.0F);
-			 		MoreBerryFoxEntity.this.world.setBlockState(this.destinationBlock, blockstate.with(SweetBerryBushBlock.AGE, Integer.valueOf(1)), 2);
+			 		MoreBerryFoxEntity.this.world.setBlockState(this.destinationBlock, blockstate.with(SweetBerryBushBlock.AGE, 1), 2);
 				}
 			}
 		}

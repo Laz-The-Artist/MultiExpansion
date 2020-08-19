@@ -12,7 +12,6 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.FlowerPotBlock;
 import net.minecraft.block.LogBlock;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
 import net.minecraft.entity.passive.FoxEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.AxeItem;
@@ -27,8 +26,10 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
+import java.util.Objects;
 import java.util.Random;
 
+@SuppressWarnings("unused")
 @Mod.EventBusSubscriber
 public class EventHandler
 {
@@ -93,10 +94,10 @@ public class EventHandler
             if (((FlowerPotBlock)block).func_220276_d() == Blocks.AIR)
             {
                 if (event.getItemStack().getItem() == Items.SWEET_BERRIES)
-                    world.setBlockState(pos, BlockRegistry.POTTED_BERRY_BUSH.get().getDefaultState());
+                    world.setBlockState(pos, Objects.requireNonNull(BlockRegistry.POTTED_BERRY_BUSH.get()).getDefaultState());
 
                 if (event.getItemStack().getItem() == ItemRegistry.BLUE_BERRIES.get())
-                    world.setBlockState(pos, BlockRegistry.POTTED_BERRY_BUSH.get().getDefaultState().with(PottedBerryBushBlock.BERRY_TYPE, BerryType.BLUE_BERRY_BUSH));
+                    world.setBlockState(pos, Objects.requireNonNull(BlockRegistry.POTTED_BERRY_BUSH.get()).getDefaultState().with(PottedBerryBushBlock.BERRY_TYPE, BerryType.BLUE_BERRY_BUSH));
             }
         }
     }
@@ -104,12 +105,12 @@ public class EventHandler
     @SubscribeEvent
     public static void replaceFoxes(EntityJoinWorldEvent event)
     {
+        World world = event.getWorld();
         Entity entity = event.getEntity();
 
-        if (!event.getWorld().isRemote && entity instanceof FoxEntity && !(entity instanceof MoreBerryFoxEntity))
+        if (!world.isRemote && entity instanceof FoxEntity && !(entity instanceof MoreBerryFoxEntity))
         {
-            @SuppressWarnings("unchecked")
-            MoreBerryFoxEntity newFox = new MoreBerryFoxEntity((EntityType<? extends FoxEntity>) EntityRegistry.MORE_BERRY_FOX.get(), event.getWorld());
+            MoreBerryFoxEntity newFox = Objects.requireNonNull(Objects.requireNonNull(EntityRegistry.MORE_BERRY_FOX.get()).create(world));
 
             newFox.setPositionAndRotation(entity.posX, entity.posY, entity.posZ, entity.rotationYaw, entity.rotationPitch);
             newFox.setHeldItem(((FoxEntity)entity).getActiveHand(), ((FoxEntity)entity).getHeldItemMainhand());
@@ -122,7 +123,7 @@ public class EventHandler
             if (((FoxEntity) entity).isChild())
                 newFox = newFox.createChild(newFox);
 
-            event.getWorld().addEntity(newFox);
+            event.getWorld().addEntity(Objects.requireNonNull(newFox));
             entity.remove();
         }
     }

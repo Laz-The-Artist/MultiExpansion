@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "multicraft:block_flower_rose_red",
+    "multicraft:block_flower_rose_pink",
+    "multicraft:block_flower_rose_purple",
+    "multicraft:block_flower_rose_yellow",
+    "multicraft:block_flower_rose_blue",
+    "multicraft:block_flower_rose_white"
+  ]
+}
