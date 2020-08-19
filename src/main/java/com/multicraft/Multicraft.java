@@ -23,9 +23,8 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import java.util.Objects;
 
 @Mod(Multicraft.MODID)
-public class Multicraft
+public class Multicraft // FIXME fix id change on loot table
 {
-	
 	public static final String MODID = "multicraft";
 	
 	public static final ItemGroup MULTICRAFT = new ItemGroup("multicraft")
@@ -79,7 +78,7 @@ public class Multicraft
 			((FlowerPotBlock)Blocks.FLOWER_POT).addPlant(BlockRegistry.BLUE_ROSE_BUSH.getId(), BlockRegistry.POTTED_BLUE_ROSE_BUSH);
 			((FlowerPotBlock)Blocks.FLOWER_POT).addPlant(BlockRegistry.WHITE_ROSE_BUSH.getId(), BlockRegistry.POTTED_WHITE_ROSE_BUSH);
 
-			// TODO vanilla bushes not working yet + verify if modded bushes work (might be an issue on tall plants + we're gonna have thelarge pot) + add proper model to sunflower
+			// FIXME vanilla bushes not working yet + verify if modded bushes work (might be an issue on tall plants + we're gonna have thelarge pot) + add proper model to sunflower
 			((FlowerPotBlock)Blocks.FLOWER_POT).addPlant(Objects.requireNonNull(Blocks.SUNFLOWER.getRegistryName()), () -> Blocks.SUNFLOWER);
 			((FlowerPotBlock)Blocks.FLOWER_POT).addPlant(Objects.requireNonNull(Blocks.LILAC.getRegistryName()), () -> Blocks.LILAC);
 			((FlowerPotBlock)Blocks.FLOWER_POT).addPlant(Objects.requireNonNull(Blocks.PEONY.getRegistryName()), () -> Blocks.PEONY);
