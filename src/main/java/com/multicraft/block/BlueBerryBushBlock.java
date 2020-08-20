@@ -1,10 +1,6 @@
 package com.multicraft.block;
 
-import java.util.Random;
-
-import com.multicraft.Multicraft;
 import com.multicraft.registries.ItemRegistry;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BushBlock;
@@ -18,6 +14,7 @@ import net.minecraft.item.Items;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
@@ -28,6 +25,8 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+
+import java.util.Random;
 
 @SuppressWarnings("deprecation")
 public class BlueBerryBushBlock extends BushBlock implements IGrowable
@@ -46,25 +45,19 @@ public class BlueBerryBushBlock extends BushBlock implements IGrowable
 	{
 		return new ItemStack(ItemRegistry.BLUE_BERRIES.get());
 	}
-	
-	@SuppressWarnings("deprecation")
+
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context)
 	{
-		
 		if (state.get(AGE) == 0) return SMALL_BUSH_SHAPE;
 		else return state.get(AGE) < 3 ? LARGE_BUSH_SHAPE : super.getShape(state, worldIn, pos, context);
-		
 	}
-	
-	@SuppressWarnings("deprecation")
+
 	public void tick(BlockState state, World worldIn, BlockPos pos, Random random)
 	{
 		super.tick(state, worldIn, pos, random);
 		
-		int i = state.get(AGE);
-		
-		if (i < 3 && random.nextInt(5) == 0 && worldIn.getLightSubtracted(pos.up(), 0) >= 9)
-			worldIn.setBlockState(pos, state.with(AGE, i + 1), 2);
+		if (!this.isMaxAge(state) && random.nextInt(5) == 0 && worldIn.getLightSubtracted(pos.up(), 0) >= 9)
+			worldIn.setBlockState(pos, state.with(AGE, state.get(AGE) + 1), 2);
 	}
 	
 	public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entityIn)
@@ -79,8 +72,7 @@ public class BlueBerryBushBlock extends BushBlock implements IGrowable
 					   d1 = Math.abs(entityIn.posZ - entityIn.lastTickPosZ);
 				
 				if (d0 >= (double)0.003F || d1 >= (double)0.003F)
-					entityIn.attackEntityFrom(Multicraft.BLUEBERRY_BUSH, 1.0F);
-				
+					entityIn.attackEntityFrom(DamageSource.SWEET_BERRY_BUSH, 1.0F);
 			}
 		}
 	}
@@ -124,9 +116,7 @@ public class BlueBerryBushBlock extends BushBlock implements IGrowable
 	
 	public void grow(World worldIn, Random rand, BlockPos pos, BlockState state)
 	{
-		int i = Math.min(3, state.get(AGE) + 1);
-		
-		worldIn.setBlockState(pos, state.with(AGE, i), 2);
+		worldIn.setBlockState(pos, state.with(AGE, Math.min(3, state.get(AGE) + 1)), 2);
 	}
 	
 }

@@ -82,9 +82,11 @@
 	"block.multicraft.potted_peony": "Potted Peony",
 
 	"itemGroup.multicraft": "Multicraft",
-	
-	"death.attack.blueBerryBush": "%1$s was poked to death by a blue berry bush",
+
+	"death.attack.sweetBerryBush": "%1$s was poked to death by a berry bush",
+	"death.attack.sweetBerryBush.player": "%1$s was poked to death by a berry bush whilst trying to escape %2$s",
 	"death.attack.roseBush": "%1$s was poked to death by a rose bush",
+	"death.attack.roseBush.player": "%1$s was poked to death by a rose bush whilst trying to escape %2$s",
 
 	"advancements.adventure.collect_every_flower.title": "A Single Pale Rose",
 	"advancements.adventure.collect_every_flower.description": "Collect every flower, including tall flowers, modded flowers, and wither rose."

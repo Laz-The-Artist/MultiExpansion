@@ -23,7 +23,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import java.util.Objects;
 
 @Mod(Multicraft.MODID)
-public class Multicraft // FIXME fix id change on loot table
+public class Multicraft
 {
 	public static final String MODID = "multicraft";
 	
@@ -36,8 +36,7 @@ public class Multicraft // FIXME fix id change on loot table
 			return new ItemStack(ItemRegistry.CREATIVE_TAB_ITEM.get());
 		}
     };
-	
-	public static final DamageSource BLUEBERRY_BUSH = new DamageSource("blueBerryBush");
+
 	public static final DamageSource ROSE_BUSH = new DamageSource("roseBush");
 	
 	public Multicraft()
@@ -56,7 +55,8 @@ public class Multicraft // FIXME fix id change on loot table
 		
 		MinecraftForge.EVENT_BUS.register(this);
 	}
-	
+
+    @SuppressWarnings("deprecation")
 	private void setup(final FMLCommonSetupEvent event)
 	{
 		DeferredWorkQueue.runLater(FeatureRegistry::generateFeatures);
@@ -78,10 +78,9 @@ public class Multicraft // FIXME fix id change on loot table
 			((FlowerPotBlock)Blocks.FLOWER_POT).addPlant(BlockRegistry.BLUE_ROSE_BUSH.getId(), BlockRegistry.POTTED_BLUE_ROSE_BUSH);
 			((FlowerPotBlock)Blocks.FLOWER_POT).addPlant(BlockRegistry.WHITE_ROSE_BUSH.getId(), BlockRegistry.POTTED_WHITE_ROSE_BUSH);
 
-			// FIXME vanilla bushes not working yet + verify if modded bushes work (might be an issue on tall plants + we're gonna have thelarge pot) + add proper model to sunflower
-			((FlowerPotBlock)Blocks.FLOWER_POT).addPlant(Objects.requireNonNull(Blocks.SUNFLOWER.getRegistryName()), () -> Blocks.SUNFLOWER);
-			((FlowerPotBlock)Blocks.FLOWER_POT).addPlant(Objects.requireNonNull(Blocks.LILAC.getRegistryName()), () -> Blocks.LILAC);
-			((FlowerPotBlock)Blocks.FLOWER_POT).addPlant(Objects.requireNonNull(Blocks.PEONY.getRegistryName()), () -> Blocks.PEONY);
+			((FlowerPotBlock)Blocks.FLOWER_POT).addPlant(Objects.requireNonNull(Blocks.SUNFLOWER.getRegistryName()), BlockRegistry.POTTED_SUNFLOWER);
+			((FlowerPotBlock)Blocks.FLOWER_POT).addPlant(Objects.requireNonNull(Blocks.LILAC.getRegistryName()), BlockRegistry.POTTED_LILAC);
+			((FlowerPotBlock)Blocks.FLOWER_POT).addPlant(Objects.requireNonNull(Blocks.PEONY.getRegistryName()), BlockRegistry.POTTED_PEONY);
 		});
 
 		PotionRegistry.registerBrewingRecipes();
