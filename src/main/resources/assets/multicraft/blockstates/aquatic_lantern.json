@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "hanging=true": { "model": "multicraft:block/hanging_aquatic_lantern" },
+    "hanging=false": { "model": "multicraft:block/aquatic_lantern" }
+  }
+}

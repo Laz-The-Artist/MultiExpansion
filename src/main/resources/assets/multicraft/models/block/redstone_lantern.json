@@ -1,0 +1,7 @@
+{
+  "parent": "block/lantern",
+  "textures": {
+    "particle": "multicraft:block/redstone_lantern_off",
+    "all": "multicraft:block/redstone_lantern_off"
+  }
+}

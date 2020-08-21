@@ -84,7 +84,9 @@ public final class ItemRegistry
 	public static final RegistryObject<Item> YELLOW_ROSE_BUSH = register(BlockRegistry.YELLOW_ROSE_BUSH);
 	public static final RegistryObject<Item> BLUE_ROSE_BUSH = register(BlockRegistry.BLUE_ROSE_BUSH);
 	public static final RegistryObject<Item> WHITE_ROSE_BUSH = register(BlockRegistry.WHITE_ROSE_BUSH);
-	
+	public static final RegistryObject<Item> REDSTONE_LANTERN = register(BlockRegistry.REDSTONE_LANTERN);
+	public static final RegistryObject<Item> AQUATIC_LANTERN = register(BlockRegistry.AQUATIC_LANTERN);
+
 	private static RegistryObject<Item> register(String name)
 	{
 		return ITEMS.register(name, () -> new Item(new Item.Properties().group(Multicraft.MULTICRAFT)));
@@ -92,6 +94,6 @@ public final class ItemRegistry
 	
 	private static RegistryObject<Item> register(RegistryObject<Block> block)
 	{
-		return ITEMS.register(block.getId().getPath(), () -> new BlockItem(block.get(), new Item.Properties().group(Multicraft.MULTICRAFT)));
+		return ITEMS.register(block.getId().getPath(), () -> new BlockItem(Objects.requireNonNull(block.get()), new Item.Properties().group(Multicraft.MULTICRAFT)));
 	}
 }

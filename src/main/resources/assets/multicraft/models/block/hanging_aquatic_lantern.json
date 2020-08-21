@@ -1,0 +1,7 @@
+{
+  "parent": "block/hanging_lantern",
+  "textures": {
+    "particle": "multicraft:block/aquatic_lantern",
+    "all": "multicraft:block/aquatic_lantern"
+  }
+}

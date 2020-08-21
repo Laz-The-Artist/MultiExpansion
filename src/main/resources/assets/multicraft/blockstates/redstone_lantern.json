@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "hanging=true,lit=true": { "model": "multicraft:block/hanging_redstone_lantern_on" },
+    "hanging=true,lit=false": { "model": "multicraft:block/hanging_redstone_lantern" },
+    "hanging=false,lit=true": { "model": "multicraft:block/redstone_lantern_on" },
+    "hanging=false,lit=false": { "model": "multicraft:block/redstone_lantern" }
+  }
+}

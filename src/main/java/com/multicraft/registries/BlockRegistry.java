@@ -87,4 +87,7 @@ public final class BlockRegistry
 	public static final RegistryObject<Block> POTTED_SUNFLOWER = BLOCKS.register("potted_sunflower", () -> new FlowerPotBlock(() -> (FlowerPotBlock)Blocks.FLOWER_POT, () -> Blocks.SUNFLOWER, Block.Properties.from(Blocks.FLOWER_POT)));
 	public static final RegistryObject<Block> POTTED_LILAC = BLOCKS.register("potted_lilac", () -> new FlowerPotBlock(() -> (FlowerPotBlock)Blocks.FLOWER_POT, () -> Blocks.LILAC, Block.Properties.from(Blocks.FLOWER_POT)));
 	public static final RegistryObject<Block> POTTED_PEONY = BLOCKS.register("potted_peony", () -> new FlowerPotBlock(() -> (FlowerPotBlock)Blocks.FLOWER_POT, () -> Blocks.PEONY, Block.Properties.from(Blocks.FLOWER_POT)));
+
+	public static final RegistryObject<Block> REDSTONE_LANTERN = BLOCKS.register("redstone_lantern", () -> new RedstoneLanternBlock(Block.Properties.from(Blocks.LANTERN)));
+	public static final RegistryObject<Block> AQUATIC_LANTERN = BLOCKS.register("aquatic_lantern", () -> new AquaticLanternBlock(Block.Properties.from(Blocks.LANTERN)));
 }
