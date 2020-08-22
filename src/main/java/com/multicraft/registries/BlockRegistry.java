@@ -6,6 +6,7 @@ import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
 import net.minecraft.potion.Effects;
+import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -54,8 +55,8 @@ public final class BlockRegistry
 	public static final RegistryObject<Block> RED_PLANKS = BLOCKS.register("block_red_planks", () -> new Block(Block.Properties.create(Material.WOOD, MaterialColor.RED).hardnessAndResistance(2.0F, 3.0F).sound(SoundType.WOOD)));
 	public static final RegistryObject<Block> BLACK_PLANKS = BLOCKS.register("block_black_planks", () -> new Block(Block.Properties.create(Material.WOOD, MaterialColor.BLACK).hardnessAndResistance(2.0F, 3.0F).sound(SoundType.WOOD)));
 
-	public static final RegistryObject<Block> RUBY_ORE = BLOCKS.register("block_ruby_ore", () -> new RubyOreBlock(Block.Properties.create(Material.ROCK, MaterialColor.NETHERRACK).hardnessAndResistance(3.0F, 3.0F).sound(SoundType.STONE).harvestLevel(3)));
-	public static final RegistryObject<Block> RUBY_BLOCK = BLOCKS.register("block_ruby_block", () -> new Block(Block.Properties.create(Material.ROCK, MaterialColor.RED).hardnessAndResistance(5.0F, 6.0F).sound(SoundType.METAL)));
+	public static final RegistryObject<Block> RUBY_ORE = BLOCKS.register("block_ruby_ore", () -> new RubyOreBlock(Block.Properties.create(Material.ROCK, MaterialColor.NETHERRACK).hardnessAndResistance(3.0F, 3.0F).sound(SoundType.STONE).harvestTool(ToolType.PICKAXE).harvestLevel(3)));
+	public static final RegistryObject<Block> RUBY_BLOCK = BLOCKS.register("block_ruby_block", () -> new Block(Block.Properties.create(Material.ROCK, MaterialColor.RED).hardnessAndResistance(5.0F, 6.0F).sound(SoundType.METAL).harvestTool(ToolType.PICKAXE).harvestLevel(3)));
 
 	public static final RegistryObject<Block> RED_ROSE = BLOCKS.register("block_flower_rose_red", () -> new FlowerBlock(Effects.HEALTH_BOOST, 4, Block.Properties.create(Material.PLANTS).doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.PLANT)));
 	public static final RegistryObject<Block> PINK_ROSE = BLOCKS.register("block_flower_rose_pink", () -> new FlowerBlock(Effects.HEALTH_BOOST, 4, Block.Properties.create(Material.PLANTS).doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.PLANT)));
