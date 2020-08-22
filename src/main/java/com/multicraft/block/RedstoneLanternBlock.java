@@ -12,10 +12,10 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.world.IEnviromentBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
 
+@SuppressWarnings("deprecation")
 public class RedstoneLanternBlock extends LanternBlock
 {
     public static final BooleanProperty LIT = RedstoneTorchBlock.LIT;
@@ -27,12 +27,11 @@ public class RedstoneLanternBlock extends LanternBlock
     }
 
     @Override
-    public int getLightValue(BlockState state, IEnviromentBlockReader world, BlockPos pos)
+    public int getLightValue(BlockState state)
     {
-        return state.get(LIT) ? super.getLightValue(state, world, pos) : 0;
+        return state.get(LIT) ? super.getLightValue(state) : 0;
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit)
     {
