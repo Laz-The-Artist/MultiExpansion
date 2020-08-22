@@ -17,6 +17,7 @@
 	"item.multicraft.item_pie_blue_berry": "Blue Berry Pie",
 	
 	"block.multicraft.block_blue_berry_bush": "Blue Berry Bush",
+	"block.multicraft.block_potted_berry_bush": "Potted Berry Bush",
 	"block.multicraft.block_brick_mossy": "Mossy Bricks",
 	"block.multicraft.block_brick_terracotta": "Terracotta Bricks",
 	"block.multicraft.block_brick_terracotta_white": "White Terracotta Bricks",
@@ -81,6 +82,7 @@
 	"block.multicraft.potted_lilac": "Potted Lilac",
 	"block.multicraft.potted_peony": "Potted Peony",
 	"block.multicraft.large_flower_pot": "Large Flower Pot",
+	"block.multicraft.chain": "Chain",
 	"block.multicraft.redstone_lantern": "Redstone Lantern",
 	"block.multicraft.aquatic_lantern": "Aquatic Lantern",
 
