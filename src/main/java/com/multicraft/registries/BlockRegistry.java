@@ -17,6 +17,7 @@ public final class BlockRegistry
 	
 	public static final RegistryObject<Block> BLUE_BERRY_BUSH = BLOCKS.register("block_blue_berry_bush", () -> new BlueBerryBushBlock(Block.Properties.create(Material.PLANTS).tickRandomly().doesNotBlockMovement().sound(SoundType.SWEET_BERRY_BUSH)));
 	public static final RegistryObject<Block> POTTED_BERRY_BUSH = BLOCKS.register("block_potted_berry_bush", () -> new PottedBerryBushBlock(Block.Properties.create(Material.MISCELLANEOUS).tickRandomly().hardnessAndResistance(0)));
+
 	public static final RegistryObject<Block> MOSSY_BRICKS = BLOCKS.register("block_brick_mossy", () -> new Block(Block.Properties.create(Material.ROCK, MaterialColor.RED).hardnessAndResistance(2.0F, 6.0F)));
 
 	public static final RegistryObject<Block> TERRACOTTA_BRICKS = BLOCKS.register("block_brick_terracotta", () -> new Block(Block.Properties.create(Material.ROCK, MaterialColor.ADOBE).hardnessAndResistance(2.0F, 6.0F)));

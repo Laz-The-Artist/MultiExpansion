@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "XXX",
+    "R#R",
+    "XLX"
+  ],
+  "key":
+  {
+    "#": { "item": "minecraft:redstone_torch" },
+    "X": { "tag": "forge:nuggets/iron" },
+    "R": { "tag": "forge:dusts/redstone" },
+    "L": { "item": "minecraft:lever" }
+  },
+  "result": { "item": "multicraft:redstone_lantern" }
+}
