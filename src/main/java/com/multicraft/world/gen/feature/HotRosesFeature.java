@@ -1,18 +1,16 @@
 package com.multicraft.world.gen.feature;
 
-import java.util.Random;
-import java.util.function.Function;
-
 import com.mojang.datafixers.Dynamic;
-import com.mojang.datafixers.types.DynamicOps;
 import com.multicraft.registries.BlockRegistry;
-
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.gen.feature.FlowersFeature;
-import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
+
+import java.util.Objects;
+import java.util.Random;
+import java.util.function.Function;
 
 public class HotRosesFeature extends FlowersFeature
 {
@@ -28,11 +26,11 @@ public class HotRosesFeature extends FlowersFeature
 		switch (flower)
 		{
 		case 0:
-			return BlockRegistry.RED_ROSE.get().getDefaultState();
+			return Objects.requireNonNull(BlockRegistry.RED_ROSE.get()).getDefaultState();
 		case 1:
-			return BlockRegistry.PINK_ROSE.get().getDefaultState();
+			return Objects.requireNonNull(BlockRegistry.PINK_ROSE.get()).getDefaultState();
 		case 2:
-			return BlockRegistry.YELLOW_ROSE.get().getDefaultState();
+			return Objects.requireNonNull(BlockRegistry.YELLOW_ROSE.get()).getDefaultState();
 		default: return Blocks.AIR.getDefaultState();
 		}
 	}

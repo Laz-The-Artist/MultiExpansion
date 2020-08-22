@@ -2,7 +2,6 @@ package com.multicraft.registries;
 
 import com.multicraft.Multicraft;
 import com.multicraft.block.*;
-
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;

@@ -1,15 +1,15 @@
 package com.multicraft.registries;
 
 import com.multicraft.Multicraft;
-
 import net.minecraft.entity.item.PaintingType;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
+@SuppressWarnings("unused")
 public final class PaintingRegistry
 {
-	public static final DeferredRegister<PaintingType> PAINTINGS = new DeferredRegister<PaintingType>(ForgeRegistries.PAINTING_TYPES, Multicraft.MODID);
+	public static final DeferredRegister<PaintingType> PAINTINGS = new DeferredRegister<>(ForgeRegistries.PAINTING_TYPES, Multicraft.MODID);
 	
 	public static final RegistryObject<PaintingType> ABSTRACT_1 = register(32, 64, "painting_abstract_1_by_gama");
 	public static final RegistryObject<PaintingType> ABSTRACT_2 = register(32, 32, "painting_abstract_2_by_gama");

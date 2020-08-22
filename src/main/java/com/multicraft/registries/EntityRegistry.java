@@ -2,7 +2,6 @@ package com.multicraft.registries;
 
 import com.multicraft.Multicraft;
 import com.multicraft.entity.MoreBerryFoxEntity;
-
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraftforge.fml.RegistryObject;

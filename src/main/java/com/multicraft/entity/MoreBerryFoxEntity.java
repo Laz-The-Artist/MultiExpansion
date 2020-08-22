@@ -4,7 +4,6 @@ import com.multicraft.block.BlueBerryBushBlock;
 import com.multicraft.registries.BlockRegistry;
 import com.multicraft.registries.EntityRegistry;
 import com.multicraft.registries.ItemRegistry;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
