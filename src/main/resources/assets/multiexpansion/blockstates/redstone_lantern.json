@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "hanging=false,powered=true": {
+      "model": "multiexpansion:block/redstone_lantern_on"
+    },
+    "hanging=true,powered=true": {
+      "model": "multiexpansion:block/redstone_lantern_hanging_on"
+    },
+    "hanging=false,powered=false": {
+      "model": "multiexpansion:block/redstone_lantern_off"
+    },
+    "hanging=true,powered=false": {
+      "model": "multiexpansion:block/redstone_lantern_hanging_off"
+    }
+  }
+}

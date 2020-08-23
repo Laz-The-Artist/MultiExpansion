@@ -1,0 +1,54 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "multiexpansion:ghast_tear_seeds"
+    ]
+  },
+  "criteria": {
+    "has_ghast_tear": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:ghast_tear"
+          }
+        ]
+      }
+    },
+    "has_beetroot_seeds": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:beetroot_seeds"
+          }
+        ]
+      }
+    },
+    "has_wisping_soul_bottle": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "multiexpansion:wisping_soul_bottle"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "multiexpansion:ghast_tear_seeds"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_ghast_tear",
+      "has_beetroot_seeds",
+      "has_wisping_soul_bottle",
+      "has_the_recipe"
+    ]
+  ]
+}

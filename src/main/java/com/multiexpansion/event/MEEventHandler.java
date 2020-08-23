@@ -2,7 +2,6 @@ package com.multiexpansion.event;
 
 import com.multiexpansion.block.MEBlocks;
 import com.multiexpansion.item.MEItems;
-
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
@@ -13,6 +12,7 @@ import net.minecraft.item.Items;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
+import net.minecraft.stats.Stats;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
@@ -68,6 +68,68 @@ public class MEEventHandler {
 	}
 	
 	@SubscribeEvent
+	public static void onEmptyBottle(RightClickBlock event) {
+		
+		World world = event.getWorld();
+		BlockPos pos = event.getPos();
+		PlayerEntity player = event.getPlayer();
+		ItemStack stack = event.getItemStack();
+		
+		if (stack.getItem() == Items.GLASS_BOTTLE) {
+			
+			if (world.getBlockState(pos).isIn(Blocks.field_235399_ni_)) {
+				
+				world.setBlockState(pos, Blocks.OBSIDIAN.getDefaultState());
+				
+				world.playSound(player, player.getPosX(), player.getPosY(), player.getPosZ(), SoundEvents.ITEM_BOTTLE_FILL, SoundCategory.NEUTRAL, 1.0F, 1.0F);
+				
+				if (!player.isCreative()) {
+					
+					stack.shrink(1);
+					
+				}
+				
+				player.addStat(Stats.ITEM_USED.get(Items.GLASS_BOTTLE));
+				
+				if (!player.inventory.addItemStackToInventory(new ItemStack(MEItems.BOTTLED_OBSIDIAN_TEARS.get()))) {
+					
+					player.dropItem(new ItemStack(MEItems.BOTTLED_OBSIDIAN_TEARS.get()), false);
+					
+				}
+				
+				player.swing(event.getHand(), true);
+	            
+			}
+			
+			if (world.getBlockState(pos).isIn(MEBlocks.SOUL_SPROUT.get())) {
+				
+				world.destroyBlock(pos, false);
+				
+				world.playSound(player, player.getPosX(), player.getPosY(), player.getPosZ(), SoundEvents.ENTITY_ENDERMITE_HURT, SoundCategory.NEUTRAL, 2.0F, world.getRandom().nextFloat() - 8.0F);
+				
+				if (!player.isCreative()) {
+					
+					stack.shrink(1);
+					
+				}
+				
+				player.addStat(Stats.ITEM_USED.get(Items.GLASS_BOTTLE));
+				
+				if (!player.inventory.addItemStackToInventory(new ItemStack(MEItems.WISPING_SOUL_BOTTLE.get()))) {
+					
+					player.dropItem(new ItemStack(MEItems.WISPING_SOUL_BOTTLE.get()), false);
+					
+				}
+				
+				player.swing(event.getHand(), true);
+	            
+			}
+			
+		}
+		
+	}
+	
+	@SubscribeEvent
 	public static void onGoldenHoeUsed(RightClickBlock event) {
 		
 		World world = event.getWorld();
@@ -109,6 +171,31 @@ public class MEEventHandler {
 	            player.swing(event.getHand(), true);
 	            
 			}
+			
+		}
+		
+	}
+	
+	@SubscribeEvent
+	public static void changeCampfirePlacement(RightClickBlock event) {
+		
+		ItemStack stack = event.getItemStack();
+		
+		if (stack.getItem() == Items.CAMPFIRE) {
+			
+			ItemStack replaceStack = new ItemStack(MEBlocks.CAMPFIRE.get(), stack.getCount());
+			replaceStack.setTag(stack.getTag());
+			
+			event.getEntityLiving().setHeldItem(event.getHand(), replaceStack);
+			
+		}
+		
+		if (stack.getItem() == Items.field_234791_rn_) {
+			
+			ItemStack replaceStack = new ItemStack(MEBlocks.SOUL_CAMPFIRE.get(), stack.getCount());
+			replaceStack.setTag(stack.getTag());
+			
+			event.getEntityLiving().setHeldItem(event.getHand(), replaceStack);
 			
 		}
 		

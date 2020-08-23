@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "hanging=false": {
+      "model": "multiexpansion:block/aquatic_lantern"
+    },
+    "hanging=true": {
+      "model": "multiexpansion:block/aquatic_lantern_hanging"
+    }
+  }
+}

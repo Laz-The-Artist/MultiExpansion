@@ -1,0 +1,12 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern":
+	[
+		"R"
+	],
+	"key":
+	{
+		"R": { "item": "multiexpansion:ruby_block" }
+	},
+    "result": { "item": "multiexpansion:ruby", "count": 9 }
+}

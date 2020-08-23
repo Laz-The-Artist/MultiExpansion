@@ -52,11 +52,15 @@ public class SoulSandFarmlandBlock extends Block {
 	@Override
 	public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn) {
 		
-		if (worldIn.getBlockState(pos).get(MOISTURE) == 7) {
+		if (worldIn.getBlockState(pos).func_235901_b_(MOISTURE)) {
 			
-			if (!entityIn.func_230279_az_() && entityIn instanceof LivingEntity && !EnchantmentHelper.hasFrostWalker((LivingEntity)entityIn)) {
+			if (worldIn.getBlockState(pos).get(MOISTURE) == 7) {
 				
-				entityIn.attackEntityFrom(DamageSource.HOT_FLOOR, 1.0F);
+				if (!entityIn.func_230279_az_() && entityIn instanceof LivingEntity && !EnchantmentHelper.hasFrostWalker((LivingEntity)entityIn)) {
+					
+					entityIn.attackEntityFrom(DamageSource.HOT_FLOOR, 1.0F);
+					
+				}
 				
 			}
 			
@@ -204,6 +208,18 @@ public class SoulSandFarmlandBlock extends Block {
 	public static void turnToSoulSand(BlockState state, World worldIn, BlockPos pos) {
 		
 		worldIn.setBlockState(pos, nudgeEntitiesWithNewState(state, Blocks.SOUL_SAND.getDefaultState(), worldIn, pos));
+		
+		if (worldIn.getBlockState(pos.up()).isIn(Blocks.NETHER_WART)) {
+			
+			worldIn.destroyBlock(pos.up(), true);
+			
+		}
+		
+		if (worldIn.getBlockState(pos.up()).isIn(MEBlocks.GHAST_TEAR_CROP.get())) {
+			
+			worldIn.destroyBlock(pos.up(), true);
+			
+		}
 		
 	}
 	
