@@ -7,7 +7,7 @@ displayName="MultiExpansion"
 logoFile="logo.png" #optional
 credits="§3§lMultiexpansion§r mod is made by §nMultiteam§r, specially by: Rellit §2§l[MAIN CODE]§r, MaroonShaded §a§l[CODE]§r, Laz the Artist §4§l[TEXTURES/MODELS]§r, and IAmGama §c§l[TEXTURES]§r"
 authors="Rellit, MaroonShaded, Laz the Artist, and IAmGama."
-description='''This mod adds the things we've been missing from minecraft for a long time, and even some new exciting features!'''
+description='''This mod adds the things we've been missing from Minecraft for a long time, and even some new exciting features!'''
 
 [[dependencies.multiexpansion]]
     modId="forge"

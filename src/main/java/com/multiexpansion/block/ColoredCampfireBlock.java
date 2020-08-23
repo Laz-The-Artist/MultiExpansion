@@ -5,6 +5,8 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
+import com.multiexpansion.particles.ColoredCampfireCosySmokeParticleData;
+import com.multiexpansion.particles.ColoredCampfireSignalSmokeParticleData;
 import com.multiexpansion.particles.ColoredCampfireSmokeParticleData;
 import com.multiexpansion.tileentity.ColoredCampfireTileEntity;
 
@@ -195,7 +197,7 @@ public class ColoredCampfireBlock extends ContainerBlock implements IWaterLoggab
 				
 				for(int i = 0; i < rand.nextInt(1) + 1; ++i) {
 					
-					worldIn.addParticle(ParticleTypes.LAVA, (double)pos.getX() + 0.5D, (double)pos.getY() + 0.5D, (double)pos.getZ() + 0.5D, (double)(rand.nextFloat() / 2.0F), 5.0E-5D, (double)(rand.nextFloat() / 2.0F));
+					worldIn.addParticle(ParticleTypes.LAVA, (double)pos.getX() + 0.5D, (double)pos.getY() + 0.5D, (double)pos.getZ() + 0.5D, (double)(rand.nextFloat() / 2.0), 5.0E-5D, (double)(rand.nextFloat() / 2.0));
 					
 				}
 				
@@ -276,109 +278,573 @@ public class ColoredCampfireBlock extends ContainerBlock implements IWaterLoggab
 		
 	}
 	
-	public static void spawnSmokeParticles(World worldIn, BlockPos pos, boolean isSignalFire, boolean spawnExtraSmoke) {
+	public static void spawnSmokeParticles(World world, BlockPos pos, boolean isSignalFire, boolean spawnExtraSmoke) {
 		
-		Random random = worldIn.getRandom();
+		Random random = world.getRandom();
 		
-		if (hasWool(worldIn.getBlockState(pos.down()).getBlock())) {
-			
-			worldIn.addOptionalParticle(getColoredParticleFromBlock(worldIn.getBlockState(pos.down()).getBlock()), true, (double)pos.getX() + 0.5D + random.nextDouble() / 3.0D * (double)(random.nextBoolean() ? 1 : -1), (double)pos.getY() + random.nextDouble() + random.nextDouble(), (double)pos.getZ() + 0.5D + random.nextDouble() / 3.0D * (double)(random.nextBoolean() ? 1 : -1), 0.0D, 0.07D, 0.0D);
-			
-			
-		} else {
+		if (!spawnColoredParticle(world, world.getBlockState(pos.down()).getBlock(), pos, random)) {
 			
 			BasicParticleType basicparticletype = isSignalFire ? ParticleTypes.CAMPFIRE_SIGNAL_SMOKE : ParticleTypes.CAMPFIRE_COSY_SMOKE;
-			worldIn.addOptionalParticle(basicparticletype, true, (double)pos.getX() + 0.5D + random.nextDouble() / 3.0D * (double)(random.nextBoolean() ? 1 : -1), (double)pos.getY() + random.nextDouble() + random.nextDouble(), (double)pos.getZ() + 0.5D + random.nextDouble() / 3.0D * (double)(random.nextBoolean() ? 1 : -1), 0.0D, 0.07D, 0.0D);
+			world.addOptionalParticle(basicparticletype, true, (double)pos.getX() + 0.5D + random.nextDouble() / 3.0D * (double)(random.nextBoolean() ? 1 : -1), (double)pos.getY() + random.nextDouble() + random.nextDouble(), (double)pos.getZ() + 0.5D + random.nextDouble() / 3.0D * (double)(random.nextBoolean() ? 1 : -1), 0.0D, 0.07D, 0.0D);
 			
 		}
 		
 		if (spawnExtraSmoke) {
 			
-			worldIn.addParticle(ParticleTypes.SMOKE, (double)pos.getX() + 0.25D + random.nextDouble() / 2.0D * (double)(random.nextBoolean() ? 1 : -1), (double)pos.getY() + 0.4D, (double)pos.getZ() + 0.25D + random.nextDouble() / 2.0D * (double)(random.nextBoolean() ? 1 : -1), 0.0D, 0.005D, 0.0D);
+			world.addParticle(ParticleTypes.SMOKE, (double)pos.getX() + 0.25D + random.nextDouble() / 2.0D * (double)(random.nextBoolean() ? 1 : -1), (double)pos.getY() + 0.4D, (double)pos.getZ() + 0.25D + random.nextDouble() / 2.0D * (double)(random.nextBoolean() ? 1 : -1), 0.0D, 0.005D, 0.0D);
 			
 		}
 		
 	}
 	
-	public static boolean hasWool(Block block) {
+	public static boolean spawnColoredParticle(World world, Block block, BlockPos pos, Random random) {
+		
+		CampfireParticlePlaceholder particle = getParticleResultFromBlock(block, random);
+		
+		if (particle != null) {
+			
+			if (isWool(block)) {
+				
+				world.addOptionalParticle(new ColoredCampfireCosySmokeParticleData(particle.getRed(), particle.getGreen(), particle.getBlue(), particle.getAlpha()), true, (double)pos.getX() + 0.5D + random.nextDouble() / 3.0D * (double)(random.nextBoolean() ? 1 : -1), (double)pos.getY() + random.nextDouble() + random.nextDouble(), (double)pos.getZ() + 0.5D + random.nextDouble() / 3.0D * (double)(random.nextBoolean() ? 1 : -1), 0.0D, 0.07D, 0.0D);
+				
+				return true;
+				
+			} else if (isStainedGlass(block)) {
+				
+				if (random.nextFloat() < 0.2F) {
+					
+					world.addOptionalParticle(new ColoredCampfireSignalSmokeParticleData(particle.getRed(), particle.getGreen(), particle.getBlue(), particle.getAlpha()), true, (double)pos.getX() + 0.5D + random.nextDouble() / 3.0D * (double)(random.nextBoolean() ? 1 : -1), (double)pos.getY() + random.nextDouble() + random.nextDouble(), (double)pos.getZ() + 0.5D + random.nextDouble() / 3.0D * (double)(random.nextBoolean() ? 1 : -1), 0.0D, 0.07D, 0.0D);
+					
+				}
+				
+				return true;
+				
+			} else if (isConcrete(block)) {
+				
+				world.addOptionalParticle(new ColoredCampfireSignalSmokeParticleData(particle.getRed(), particle.getGreen(), particle.getBlue(), particle.getAlpha()), true, (double)pos.getX() + 0.5D + random.nextDouble() / 3.0D * (double)(random.nextBoolean() ? 1 : -1), (double)pos.getY() + random.nextDouble() + random.nextDouble(), (double)pos.getZ() + 0.5D + random.nextDouble() / 3.0D * (double)(random.nextBoolean() ? 1 : -1), 0.0D, 0.07D, 0.0D);
+				
+				return true;
+				
+			} else if (isConcretePowder(block)) {
+				
+				if (random.nextFloat() < 0.2F) {
+					
+					world.addOptionalParticle(new ColoredCampfireCosySmokeParticleData(particle.getRed(), particle.getGreen(), particle.getBlue(), particle.getAlpha()), true, (double)pos.getX() + 0.5D + random.nextDouble() / 3.0D * (double)(random.nextBoolean() ? 1 : -1), (double)pos.getY() + random.nextDouble() + random.nextDouble(), (double)pos.getZ() + 0.5D + random.nextDouble() / 3.0D * (double)(random.nextBoolean() ? 1 : -1), 0.0D, 0.07D, 0.0D);
+					
+				}
+				
+				return true;
+				
+			} else {
+				
+				world.addOptionalParticle(new ColoredCampfireSignalSmokeParticleData(particle.getRed(), particle.getGreen(), particle.getBlue(), particle.getAlpha()), true, (double)pos.getX() + 0.5D + random.nextDouble() / 3.0D * (double)(random.nextBoolean() ? 1 : -1), (double)pos.getY() + random.nextDouble() + random.nextDouble(), (double)pos.getZ() + 0.5D + random.nextDouble() / 3.0D * (double)(random.nextBoolean() ? 1 : -1), 0.0D, 0.07D, 0.0D);
+				return true;
+				
+			}
+ 			
+		} else {
+			
+			return false;
+			
+		}
+		
+	}
+	
+	public static boolean isWool(Block block) {
 		
 		return (block == Blocks.WHITE_WOOL || block == Blocks.ORANGE_WOOL || block == Blocks.MAGENTA_WOOL || block == Blocks.LIGHT_BLUE_WOOL || block == Blocks.YELLOW_WOOL || block == Blocks.LIME_WOOL || block == Blocks.PINK_WOOL || block == Blocks.GRAY_WOOL || block == Blocks.LIGHT_GRAY_WOOL || block == Blocks.CYAN_WOOL || block == Blocks.PURPLE_WOOL || block == Blocks.BLUE_WOOL || block == Blocks.BROWN_WOOL || block == Blocks.GREEN_WOOL || block == Blocks.RED_WOOL || block == Blocks.BLACK_WOOL);
 		
 	}
 	
-	public static ColoredCampfireSmokeParticleData getColoredParticleFromBlock(Block block) {
+	public static boolean isStainedGlass(Block block) {
 		
-		//RGB Data found from https://www.reddit.com/r/MinecraftCommands/comments/9tdvfc/almost_perfect_minecraft_rgb_colors_in_percent/
+		return (block == Blocks.WHITE_STAINED_GLASS || block == Blocks.ORANGE_STAINED_GLASS || block == Blocks.MAGENTA_STAINED_GLASS || block == Blocks.LIGHT_BLUE_STAINED_GLASS || block == Blocks.YELLOW_STAINED_GLASS || block == Blocks.LIME_STAINED_GLASS || block == Blocks.PINK_STAINED_GLASS || block == Blocks.GRAY_STAINED_GLASS || block == Blocks.LIGHT_GRAY_STAINED_GLASS || block == Blocks.CYAN_STAINED_GLASS || block == Blocks.PURPLE_STAINED_GLASS || block == Blocks.BLUE_STAINED_GLASS || block == Blocks.BROWN_STAINED_GLASS || block == Blocks.GREEN_STAINED_GLASS || block == Blocks.RED_STAINED_GLASS || block == Blocks.BLACK_STAINED_GLASS);
 		
-		if (block == Blocks.WHITE_WOOL) {
+	}
+	
+	public static boolean isConcrete(Block block) {
+		
+		return (block == Blocks.WHITE_CONCRETE || block == Blocks.ORANGE_CONCRETE || block == Blocks.MAGENTA_CONCRETE || block == Blocks.LIGHT_BLUE_CONCRETE || block == Blocks.YELLOW_CONCRETE || block == Blocks.LIME_CONCRETE || block == Blocks.PINK_CONCRETE || block == Blocks.GRAY_CONCRETE || block == Blocks.LIGHT_GRAY_CONCRETE || block == Blocks.CYAN_CONCRETE || block == Blocks.PURPLE_CONCRETE || block == Blocks.BLUE_CONCRETE || block == Blocks.BROWN_CONCRETE || block == Blocks.GREEN_CONCRETE || block == Blocks.RED_CONCRETE || block == Blocks.BLACK_CONCRETE);
+		
+	}
+	
+	public static boolean isConcretePowder(Block block) {
+		
+		return (block == Blocks.WHITE_CONCRETE_POWDER || block == Blocks.ORANGE_CONCRETE_POWDER || block == Blocks.MAGENTA_CONCRETE_POWDER || block == Blocks.LIGHT_BLUE_CONCRETE_POWDER || block == Blocks.YELLOW_CONCRETE_POWDER || block == Blocks.LIME_CONCRETE_POWDER || block == Blocks.PINK_CONCRETE_POWDER || block == Blocks.GRAY_CONCRETE_POWDER || block == Blocks.LIGHT_GRAY_CONCRETE_POWDER || block == Blocks.CYAN_CONCRETE_POWDER || block == Blocks.PURPLE_CONCRETE_POWDER || block == Blocks.BLUE_CONCRETE_POWDER || block == Blocks.BROWN_CONCRETE_POWDER || block == Blocks.GREEN_CONCRETE_POWDER || block == Blocks.RED_CONCRETE_POWDER || block == Blocks.BLACK_CONCRETE_POWDER);
+		
+	}
+	
+	public static CampfireParticlePlaceholder getParticleResultFromBlock(Block block, Random random) {
+		
+		if (block == Blocks.WHITE_WOOL || block == Blocks.WHITE_STAINED_GLASS || block == Blocks.WHITE_CONCRETE || block == Blocks.WHITE_CONCRETE_POWDER) {
 			
-			return new ColoredCampfireSmokeParticleData(1.0F, 1.0F, 1.0F, 0.0F);
+			return new CampfireParticlePlaceholder(246, 246, 246, 0);
 			
-		} else if (block == Blocks.ORANGE_WOOL) {
+		} else if (block == Blocks.ORANGE_WOOL || block == Blocks.ORANGE_STAINED_GLASS || block == Blocks.ORANGE_CONCRETE || block == Blocks.ORANGE_CONCRETE_POWDER) {
 			
-			return new ColoredCampfireSmokeParticleData(0.91F, 0.67F, 0.32F, 0.0F);
+			return new CampfireParticlePlaceholder(229, 128, 25, 0);
 			
-		} else if (block == Blocks.MAGENTA_WOOL) {
+		} else if (block == Blocks.MAGENTA_WOOL || block == Blocks.MAGENTA_STAINED_GLASS || block == Blocks.MAGENTA_CONCRETE || block == Blocks.MAGENTA_CONCRETE_POWDER) {
 			
-			return new ColoredCampfireSmokeParticleData(0.88F, 0.56F, 0.85F, 0.0F);
+			return new CampfireParticlePlaceholder(194, 78, 185, 0);
 			
-		} else if (block == Blocks.LIGHT_BLUE_WOOL) {
+		} else if (block == Blocks.LIGHT_BLUE_WOOL || block == Blocks.LIGHT_BLUE_STAINED_GLASS || block == Blocks.LIGHT_BLUE_CONCRETE || block == Blocks.LIGHT_BLUE_CONCRETE_POWDER) {
 			
-			return new ColoredCampfireSmokeParticleData(0.58F, 0.72F, 0.91F, 0.0F);
+			return new CampfireParticlePlaceholder(89, 205, 230, 0);
 			
-		} else if (block == Blocks.YELLOW_WOOL) {
+		} else if (block == Blocks.YELLOW_WOOL || block == Blocks.YELLOW_STAINED_GLASS || block == Blocks.YELLOW_CONCRETE || block == Blocks.YELLOW_CONCRETE_POWDER) {
 			
-			return new ColoredCampfireSmokeParticleData(0.91F, 0.91F, 0.3F, 0.0F);
+			return new CampfireParticlePlaceholder(243, 212, 58, 0);
 			
-		} else if (block == Blocks.LIME_WOOL) {
+		} else if (block == Blocks.LIME_WOOL || block == Blocks.LIME_STAINED_GLASS || block == Blocks.LIME_CONCRETE || block == Blocks.LIME_CONCRETE_POWDER) {
 			
-			return new ColoredCampfireSmokeParticleData(0.58F, 0.85F, 0.25F, 0.0F);
+			return new CampfireParticlePlaceholder(134, 204, 45, 0);
 			
-		} else if (block == Blocks.PINK_WOOL) {
+		} else if (block == Blocks.PINK_WOOL || block == Blocks.PINK_STAINED_GLASS || block == Blocks.PINK_CONCRETE || block == Blocks.PINK_CONCRETE_POWDER) {
 			
-			return new ColoredCampfireSmokeParticleData(0.94F, 0.7F, 0.82F, 0.0F);
+			return new CampfireParticlePlaceholder(246, 182, 206, 0);
 			
-		} else if (block == Blocks.GRAY_WOOL) {
+		} else if (block == Blocks.GRAY_WOOL || block == Blocks.GRAY_STAINED_GLASS || block == Blocks.GRAY_CONCRETE || block == Blocks.GRAY_CONCRETE_POWDER) {
 			
-			return new ColoredCampfireSmokeParticleData(0.54F, 0.54F, 0.54F, 0.0F);
+			return new CampfireParticlePlaceholder(87, 93, 98, 0);
 			
-		} else if (block == Blocks.LIGHT_GRAY_WOOL) {
+		} else if (block == Blocks.LIGHT_GRAY_WOOL || block == Blocks.LIGHT_GRAY_STAINED_GLASS || block == Blocks.LIGHT_GRAY_CONCRETE || block == Blocks.LIGHT_GRAY_CONCRETE_POWDER) {
 			
-			return new ColoredCampfireSmokeParticleData(0.81F, 0.81F, 0.81F, 0.0F);
+			return new CampfireParticlePlaceholder(157, 157, 151, 0);
 			
-		} else if (block == Blocks.CYAN_WOOL) {
+		} else if (block == Blocks.CYAN_WOOL || block == Blocks.CYAN_STAINED_GLASS || block == Blocks.CYAN_CONCRETE || block == Blocks.CYAN_CONCRETE_POWDER) {
 			
-			return new ColoredCampfireSmokeParticleData(0.22F, 0.48F, 0.58F, 0.0F);
+			return new CampfireParticlePlaceholder(37, 145, 155, 0);
 			
-		} else if (block == Blocks.PURPLE_WOOL) {
+		} else if (block == Blocks.PURPLE_WOOL || block == Blocks.PURPLE_STAINED_GLASS || block == Blocks.PURPLE_CONCRETE || block == Blocks.PURPLE_CONCRETE_POWDER) {
 			
-			return new ColoredCampfireSmokeParticleData(0.74F, 0.48F, 0.86F, 0.0F);
+			return new CampfireParticlePlaceholder(122, 50, 170, 0);
 			
-		} else if (block == Blocks.BLUE_WOOL) {
+		} else if (block == Blocks.BLUE_WOOL || block == Blocks.BLUE_STAINED_GLASS || block == Blocks.BLUE_CONCRETE || block == Blocks.BLUE_CONCRETE_POWDER) {
 			
-			return new ColoredCampfireSmokeParticleData(0.23F, 0.42F, 0.7F, 0.0F);
+			return new CampfireParticlePlaceholder(69, 70, 163, 0);
 			
-		} else if (block == Blocks.BROWN_WOOL) {
+		} else if (block == Blocks.BROWN_WOOL || block == Blocks.BROWN_STAINED_GLASS || block == Blocks.BROWN_CONCRETE || block == Blocks.BROWN_CONCRETE_POWDER) {
 			
-			return new ColoredCampfireSmokeParticleData(0.61F, 0.44F, 0.32F, 0.0F);
+			return new CampfireParticlePlaceholder(147, 101, 67, 0);
 			
-		} else if (block == Blocks.GREEN_WOOL) {
+		} else if (block == Blocks.GREEN_WOOL || block == Blocks.GREEN_STAINED_GLASS || block == Blocks.GREEN_CONCRETE || block == Blocks.GREEN_CONCRETE_POWDER) {
 			
-			return new ColoredCampfireSmokeParticleData(0.39F, 0.5F, 0.21F, 0.0F);
+			return new CampfireParticlePlaceholder(93, 113, 48, 0);
 			
-		} else if (block == Blocks.RED_WOOL) {
+		} else if (block == Blocks.RED_WOOL || block == Blocks.RED_STAINED_GLASS || block == Blocks.RED_CONCRETE || block == Blocks.RED_CONCRETE_POWDER) {
 			
-			return new ColoredCampfireSmokeParticleData(0.7F, 0.25F, 0.25F, 0.0F);
+			return new CampfireParticlePlaceholder(178, 57, 52, 0);
 			
-		} else if (block == Blocks.BLACK_WOOL) {
+		} else if (block == Blocks.BLACK_WOOL || block == Blocks.BLACK_STAINED_GLASS || block == Blocks.BLACK_CONCRETE || block == Blocks.BLACK_CONCRETE_POWDER) {
 			
-			return new ColoredCampfireSmokeParticleData(0.23F, 0.23F, 0.23F, 0.0F);
+			return new CampfireParticlePlaceholder(28, 28, 28, 0);
+			
+		} else if (block == Blocks.TERRACOTTA) {
+			
+			return new CampfireParticlePlaceholder(155, 96, 69, 0);
+			
+		} else if (block == Blocks.WHITE_TERRACOTTA) {
+			
+			return new CampfireParticlePlaceholder(210, 177, 161, 0);
+			
+		} else if (block == Blocks.ORANGE_TERRACOTTA) {
+			
+			return new CampfireParticlePlaceholder(168, 89, 42, 0);
+			
+		} else if (block == Blocks.MAGENTA_TERRACOTTA) {
+			
+			return new CampfireParticlePlaceholder(148, 86, 108, 0);
+			
+		} else if (block == Blocks.LIGHT_BLUE_TERRACOTTA) {
+			
+			return new CampfireParticlePlaceholder(114, 108, 138, 0);
+			
+		} else if (block == Blocks.YELLOW_TERRACOTTA) {
+			
+			return new CampfireParticlePlaceholder(190, 137, 38, 0);
+			
+		} else if (block == Blocks.LIME_TERRACOTTA) {
+			
+			return new CampfireParticlePlaceholder(103, 119, 54, 0);
+			
+		} else if (block == Blocks.PINK_TERRACOTTA) {
+			
+			return new CampfireParticlePlaceholder(166, 82, 82, 0);
+			
+		} else if (block == Blocks.GRAY_TERRACOTTA) {
+			
+			return new CampfireParticlePlaceholder(60, 45, 36, 0);
+			
+		} else if (block == Blocks.LIGHT_GRAY_TERRACOTTA) {
+			
+			return new CampfireParticlePlaceholder(139, 110, 100, 0);
+			
+		} else if (block == Blocks.CYAN_TERRACOTTA) {
+			
+			return new CampfireParticlePlaceholder(85, 90, 90, 0);
+			
+		} else if (block == Blocks.PURPLE_TERRACOTTA) {
+			
+			return new CampfireParticlePlaceholder(116, 69, 85, 0);
+			
+		} else if (block == Blocks.BLUE_TERRACOTTA) {
+			
+			return new CampfireParticlePlaceholder(73, 59, 91, 0);
+			
+		} else if (block == Blocks.BROWN_TERRACOTTA) {
+			
+			return new CampfireParticlePlaceholder(61, 44, 32, 0);
+			
+		} else if (block == Blocks.GREEN_TERRACOTTA) {
+			
+			return new CampfireParticlePlaceholder(79, 87, 46, 0);
+			
+		} else if (block == Blocks.RED_TERRACOTTA) {
+			
+			return new CampfireParticlePlaceholder(145, 63, 48, 0);
+			
+		} else if (block == Blocks.BLACK_TERRACOTTA) {
+			
+			return new CampfireParticlePlaceholder(39, 24, 18, 0);
+			
+		} else if (block == Blocks.WHITE_GLAZED_TERRACOTTA) {
+			
+			float chance = random.nextFloat();
+			
+			if (chance <= 0.2F) {
+				
+				return new CampfireParticlePlaceholder(243, 212, 58, 0);
+				
+			} else if (chance <= 0.4F) {
+				
+				return new CampfireParticlePlaceholder(89, 205, 230, 0);
+				
+			} else {
+				
+				return new CampfireParticlePlaceholder(246, 246, 246, 0);
+				
+			}
+			
+		} else if (block == Blocks.ORANGE_GLAZED_TERRACOTTA) {
+			
+			float chance = random.nextFloat();
+			
+			if (chance <= 0.05F) {
+				
+				return new CampfireParticlePlaceholder(246, 246, 246, 0);
+				
+			} else if (chance <= 0.4F) {
+				
+				return new CampfireParticlePlaceholder(37, 145, 155, 0);
+				
+			} else {
+				
+				return new CampfireParticlePlaceholder(229, 128, 25, 0);
+				
+			}
+			
+		} else if (block == Blocks.MAGENTA_GLAZED_TERRACOTTA) {
+			
+			float chance = random.nextFloat();
+			
+			if (chance <= 0.15F) {
+				
+				return new CampfireParticlePlaceholder(246, 182, 206, 0);
+				
+			} else {
+				
+				return new CampfireParticlePlaceholder(194, 78, 185, 0);
+				
+			}
+			
+		} else if (block == Blocks.LIGHT_BLUE_GLAZED_TERRACOTTA) {
+			
+			float chance = random.nextFloat();
+			
+			if (chance <= 0.25F) {
+					
+					return new CampfireParticlePlaceholder(69, 70, 163, 0);
+					
+			} else if (chance <= 0.3F) {
+				
+				return new CampfireParticlePlaceholder(37, 145, 155, 0);
+				
+			} else if (chance <= 0.31F) {
+				
+				return new CampfireParticlePlaceholder(246, 246, 246, 0);
+				
+			} else {
+				
+				return new CampfireParticlePlaceholder(89, 205, 230, 0);
+				
+			}
+			
+		} else if (block == Blocks.YELLOW_GLAZED_TERRACOTTA) {
+			
+			float chance = random.nextFloat();
+			
+			if (chance <= 0.15F) {
+				
+				return new CampfireParticlePlaceholder(147, 101, 67, 0);
+				
+			} else {
+				
+				return new CampfireParticlePlaceholder(243, 212, 58, 0);
+				
+			}
+			
+		} else if (block == Blocks.LIME_GLAZED_TERRACOTTA) {
+			
+			float chance = random.nextFloat();
+			
+			if (chance <= 0.25F) {
+				
+				return new CampfireParticlePlaceholder(243, 212, 58, 0);
+				
+			} else {
+				
+				return new CampfireParticlePlaceholder(134, 204, 45, 0);
+				
+			}
+			
+		} else if (block == Blocks.PINK_GLAZED_TERRACOTTA) {
+			
+			float chance = random.nextFloat();
+			
+			if (chance <= 0.05F) {
+				
+				return new CampfireParticlePlaceholder(157, 157, 151, 0);
+				
+			} else {
+				
+				return new CampfireParticlePlaceholder(246, 182, 206, 0);
+				
+			}
+			
+		} else if (block == Blocks.GRAY_GLAZED_TERRACOTTA) {
+			
+			float chance = random.nextFloat();
+			
+			if (chance <= 0.15F) {
+				
+				return new CampfireParticlePlaceholder(157, 157, 151, 0);
+				
+			} else {
+				
+				return new CampfireParticlePlaceholder(87, 93, 98, 0);
+				
+			}
+			
+		} else if (block == Blocks.LIGHT_GRAY_GLAZED_TERRACOTTA) {
+			
+			float chance = random.nextFloat();
+			
+			if (chance <= 0.05F) {
+				
+				return new CampfireParticlePlaceholder(246, 246, 246, 0);
+				
+			} else if (chance <= 0.1F) {
+				
+				return new CampfireParticlePlaceholder(87, 93, 98, 0);
+				
+			} else if (chance <= 0.15F) {
+				
+				return new CampfireParticlePlaceholder(37, 145, 155, 0);
+				
+			} else {
+				
+				return new CampfireParticlePlaceholder(157, 157, 151, 0);
+				
+			}
+			
+		} else if (block == Blocks.CYAN_GLAZED_TERRACOTTA) {
+			
+			float chance = random.nextFloat();
+			
+			if (chance <= 0.15F) {
+				
+				return new CampfireParticlePlaceholder(246, 246, 246, 0);
+				
+			} else if (chance <= 0.3F) {
+				
+				return new CampfireParticlePlaceholder(89, 205, 230, 0);
+				
+			} else if (chance <= 0.4F) {
+				
+				return new CampfireParticlePlaceholder(87, 93, 98, 0);
+				
+			} else {
+				
+				return new CampfireParticlePlaceholder(37, 145, 155, 0);
+				
+			}
+			
+		} else if (block == Blocks.PURPLE_GLAZED_TERRACOTTA) {
+			
+			float chance = random.nextFloat();
+			
+			if (chance <= 0.2F) {
+				
+				return new CampfireParticlePlaceholder(28, 28, 28, 0);
+				
+			} else {
+				
+				return new CampfireParticlePlaceholder(122, 50, 170, 0);
+				
+			}
+			
+		} else if (block == Blocks.BLUE_GLAZED_TERRACOTTA) {
+			
+			float chance = random.nextFloat();
+			
+			if (chance <= 0.1F) {
+				
+				return new CampfireParticlePlaceholder(28, 28, 28, 0);
+				
+			} else if (chance <= 0.3F) {
+				
+				return new CampfireParticlePlaceholder(89, 205, 230, 0);
+				
+			} else {
+				
+				return new CampfireParticlePlaceholder(69, 70, 163, 0);
+				
+			}
+			
+		} else if (block == Blocks.BROWN_GLAZED_TERRACOTTA) {
+			
+			float chance = random.nextFloat();
+			
+			if (chance <= 0.3F) {
+				
+				return new CampfireParticlePlaceholder(37, 145, 155, 0);
+				
+			} else {
+				
+				return new CampfireParticlePlaceholder(147, 101, 67, 0);
+				
+			}
+			
+		} else if (block == Blocks.GREEN_GLAZED_TERRACOTTA) {
+			
+			float chance = random.nextFloat();
+			
+			if (chance <= 0.2F) {
+				
+				return new CampfireParticlePlaceholder(246, 246, 246, 0);
+				
+			} else {
+				
+				return new CampfireParticlePlaceholder(93, 113, 48, 0);
+				
+			}
+			
+		} else if (block == Blocks.RED_GLAZED_TERRACOTTA) {
+			
+			float chance = random.nextFloat();
+			
+			if (chance <= 0.05F) {
+				
+				return new CampfireParticlePlaceholder(246, 182, 206, 0);
+				
+			} else {
+				
+				return new CampfireParticlePlaceholder(178, 57, 52, 0);
+				
+			}
+			
+		} else if (block == Blocks.BLACK_GLAZED_TERRACOTTA) {
+			
+			float chance = random.nextFloat();
+			
+			if (chance <= 0.35F) {
+				
+				return new CampfireParticlePlaceholder(87, 93, 98, 0);
+				
+			} else if (chance <= 0.45F) {
+				
+				return new CampfireParticlePlaceholder(178, 57, 52, 0);
+				
+			} else {
+				
+				return new CampfireParticlePlaceholder(28, 28, 28, 0);
+				
+			}
 			
 		} else {
 			
-			return new ColoredCampfireSmokeParticleData(0.0F, 0.0F, 0.0F, 0.0F);
+			return null;
 			
 		}
+		
+		/**
+		 * if (block == Blocks.WHITE_WOOL) {
+			
+			return new ColoredCampfireSmokeParticleData(1.0, 1.0, 1.0, 0);
+			
+		} else if (block == Blocks.ORANGE_WOOL) {
+			
+			return new ColoredCampfireSmokeParticleData(0.91F, 0.67F, 0.32F, 0);
+			
+		} else if (block == Blocks.MAGENTA_WOOL) {
+			
+			return new ColoredCampfireSmokeParticleData(0.88F, 0.56F, 0.85F, 0);
+			
+		} else if (block == Blocks.LIGHT_BLUE_WOOL) {
+			
+			return new ColoredCampfireSmokeParticleData(0.58F, 0.72F, 0.91F, 0);
+			
+		} else if (block == Blocks.YELLOW_WOOL) {
+			
+			return new ColoredCampfireSmokeParticleData(0.91F, 0.91F, 0.3F, 0);
+			
+		} else if (block == Blocks.LIME_WOOL) {
+			
+			return new ColoredCampfireSmokeParticleData(0.58F, 0.85F, 0.25F, 0);
+			
+		} else if (block == Blocks.PINK_WOOL) {
+			
+			return new ColoredCampfireSmokeParticleData(0.94F, 0.7F, 0.82F, 0);
+			
+		} else if (block == Blocks.GRAY_WOOL) {
+			
+			return new ColoredCampfireSmokeParticleData(0.54F, 0.54F, 0.54F, 0);
+			
+		} else if (block == Blocks.LIGHT_GRAY_WOOL) {
+			
+			return new ColoredCampfireSmokeParticleData(0.81F, 0.81F, 0.81F, 0);
+			
+		} else if (block == Blocks.CYAN_WOOL) {
+			
+			return new ColoredCampfireSmokeParticleData(0.22F, 0.48F, 0.58F, 0);
+			
+		} else if (block == Blocks.PURPLE_WOOL) {
+			
+			return new ColoredCampfireSmokeParticleData(0.74F, 0.48F, 0.86F, 0);
+			
+		} else if (block == Blocks.BLUE_WOOL) {
+			
+			return new ColoredCampfireSmokeParticleData(0.23F, 0.42F, 0.7F, 0);
+			
+		} else if (block == Blocks.BROWN_WOOL) {
+			
+			return new ColoredCampfireSmokeParticleData(0.61F, 0.44F, 0.32F, 0);
+			
+		} else if (block == Blocks.GREEN_WOOL) {
+			
+			return new ColoredCampfireSmokeParticleData(0.39F, 0.5F, 0.21F, 0);
+			
+		} else if (block == Blocks.RED_WOOL) {
+			
+			return new ColoredCampfireSmokeParticleData(0.7F, 0.25F, 0.25F, 0);
+			
+		} else if (block == Blocks.BLACK_WOOL) {
+			
+			return new ColoredCampfireSmokeParticleData(0.23F, 0.23F, 0.23F, 0);
+			
+		}
+		 */
 		
 	}
 	
@@ -462,6 +928,48 @@ public class ColoredCampfireBlock extends ContainerBlock implements IWaterLoggab
 			return p_241469_0_.func_235901_b_(BlockStateProperties.WATERLOGGED) && p_241469_0_.func_235901_b_(BlockStateProperties.LIT);
 			
 		}) && !p_241470_0_.get(BlockStateProperties.WATERLOGGED) && !p_241470_0_.get(BlockStateProperties.LIT);
+		
+	}
+	
+	public static class CampfireParticlePlaceholder {
+		
+		private float red;
+		private float green;
+		private float blue;
+		private float alpha;
+		
+		public CampfireParticlePlaceholder(int red, int green, int blue, float alpha) {
+			
+			this.red = red / 255F;
+			this.green = green / 255F;
+			this.blue = blue / 255F;
+			this.alpha = alpha;
+			
+		}
+		
+		public float getRed() {
+			
+			return red;
+			
+		}
+		
+		public float getGreen() {
+			
+			return green;
+			
+		}
+		
+		public float getBlue() {
+			
+			return blue;
+			
+		}
+		
+		public float getAlpha() {
+			
+			return alpha;
+			
+		}
 		
 	}
 	

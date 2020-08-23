@@ -1,5 +1,7 @@
 package com.multiexpansion.client.particle;
 
+import com.multiexpansion.particles.ColoredCampfireCosySmokeParticleData;
+import com.multiexpansion.particles.ColoredCampfireSignalSmokeParticleData;
 import com.multiexpansion.particles.ColoredCampfireSmokeParticleData;
 
 import net.minecraft.client.particle.IAnimatedSprite;
@@ -14,12 +16,22 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public class ColoredCampfireSmokeParticle extends SpriteTexturedParticle {
 	
-	private ColoredCampfireSmokeParticle(ClientWorld world, double xPos, double yPos, double zPos, double motionX, double motionY, double motionZ) {
+	private ColoredCampfireSmokeParticle(ClientWorld world, double xPos, double yPos, double zPos, double motionX, double motionY, double motionZ, boolean isSignal) {
 		
 		super(world, xPos, yPos, zPos);
 		this.multipleParticleScaleBy(3.0F);
 		this.setSize(0.25F, 0.25F);
-		this.maxAge = this.rand.nextInt(50) + 280;
+		
+		if (isSignal) {
+			
+			this.maxAge = this.rand.nextInt(50) + 280;
+			
+		} else {
+			
+			this.maxAge = this.rand.nextInt(50) + 80;
+			
+		}
+		
 		this.particleGravity = 3.0E-6F;
 		this.motionX = motionX;
 		this.motionY = motionY + (double)(this.rand.nextFloat() / 500.0F);
@@ -61,11 +73,11 @@ public class ColoredCampfireSmokeParticle extends SpriteTexturedParticle {
    }
 	
 	@OnlyIn(Dist.CLIENT)
-	public static class Factory implements IParticleFactory<ColoredCampfireSmokeParticleData> {
+	public static class CosySmokeFactory implements IParticleFactory<ColoredCampfireSmokeParticleData> {
 		
 		private final IAnimatedSprite spriteSet;
 		
-		public Factory(IAnimatedSprite spriteSet) {
+		public CosySmokeFactory(IAnimatedSprite spriteSet) {
 			
 			this.spriteSet = spriteSet;
 			
@@ -73,7 +85,32 @@ public class ColoredCampfireSmokeParticle extends SpriteTexturedParticle {
 		
 		public Particle makeParticle(ColoredCampfireSmokeParticleData typeIn, ClientWorld worldIn, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
 			
-			ColoredCampfireSmokeParticle campfireparticle = new ColoredCampfireSmokeParticle(worldIn, x, y, z, xSpeed, ySpeed, zSpeed);
+			ColoredCampfireSmokeParticle campfireparticle = new ColoredCampfireSmokeParticle(worldIn, x, y, z, xSpeed, ySpeed, zSpeed, false);
+			
+			campfireparticle.setAlphaF(0.9F);
+			campfireparticle.selectSpriteRandomly(this.spriteSet);
+			campfireparticle.setColor(typeIn.getRed(), typeIn.getGreen(), typeIn.getBlue());
+			
+			return campfireparticle;
+			
+		}
+		
+	}
+	
+	@OnlyIn(Dist.CLIENT)
+	public static class SignalSmokeFactory implements IParticleFactory<ColoredCampfireSmokeParticleData> {
+		
+		private final IAnimatedSprite spriteSet;
+		
+		public SignalSmokeFactory(IAnimatedSprite spriteSet) {
+			
+			this.spriteSet = spriteSet;
+			
+		}
+		
+		public Particle makeParticle(ColoredCampfireSmokeParticleData typeIn, ClientWorld worldIn, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+			
+			ColoredCampfireSmokeParticle campfireparticle = new ColoredCampfireSmokeParticle(worldIn, x, y, z, xSpeed, ySpeed, zSpeed, true);
 			
 			campfireparticle.setAlphaF(0.95F);
 			campfireparticle.selectSpriteRandomly(this.spriteSet);
@@ -84,4 +121,5 @@ public class ColoredCampfireSmokeParticle extends SpriteTexturedParticle {
 		}
 		
 	}
+	
 }

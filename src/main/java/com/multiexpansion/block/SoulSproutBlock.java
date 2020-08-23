@@ -44,11 +44,11 @@ public class SoulSproutBlock extends BushBlock implements IForgeShearable {
 	@Override
 	public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
 		
-		if (rand.nextInt(100) == 0) {
+		if (rand.nextInt(5) == 0) {
 			
-			for (int i = 0; i < worldIn.rand.nextInt(4) + 1; i++) {
+			for (int i = 0; i < worldIn.rand.nextInt(2) + 1; i++) {
 				
-				worldIn.addParticle(ParticleTypes.field_239812_C_, pos.getX() + worldIn.rand.nextDouble(), pos.getY() + 0.8D, pos.getZ() + worldIn.rand.nextDouble(), 0, 0.02D, 0);
+				worldIn.addParticle(ParticleTypes.field_239812_C_, pos.getX() + worldIn.rand.nextDouble(), pos.getY() + 0.6D, pos.getZ() + worldIn.rand.nextDouble(), 0, 0.02D, 0);
 				
 			}
 			

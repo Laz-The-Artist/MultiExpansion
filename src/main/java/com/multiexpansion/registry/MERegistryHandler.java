@@ -30,7 +30,8 @@ public class MERegistryHandler {
 	@SubscribeEvent
 	public static void registerParticles(ParticleFactoryRegisterEvent event) {
 		
-		Minecraft.getInstance().particles.registerFactory(MEParticleType.CAMPFIRE_COLORED_SIGNAL_SMOKE.get(), ColoredCampfireSmokeParticle.Factory::new);
+		Minecraft.getInstance().particles.registerFactory(MEParticleType.CAMPFIRE_COLORED_COSY_SMOKE.get(), ColoredCampfireSmokeParticle.CosySmokeFactory::new);
+		Minecraft.getInstance().particles.registerFactory(MEParticleType.CAMPFIRE_COLORED_SIGNAL_SMOKE.get(), ColoredCampfireSmokeParticle.SignalSmokeFactory::new);
 		
 	}
 	

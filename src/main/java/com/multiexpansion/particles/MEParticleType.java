@@ -17,9 +17,15 @@ public class MEParticleType {
 	
 	public static final DeferredRegister<ParticleType<?>> PARTICLE_TYPES = DeferredRegister.create(ForgeRegistries.PARTICLE_TYPES, MultiExpansion.MODID);
 	
-	public static final RegistryObject<ParticleType<ColoredCampfireSmokeParticleData>> CAMPFIRE_COLORED_SIGNAL_SMOKE = register("campfire_colored_signal_smoke", ColoredCampfireSmokeParticleData.DESERIALIZER, (p_239822_0_) -> {
+	public static final RegistryObject<ParticleType<ColoredCampfireSmokeParticleData>> CAMPFIRE_COLORED_COSY_SMOKE = register("campfire_colored_cosy_smoke", ColoredCampfireCosySmokeParticleData.DESERIALIZER, (p_239822_0_) -> {
 		
-		return ColoredCampfireSmokeParticleData.field_239802_b_;
+		return ColoredCampfireCosySmokeParticleData.field_239802_b_;
+		
+	});
+	
+	public static final RegistryObject<ParticleType<ColoredCampfireSmokeParticleData>> CAMPFIRE_COLORED_SIGNAL_SMOKE = register("campfire_colored_signal_smoke", ColoredCampfireSignalSmokeParticleData.DESERIALIZER, (p_239822_0_) -> {
+		
+		return ColoredCampfireSignalSmokeParticleData.field_239802_b_;
 		
 	});
 	
