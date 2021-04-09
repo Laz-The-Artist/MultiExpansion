@@ -28,6 +28,8 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class RedstoneLanternBlock extends Block {
 	
 	public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
@@ -45,8 +47,8 @@ public class RedstoneLanternBlock extends Block {
 		
 		if (worldIn.isRemote) {
 			
-			BlockState blockstate1 = state.func_235896_a_(POWERED);
-			BlockState blockstate2 = state.func_235896_a_(HANGING);
+			BlockState blockstate1 = state.cycle(POWERED);
+			BlockState blockstate2 = state.cycle(HANGING);
 			
 			if (blockstate1.get(POWERED)) {
 				
@@ -84,7 +86,7 @@ public class RedstoneLanternBlock extends Block {
 	
 	public BlockState updateBlock(BlockState state, World world, BlockPos pos) {
 		
-		state = state.func_235896_a_(POWERED);
+		state = state.cycle(POWERED);
 		world.setBlockState(pos, state, 3);
 		this.updateNeighbors(state, world, pos);
 		
@@ -135,12 +137,12 @@ public class RedstoneLanternBlock extends Block {
 	
 	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
 		
-		Direction direction = func_220277_j(state).getOpposite();
+		Direction direction = getConnectedDirection(state).getOpposite();
 		return Block.hasEnoughSolidSide(worldIn, pos.offset(direction), direction.getOpposite());
 		
 	}
 	
-	protected static Direction func_220277_j(BlockState p_220277_0_) {
+	protected static Direction getConnectedDirection(BlockState p_220277_0_) {
 		
 		return p_220277_0_.get(HANGING) ? Direction.DOWN : Direction.UP;
 		
@@ -155,7 +157,7 @@ public class RedstoneLanternBlock extends Block {
 	@SuppressWarnings("deprecation")
 	public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
 		
-		return func_220277_j(stateIn).getOpposite() == facing && !stateIn.isValidPosition(worldIn, currentPos) ? Blocks.AIR.getDefaultState() : super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
+		return getConnectedDirection(stateIn).getOpposite() == facing && !stateIn.isValidPosition(worldIn, currentPos) ? Blocks.AIR.getDefaultState() : super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
 	
 	}
 	

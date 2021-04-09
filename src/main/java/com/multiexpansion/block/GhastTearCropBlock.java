@@ -30,6 +30,8 @@ import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.PlantType;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class GhastTearCropBlock extends CropsBlock {
 	
 	public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;

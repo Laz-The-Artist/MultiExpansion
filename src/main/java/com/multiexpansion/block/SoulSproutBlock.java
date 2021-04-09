@@ -16,6 +16,8 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.IForgeShearable;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class SoulSproutBlock extends BushBlock implements IForgeShearable {
 	
 	protected static final VoxelShape SHAPE = Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 14.0D, 14.0D);
@@ -36,7 +38,7 @@ public class SoulSproutBlock extends BushBlock implements IForgeShearable {
 		
 		Block block = state.getBlock();
 		
-		return block == Blocks.SOUL_SAND || block == Blocks.field_235336_cN_ || state.isIn(MEBlocks.SOUL_SAND_FARMLAND.get());
+		return block == Blocks.SOUL_SAND || block == Blocks.SOUL_SOIL || state.isIn(MEBlocks.SOUL_SAND_FARMLAND.get());
 		
 	}
 	
@@ -48,7 +50,7 @@ public class SoulSproutBlock extends BushBlock implements IForgeShearable {
 			
 			for (int i = 0; i < worldIn.rand.nextInt(2) + 1; i++) {
 				
-				worldIn.addParticle(ParticleTypes.field_239812_C_, pos.getX() + worldIn.rand.nextDouble(), pos.getY() + 0.6D, pos.getZ() + worldIn.rand.nextDouble(), 0, 0.02D, 0);
+				worldIn.addParticle(ParticleTypes.SOUL, pos.getX() + worldIn.rand.nextDouble(), pos.getY() + 0.6D, pos.getZ() + worldIn.rand.nextDouble(), 0, 0.02D, 0);
 				
 			}
 			

@@ -11,7 +11,7 @@ import net.minecraft.particles.ParticleType;
 
 public class ColoredCampfireSignalSmokeParticleData extends ColoredCampfireSmokeParticleData implements IParticleData {
 	
-	public static final Codec<ColoredCampfireSmokeParticleData> field_239802_b_ = RecordCodecBuilder.create((p_239803_0_) -> {
+	public static final Codec<ColoredCampfireSmokeParticleData> CODEC = RecordCodecBuilder.create((p_239803_0_) -> {
 		
 		return p_239803_0_.group(Codec.FLOAT.fieldOf("r").forGetter((p_239807_0_) -> {
 			

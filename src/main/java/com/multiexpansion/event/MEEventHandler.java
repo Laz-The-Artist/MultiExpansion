@@ -77,7 +77,7 @@ public class MEEventHandler {
 		
 		if (stack.getItem() == Items.GLASS_BOTTLE) {
 			
-			if (world.getBlockState(pos).isIn(Blocks.field_235399_ni_)) {
+			if (world.getBlockState(pos).isIn(Blocks.CRYING_OBSIDIAN)) {
 				
 				world.setBlockState(pos, Blocks.OBSIDIAN.getDefaultState());
 				
@@ -137,7 +137,7 @@ public class MEEventHandler {
 		PlayerEntity player = event.getPlayer();
 		ItemStack stack = event.getItemStack();
 		
-		if (stack.getItem() == Items.GOLDEN_HOE || stack.getItem() == Items.field_234758_kU_) {
+		if (stack.getItem() == Items.GOLDEN_HOE || stack.getItem() == Items.NETHERITE_HOE) {
 			
 			if (world.getBlockState(pos).isIn(Blocks.SOUL_SAND)) {
 				
@@ -145,12 +145,12 @@ public class MEEventHandler {
 				
 				for(int i = 0; i < world.rand.nextInt(4) + 3; ++i) {
 					
-					world.addParticle(ParticleTypes.field_239812_C_, pos.getX() + world.rand.nextDouble(), pos.getY() + 0.1D, pos.getZ() + world.rand.nextDouble(), 0, 0.04D, 0);
+					world.addParticle(ParticleTypes.SOUL, pos.getX() + world.rand.nextDouble(), pos.getY() + 0.1D, pos.getZ() + world.rand.nextDouble(), 0, 0.04D, 0);
 					
 				}
 				
 				float f = world.rand.nextFloat() * 0.4F + world.rand.nextFloat() > 0.9F ? 0.6F : 0.0F;
-				player.playSound(SoundEvents.field_232831_nS_, f, 0.6F + world.rand.nextFloat() * 0.4F);
+				player.playSound(SoundEvents.SOUL_ESCAPE, f, 0.6F + world.rand.nextFloat() * 0.4F);
 				
 				world.playSound(player, pos, SoundEvents.ITEM_HOE_TILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
 				
@@ -190,7 +190,7 @@ public class MEEventHandler {
 			
 		}
 		
-		if (stack.getItem() == Items.field_234791_rn_) {
+		if (stack.getItem() == Items.SOUL_CAMPFIRE) {
 			
 			ItemStack replaceStack = new ItemStack(MEBlocks.SOUL_CAMPFIRE.get(), stack.getCount());
 			replaceStack.setTag(stack.getTag());

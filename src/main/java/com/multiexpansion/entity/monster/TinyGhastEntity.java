@@ -78,7 +78,7 @@ public class TinyGhastEntity extends GhastEntity {
 	
 	public static AttributeModifierMap.MutableAttribute setAttributes() {
 		
-		return MobEntity.func_233666_p_().func_233815_a_(Attributes.field_233818_a_, 10.0D).func_233815_a_(Attributes.field_233819_b_, 100.0D);
+		return MobEntity.createMobAttributes().add(Attributes.MAX_HEALTH, 10.0D).add(Attributes.FOLLOW_RANGE, 100.0D);
 		
 	}
 	
@@ -122,7 +122,7 @@ public class TinyGhastEntity extends GhastEntity {
 				
 				if (this.attackTimer == 10 && !this.parentEntity.isSilent()) {
 					
-					world.playEvent((PlayerEntity)null, 1015, this.parentEntity.func_233580_cy_(), 0);
+					world.playEvent((PlayerEntity)null, 1015, this.parentEntity.blockPosition(), 0);
 					
 				}
 				
@@ -135,7 +135,7 @@ public class TinyGhastEntity extends GhastEntity {
 					
 					if (!this.parentEntity.isSilent()) {
 						
-						world.playEvent((PlayerEntity)null, 1016, this.parentEntity.func_233580_cy_(), 0);
+						world.playEvent((PlayerEntity)null, 1016, this.parentEntity.blockPosition(), 0);
 						
 					}
 					

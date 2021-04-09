@@ -57,6 +57,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class ColoredCampfireBlock extends ContainerBlock implements IWaterLoggable {
 	
 	protected static final VoxelShape SHAPE = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 7.0D, 16.0D);
@@ -64,7 +66,7 @@ public class ColoredCampfireBlock extends ContainerBlock implements IWaterLoggab
 	public static final BooleanProperty SIGNAL_FIRE = BlockStateProperties.SIGNAL_FIRE;
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 	public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
-	private static final VoxelShape field_226912_f_ = Block.makeCuboidShape(6.0D, 0.0D, 6.0D, 10.0D, 16.0D, 10.0D);
+	private static final VoxelShape VIRTUAL_FENCE_POST = Block.makeCuboidShape(6.0D, 0.0D, 6.0D, 10.0D, 16.0D, 10.0D);
 	
 	private final boolean isBlueFire;
 	private final int damage;
@@ -110,7 +112,7 @@ public class ColoredCampfireBlock extends ContainerBlock implements IWaterLoggab
 	@SuppressWarnings("deprecation")
 	public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entityIn) {
 		
-		if (!entityIn.func_230279_az_() && state.get(LIT) && entityIn instanceof LivingEntity && !EnchantmentHelper.hasFrostWalker((LivingEntity)entityIn)) {
+		if (!entityIn.fireImmune() && state.get(LIT) && entityIn instanceof LivingEntity && !EnchantmentHelper.hasFrostWalker((LivingEntity)entityIn)) {
 			
 			entityIn.attackEntityFrom(DamageSource.IN_FIRE, (float)this.damage);
 			
@@ -207,7 +209,7 @@ public class ColoredCampfireBlock extends ContainerBlock implements IWaterLoggab
 		
 	}
 	
-	public static void func_235475_c_(IWorld p_235475_0_, BlockPos p_235475_1_, BlockState p_235475_2_) {
+	public static void dowse(IWorld p_235475_0_, BlockPos p_235475_1_, BlockState p_235475_2_) {
 		
 		if (p_235475_0_.isRemote()) {
 			
@@ -243,7 +245,7 @@ public class ColoredCampfireBlock extends ContainerBlock implements IWaterLoggab
 					
 				}
 				
-				func_235475_c_(worldIn, pos, state);
+				dowse(worldIn, pos, state);
 				
 			}
 			
@@ -264,7 +266,7 @@ public class ColoredCampfireBlock extends ContainerBlock implements IWaterLoggab
 		
 		if (!worldIn.isRemote && projectile.isBurning()) {
 			
-			Entity entity = projectile.func_234616_v_();
+			Entity entity = projectile.getOwner();
 			boolean flag = entity == null || entity instanceof PlayerEntity || net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(worldIn, entity);
 			
 			if (flag && !state.get(LIT) && !state.get(WATERLOGGED)) {
@@ -848,26 +850,26 @@ public class ColoredCampfireBlock extends ContainerBlock implements IWaterLoggab
 		
 	}
 	
-	public static boolean func_235474_a_(World p_235474_0_, BlockPos p_235474_1_) {
+	public static boolean isSmokeyPos(World p_235474_0_, BlockPos p_235474_1_) {
 		
 		for (int i = 1; i <= 5; ++i) {
 			
 			BlockPos blockpos = p_235474_1_.down(i);
 			BlockState blockstate = p_235474_0_.getBlockState(blockpos);
 			
-			if (func_226915_i_(blockstate)) {
+			if (isLitCampfire(blockstate)) {
 				
 				return true;
 				
 			}
 			
-			boolean flag = VoxelShapes.compare(field_226912_f_, blockstate.getCollisionShape(p_235474_0_, p_235474_1_, ISelectionContext.dummy()), IBooleanFunction.AND);
+			boolean flag = VoxelShapes.compare(VIRTUAL_FENCE_POST, blockstate.getCollisionShape(p_235474_0_, p_235474_1_, ISelectionContext.dummy()), IBooleanFunction.AND);
 			
 			if (flag) {
 				
 				BlockState blockstate1 = p_235474_0_.getBlockState(blockpos.down());
 				
-				return func_226915_i_(blockstate1);
+				return isLitCampfire(blockstate1);
 				
 			}
 			
@@ -877,9 +879,9 @@ public class ColoredCampfireBlock extends ContainerBlock implements IWaterLoggab
 		
 	}
 	
-	public static boolean func_226915_i_(BlockState p_226915_0_) {
+	public static boolean isLitCampfire(BlockState p_226915_0_) {
 		
-		return p_226915_0_.func_235901_b_(LIT) && p_226915_0_.func_235714_a_(BlockTags.field_232882_ax_) && p_226915_0_.get(LIT);
+		return p_226915_0_.hasProperty(LIT) && p_226915_0_.is(BlockTags.CAMPFIRES) && p_226915_0_.get(LIT);
 		
 	}
 	
@@ -921,11 +923,11 @@ public class ColoredCampfireBlock extends ContainerBlock implements IWaterLoggab
 		
 	}
 	
-	public static boolean func_241470_h_(BlockState p_241470_0_) {
+	public static boolean canLight(BlockState p_241470_0_) {
 		
-		return p_241470_0_.func_235715_a_(BlockTags.field_232882_ax_, (p_241469_0_) -> {
+		return p_241470_0_.is(BlockTags.CAMPFIRES, (p_241469_0_) -> {
 			
-			return p_241469_0_.func_235901_b_(BlockStateProperties.WATERLOGGED) && p_241469_0_.func_235901_b_(BlockStateProperties.LIT);
+			return p_241469_0_.hasProperty(BlockStateProperties.WATERLOGGED) && p_241469_0_.hasProperty(BlockStateProperties.LIT);
 			
 		}) && !p_241470_0_.get(BlockStateProperties.WATERLOGGED) && !p_241470_0_.get(BlockStateProperties.LIT);
 		

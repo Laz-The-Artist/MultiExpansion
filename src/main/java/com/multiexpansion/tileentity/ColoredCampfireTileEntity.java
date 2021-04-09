@@ -123,8 +123,8 @@ public class ColoredCampfireTileEntity extends TileEntity implements IClearable,
       return this.inventory;
    }
 
-   public void func_230337_a_(BlockState p_230337_1_, CompoundNBT p_230337_2_) {
-      super.func_230337_a_(p_230337_1_, p_230337_2_);
+   public void load(BlockState p_230337_1_, CompoundNBT p_230337_2_) {
+      super.load(p_230337_1_, p_230337_2_);
       this.inventory.clear();
       ItemStackHelper.loadAllItems(p_230337_2_, this.inventory);
       if (p_230337_2_.contains("CookingTimes", 11)) {
@@ -166,7 +166,7 @@ public class ColoredCampfireTileEntity extends TileEntity implements IClearable,
    public void onDataPacket(NetworkManager network, SUpdateTileEntityPacket packet){
        CompoundNBT tag = packet.getNbtCompound();
        
-       func_230337_a_(this.getWorld().getBlockState(packet.getPos()), tag);
+       load(this.getWorld().getBlockState(packet.getPos()), tag);
        
    }
    

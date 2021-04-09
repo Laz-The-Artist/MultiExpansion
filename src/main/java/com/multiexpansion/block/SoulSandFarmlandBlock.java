@@ -52,11 +52,11 @@ public class SoulSandFarmlandBlock extends Block {
 	@Override
 	public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn) {
 		
-		if (worldIn.getBlockState(pos).func_235901_b_(MOISTURE)) {
+		if (worldIn.getBlockState(pos).hasProperty(MOISTURE)) {
 			
 			if (worldIn.getBlockState(pos).get(MOISTURE) == 7) {
 				
-				if (!entityIn.func_230279_az_() && entityIn instanceof LivingEntity && !EnchantmentHelper.hasFrostWalker((LivingEntity)entityIn)) {
+				if (!entityIn.fireImmune() && entityIn instanceof LivingEntity && !EnchantmentHelper.hasFrostWalker((LivingEntity)entityIn)) {
 					
 					entityIn.attackEntityFrom(DamageSource.HOT_FLOOR, 1.0F);
 					
@@ -94,7 +94,7 @@ public class SoulSandFarmlandBlock extends Block {
 				
 				for (int i = 0; i < worldIn.rand.nextInt(3) + 1; i++) {
 					
-					worldIn.addParticle(ParticleTypes.field_239812_C_, pos.getX() + worldIn.rand.nextDouble(), pos.getY() + 1.1D, pos.getZ() + worldIn.rand.nextDouble(), 0, 0.02D, 0);
+					worldIn.addParticle(ParticleTypes.SOUL, pos.getX() + worldIn.rand.nextDouble(), pos.getY() + 1.1D, pos.getZ() + worldIn.rand.nextDouble(), 0, 0.02D, 0);
 					
 				}
 				

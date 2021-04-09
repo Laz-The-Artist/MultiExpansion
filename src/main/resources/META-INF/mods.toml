@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[32,)"
+loaderVersion="[36,)"
 [[mods]]
 modId="multiexpansion"
 version="0.4.0" #mandatory
@@ -12,12 +12,12 @@ description='''This mod adds the things we've been missing from Minecraft for a 
 [[dependencies.multiexpansion]]
     modId="forge"
     mandatory=true
-    versionRange="[32,)"
+    versionRange="[36,)"
     ordering="NONE"
     side="BOTH"
 [[dependencies.multiexpansion]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.16.1]"
+    versionRange="[1.16.5, 1.17]"
     ordering="NONE"
     side="BOTH"

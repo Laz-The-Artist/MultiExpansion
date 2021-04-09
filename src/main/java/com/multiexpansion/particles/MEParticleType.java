@@ -19,13 +19,13 @@ public class MEParticleType {
 	
 	public static final RegistryObject<ParticleType<ColoredCampfireSmokeParticleData>> CAMPFIRE_COLORED_COSY_SMOKE = register("campfire_colored_cosy_smoke", ColoredCampfireCosySmokeParticleData.DESERIALIZER, (p_239822_0_) -> {
 		
-		return ColoredCampfireCosySmokeParticleData.field_239802_b_;
+		return ColoredCampfireCosySmokeParticleData.CODEC;
 		
 	});
 	
 	public static final RegistryObject<ParticleType<ColoredCampfireSmokeParticleData>> CAMPFIRE_COLORED_SIGNAL_SMOKE = register("campfire_colored_signal_smoke", ColoredCampfireSignalSmokeParticleData.DESERIALIZER, (p_239822_0_) -> {
 		
-		return ColoredCampfireSignalSmokeParticleData.field_239802_b_;
+		return ColoredCampfireSignalSmokeParticleData.CODEC;
 		
 	});
 	
@@ -34,7 +34,7 @@ public class MEParticleType {
 		
 		return PARTICLE_TYPES.register(key, () -> new ParticleType<ColoredCampfireSmokeParticleData>(true, (IDeserializer<ColoredCampfireSmokeParticleData>) deserializer) {
 			
-			public Codec<ColoredCampfireSmokeParticleData> func_230522_e_() {
+			public Codec<ColoredCampfireSmokeParticleData> codec() {
 				
 				return (Codec<ColoredCampfireSmokeParticleData>) p_218416_2_.apply((ParticleType<T>) this);
 				

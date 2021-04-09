@@ -28,6 +28,7 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.vector.Vector3i;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.gen.GenerationStage;
@@ -73,15 +74,15 @@ public class MultiExpansion {
 		
 		DeferredWorkQueue.runLater(() -> {
 			
-            GlobalEntityTypeAttributes.put(MEEntities.TINY_GHAST.get(), TinyGhastEntity.setAttributes().func_233813_a_());
+            GlobalEntityTypeAttributes.put(MEEntities.TINY_GHAST.get(), TinyGhastEntity.setAttributes().build());
             
         });
 		
-		DispenserBlock.registerDispenseBehavior(Items.GLOWSTONE_DUST, new OptionalDispenseBehavior() {
+		DispenserBlock.registerBehavior(Items.GLOWSTONE_DUST, new OptionalDispenseBehavior() {
 			
 			public ItemStack dispenseStack(IBlockSource source, ItemStack stack) {
 				
-				BlockPos blockpos = source.getBlockPos().offset(source.getBlockState().get(DispenserBlock.FACING));
+				BlockPos blockpos = source.getPos().offset((Vector3i) DispenserBlock.getDispensePosition(source));
 				List<LivingEntity> list = source.getWorld().getEntitiesWithinAABB(LivingEntity.class, new AxisAlignedBB(blockpos), (target) -> {
 					
 					boolean hasGlowingEffect = false;
@@ -110,7 +111,7 @@ public class MultiExpansion {
 					
 					stack.shrink(1);
 					
-					this.func_239796_a_(true);
+					this.setSuccess(true);
 					
 					return stack;
 					
@@ -130,7 +131,7 @@ public class MultiExpansion {
 				
 				biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Feature.ORE.withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NETHERRACK, MEBlocks.RUBY_ORE.get().getDefaultState(), 3)).withPlacement(Placement.COUNT_RANGE.configure(new CountRangeConfig(16, 10, 20, 128))));
 				
-				if (biome == Biomes.field_235252_ay_) {
+				if (biome == Biomes.SOUL_SAND_VALLEY) {
 					
 					biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, MEFeature.SOUL_SPROUTS.get().withConfiguration(new BlockStateProvidingFeatureConfig((new WeightedBlockStateProvider()).addWeightedBlockstate(MEBlocks.SOUL_SPROUT.get().getDefaultState(), 1).addWeightedBlockstate(Blocks.AIR.getDefaultState(), 15))).withPlacement(Placement.COUNT_HEIGHTMAP.configure(new FrequencyConfig(2))));
 					
