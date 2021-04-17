@@ -30,8 +30,8 @@ public class MERegistryHandler {
 	@SubscribeEvent
 	public static void registerParticles(ParticleFactoryRegisterEvent event) {
 		
-		Minecraft.getInstance().particles.registerFactory(MEParticleType.CAMPFIRE_COLORED_COSY_SMOKE.get(), ColoredCampfireSmokeParticle.CosySmokeFactory::new);
-		Minecraft.getInstance().particles.registerFactory(MEParticleType.CAMPFIRE_COLORED_SIGNAL_SMOKE.get(), ColoredCampfireSmokeParticle.SignalSmokeFactory::new);
+		Minecraft.getInstance().particleEngine.register(MEParticleType.CAMPFIRE_COLORED_COSY_SMOKE.get(), ColoredCampfireSmokeParticle.CosySmokeFactory::new);
+		Minecraft.getInstance().particleEngine.register(MEParticleType.CAMPFIRE_COLORED_SIGNAL_SMOKE.get(), ColoredCampfireSmokeParticle.SignalSmokeFactory::new);
 		
 	}
 	
@@ -51,7 +51,7 @@ public class MERegistryHandler {
 				
 			} else {
 				
-				properties = new Item.Properties().group(MultiExpansion.MULTIEXPANSION_ITEMGROUP);
+				properties = new Item.Properties().tab(MultiExpansion.MULTIEXPANSION_ITEMGROUP);
 				
 			}
 			
