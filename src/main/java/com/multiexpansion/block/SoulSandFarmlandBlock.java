@@ -263,7 +263,7 @@ public class SoulSandFarmlandBlock extends Block {
 	}
 	
 	@Override
-	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
 		
 		builder.add(MOISTURE);
 		
