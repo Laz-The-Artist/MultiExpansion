@@ -20,7 +20,7 @@ import net.minecraft.block.AbstractBlock.Properties;
 
 public class SoulSproutBlock extends BushBlock implements IForgeShearable {
 	
-	protected static final VoxelShape SHAPE = Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 14.0D, 14.0D);
+	protected static final VoxelShape SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 14.0D, 14.0D);
 	
 	public SoulSproutBlock(Properties builder) {
 		
@@ -38,7 +38,7 @@ public class SoulSproutBlock extends BushBlock implements IForgeShearable {
 		
 		Block block = state.getBlock();
 		
-		return block == Blocks.SOUL_SAND || block == Blocks.SOUL_SOIL || state.isIn(MEBlocks.SOUL_SAND_FARMLAND.get());
+		return block == Blocks.SOUL_SAND || block == Blocks.SOUL_SOIL || state.is(MEBlocks.SOUL_SAND_FARMLAND.get());
 		
 	}
 	
@@ -48,9 +48,9 @@ public class SoulSproutBlock extends BushBlock implements IForgeShearable {
 		
 		if (rand.nextInt(5) == 0) {
 			
-			for (int i = 0; i < worldIn.rand.nextInt(2) + 1; i++) {
+			for (int i = 0; i < worldIn.random.nextInt(2) + 1; i++) {
 				
-				worldIn.addParticle(ParticleTypes.SOUL, pos.getX() + worldIn.rand.nextDouble(), pos.getY() + 0.6D, pos.getZ() + worldIn.rand.nextDouble(), 0, 0.02D, 0);
+				worldIn.addParticle(ParticleTypes.SOUL, pos.getX() + worldIn.random.nextDouble(), pos.getY() + 0.6D, pos.getZ() + worldIn.random.nextDouble(), 0, 0.02D, 0);
 				
 			}
 			
