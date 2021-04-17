@@ -270,7 +270,7 @@ public class SoulSandFarmlandBlock extends Block {
 	}
 	
 	@Override
-	public boolean allowsMovement(BlockState state, IBlockReader worldIn, BlockPos pos, PathType type) {
+	public boolean isPathfindable(BlockState state, IBlockReader worldIn, BlockPos pos, PathType type) {
 		
 		return false;
 		
