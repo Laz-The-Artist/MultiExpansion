@@ -61,12 +61,12 @@ import net.minecraft.block.AbstractBlock.Properties;
 
 public class ColoredCampfireBlock extends ContainerBlock implements IWaterLoggable {
 	
-	protected static final VoxelShape SHAPE = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 7.0D, 16.0D);
+	protected static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 7.0D, 16.0D);
 	public static final BooleanProperty LIT = BlockStateProperties.LIT;
 	public static final BooleanProperty SIGNAL_FIRE = BlockStateProperties.SIGNAL_FIRE;
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 	public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
-	private static final VoxelShape VIRTUAL_FENCE_POST = Block.makeCuboidShape(6.0D, 0.0D, 6.0D, 10.0D, 16.0D, 10.0D);
+	private static final VoxelShape VIRTUAL_FENCE_POST = Block.box(6.0D, 0.0D, 6.0D, 10.0D, 16.0D, 10.0D);
 	
 	private final boolean isBlueFire;
 	private final int damage;
@@ -76,25 +76,25 @@ public class ColoredCampfireBlock extends ContainerBlock implements IWaterLoggab
 		
 		this.isBlueFire = isBlueFire;
 		this.damage = damage;
-		this.setDefaultState(this.stateContainer.getBaseState().with(LIT, Boolean.valueOf(true)).with(SIGNAL_FIRE, Boolean.valueOf(false)).with(WATERLOGGED, Boolean.valueOf(false)).with(FACING, Direction.NORTH));
+		this.registerDefaultState(this.getStateDefinition().any().setValue(LIT, Boolean.valueOf(true)).setValue(SIGNAL_FIRE, Boolean.valueOf(false)).setValue(WATERLOGGED, Boolean.valueOf(false)).setValue(FACING, Direction.NORTH));
 	
 	}
 	
-	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+	public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
 		
-		TileEntity tileentity = worldIn.getTileEntity(pos);
+		TileEntity tileentity = worldIn.getBlockEntity(pos);
 		
 		if (tileentity instanceof ColoredCampfireTileEntity) {
 			
 			ColoredCampfireTileEntity campfiretileentity = (ColoredCampfireTileEntity)tileentity;
-			ItemStack itemstack = player.getHeldItem(handIn);
+			ItemStack itemstack = player.getItemInHand(handIn);
 			Optional<CampfireCookingRecipe> optional = campfiretileentity.findMatchingRecipe(itemstack);
 			
 			if (optional.isPresent()) {
 				
-				if (!worldIn.isRemote && campfiretileentity.addItem(player.abilities.isCreativeMode ? itemstack.copy() : itemstack, optional.get().getCookTime())) {
+				if (!worldIn.isClientSide && campfiretileentity.addItem(player.isCreative() ? itemstack.copy() : itemstack, optional.get().getCookingTime())) {
 					
-					player.addStat(Stats.INTERACT_WITH_CAMPFIRE);
+					player.awardStat(Stats.INTERACT_WITH_CAMPFIRE);
 					return ActionResultType.SUCCESS;
 					
 				}
@@ -108,34 +108,32 @@ public class ColoredCampfireBlock extends ContainerBlock implements IWaterLoggab
 		return ActionResultType.PASS;
 		
 	}
-	
-	@SuppressWarnings("deprecation")
-	public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entityIn) {
+
+	public void entityInside(BlockState state, World worldIn, BlockPos pos, Entity entityIn) {
 		
-		if (!entityIn.fireImmune() && state.get(LIT) && entityIn instanceof LivingEntity && !EnchantmentHelper.hasFrostWalker((LivingEntity)entityIn)) {
+		if (!entityIn.fireImmune() && state.getValue(LIT) && entityIn instanceof LivingEntity && !EnchantmentHelper.hasFrostWalker((LivingEntity)entityIn)) {
 			
-			entityIn.attackEntityFrom(DamageSource.IN_FIRE, (float)this.damage);
+			entityIn.hurt(DamageSource.IN_FIRE, (float)this.damage);
 			
 		}
 		
-		super.onEntityCollision(state, worldIn, pos, entityIn);
+		super.entityInside(state, worldIn, pos, entityIn);
 		
 	}
-	
-	@SuppressWarnings("deprecation")
-	public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
+
+	public void onRemove(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
 		
-		if (!state.isIn(newState.getBlock())) {
+		if (!state.is(newState.getBlock())) {
 			
-			TileEntity tileentity = worldIn.getTileEntity(pos);
+			TileEntity tileentity = worldIn.getBlockEntity(pos);
 			
 			if (tileentity instanceof ColoredCampfireTileEntity) {
 				
-				InventoryHelper.dropItems(worldIn, pos, ((ColoredCampfireTileEntity)tileentity).getInventory());
+				InventoryHelper.dropContents(worldIn, pos, ((ColoredCampfireTileEntity)tileentity).getInventory());
 				
 			}
 			
-			super.onReplaced(state, worldIn, pos, newState, isMoving);
+			super.onRemove(state, worldIn, pos, newState, isMoving);
 			
 		}
 		
@@ -144,31 +142,30 @@ public class ColoredCampfireBlock extends ContainerBlock implements IWaterLoggab
 	@Nullable
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
 		
-		IWorld iworld = context.getWorld();
-		BlockPos blockpos = context.getPos();
+		IWorld iworld = context.getLevel();
+		BlockPos blockpos = context.getClickedPos();
 		
-		boolean flag = iworld.getFluidState(blockpos).getFluid() == Fluids.WATER;
+		boolean flag = iworld.getFluidState(blockpos).getType() == Fluids.WATER;
 		
-		return this.getDefaultState().with(WATERLOGGED, Boolean.valueOf(flag)).with(SIGNAL_FIRE, Boolean.valueOf(this.isHayBlock(iworld.getBlockState(blockpos.down())))).with(LIT, Boolean.valueOf(!flag)).with(FACING, context.getPlacementHorizontalFacing());
+		return this.defaultBlockState().setValue(WATERLOGGED, Boolean.valueOf(flag)).setValue(SIGNAL_FIRE, Boolean.valueOf(this.isHayBlock(iworld.getBlockState(blockpos.below())))).setValue(LIT, Boolean.valueOf(!flag)).setValue(FACING, context.getHorizontalDirection());
 		
 	}
-	
-	@SuppressWarnings("deprecation")
-	public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
+
+	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
 		
-		if (stateIn.get(WATERLOGGED)) {
+		if (stateIn.getValue(WATERLOGGED)) {
 			
-			worldIn.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
+			worldIn.getLiquidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
 			
 		}
 		
-		return facing == Direction.DOWN ? stateIn.with(SIGNAL_FIRE, Boolean.valueOf(this.isHayBlock(facingState))) : super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
+		return facing == Direction.DOWN ? stateIn.setValue(SIGNAL_FIRE, Boolean.valueOf(this.isHayBlock(facingState))) : super.updateShape(stateIn, facing, facingState, worldIn, currentPos, facingPos);
 		
 	}
 	
 	private boolean isHayBlock(BlockState stateIn) {
 		
-		return stateIn.isIn(Blocks.HAY_BLOCK);
+		return stateIn.is(Blocks.HAY_BLOCK);
 		
 	}
 	
@@ -178,7 +175,7 @@ public class ColoredCampfireBlock extends ContainerBlock implements IWaterLoggab
 		
 	}
 	
-	public BlockRenderType getRenderType(BlockState state) {
+	public BlockRenderType getRenderShape(BlockState state) {
 		
 		return BlockRenderType.MODEL;
 		
@@ -187,11 +184,11 @@ public class ColoredCampfireBlock extends ContainerBlock implements IWaterLoggab
 	@OnlyIn(Dist.CLIENT)
 	public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
 		
-		if (stateIn.get(LIT)) {
+		if (stateIn.getValue(LIT)) {
 			
 			if (rand.nextInt(10) == 0) {
 				
-				worldIn.playSound((double)pos.getX() + 0.5D, (double)pos.getY() + 0.5D, (double)pos.getZ() + 0.5D, SoundEvents.BLOCK_CAMPFIRE_CRACKLE, SoundCategory.BLOCKS, 0.5F + rand.nextFloat(), rand.nextFloat() * 0.7F + 0.6F, false);
+				worldIn.playLocalSound((double)pos.getX() + 0.5D, (double)pos.getY() + 0.5D, (double)pos.getZ() + 0.5D, SoundEvents.CAMPFIRE_CRACKLE, SoundCategory.BLOCKS, 0.5F + rand.nextFloat(), rand.nextFloat() * 0.7F + 0.6F, false);
 				
 			}
 			
@@ -209,19 +206,19 @@ public class ColoredCampfireBlock extends ContainerBlock implements IWaterLoggab
 		
 	}
 	
-	public static void dowse(IWorld p_235475_0_, BlockPos p_235475_1_, BlockState p_235475_2_) {
+	public static void dowse(IWorld IworldIn, BlockPos pos, BlockState blockState) {
 		
-		if (p_235475_0_.isRemote()) {
+		if (IworldIn.isClientSide()) {
 			
 			for (int i = 0; i < 20; ++i) {
 				
-				spawnSmokeParticles(p_235475_0_.getWorld(), p_235475_1_, p_235475_2_.get(SIGNAL_FIRE), true);
+				spawnSmokeParticles((World)IworldIn, pos, blockState.getValue(SIGNAL_FIRE), true);
 				
 			}
 			
 		}
 		
-		TileEntity tileentity = p_235475_0_.getTileEntity(p_235475_1_);
+		TileEntity tileentity = IworldIn.getBlockEntity(pos);
 		
 		if (tileentity instanceof ColoredCampfireTileEntity) {
 			
@@ -231,17 +228,17 @@ public class ColoredCampfireBlock extends ContainerBlock implements IWaterLoggab
 		
 	}
 	
-	public boolean receiveFluid(IWorld worldIn, BlockPos pos, BlockState state, FluidState fluidStateIn) {
+	public boolean placeLiquid(IWorld worldIn, BlockPos pos, BlockState state, FluidState fluidStateIn) {
 		
-		if (!state.get(BlockStateProperties.WATERLOGGED) && fluidStateIn.getFluid() == Fluids.WATER) {
+		if (!state.getValue(BlockStateProperties.WATERLOGGED) && fluidStateIn.getType() == Fluids.WATER) {
 			
-			boolean flag = state.get(LIT);
+			boolean flag = state.getValue(LIT);
 			
 			if (flag) {
 				
-				if (!worldIn.isRemote()) {
+				if (!worldIn.isClientSide()) {
 					
-					worldIn.playSound((PlayerEntity)null, pos, SoundEvents.ENTITY_GENERIC_EXTINGUISH_FIRE, SoundCategory.BLOCKS, 1.0F, 1.0F);
+					worldIn.playSound((PlayerEntity)null, pos, SoundEvents.GENERIC_EXTINGUISH_FIRE, SoundCategory.BLOCKS, 1.0F, 1.0F);
 					
 				}
 				
@@ -249,8 +246,8 @@ public class ColoredCampfireBlock extends ContainerBlock implements IWaterLoggab
 				
 			}
 			
-			worldIn.setBlockState(pos, state.with(WATERLOGGED, Boolean.valueOf(true)).with(LIT, Boolean.valueOf(false)), 3);
-			worldIn.getPendingFluidTicks().scheduleTick(pos, fluidStateIn.getFluid(), fluidStateIn.getFluid().getTickRate(worldIn));
+			worldIn.setBlock(pos, state.setValue(WATERLOGGED, Boolean.valueOf(true)).setValue(LIT, Boolean.valueOf(false)), 3);
+			worldIn.getLiquidTicks().scheduleTick(pos, fluidStateIn.getType(), fluidStateIn.getType().getTickDelay(worldIn));
 			
 			return true;
 			
@@ -262,17 +259,17 @@ public class ColoredCampfireBlock extends ContainerBlock implements IWaterLoggab
 		
 	}
 	
-	public void onProjectileCollision(World worldIn, BlockState state, BlockRayTraceResult hit, ProjectileEntity projectile) {
+	public void onProjectileHit(World worldIn, BlockState state, BlockRayTraceResult hit, ProjectileEntity projectile) {
 		
-		if (!worldIn.isRemote && projectile.isBurning()) {
+		if (!worldIn.isClientSide && projectile.isOnFire()) {
 			
 			Entity entity = projectile.getOwner();
 			boolean flag = entity == null || entity instanceof PlayerEntity || net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(worldIn, entity);
 			
-			if (flag && !state.get(LIT) && !state.get(WATERLOGGED)) {
+			if (flag && !state.getValue(LIT) && !state.getValue(WATERLOGGED)) {
 				
-				BlockPos blockpos = hit.getPos();
-				worldIn.setBlockState(blockpos, state.with(BlockStateProperties.LIT, Boolean.valueOf(true)), 11);
+				BlockPos blockpos = hit.getBlockPos();
+				worldIn.setBlock(blockpos, state.setValue(BlockStateProperties.LIT, Boolean.valueOf(true)), 11);
 				
 			}
 			
@@ -284,10 +281,10 @@ public class ColoredCampfireBlock extends ContainerBlock implements IWaterLoggab
 		
 		Random random = world.getRandom();
 		
-		if (!spawnColoredParticle(world, world.getBlockState(pos.down()).getBlock(), pos, random)) {
+		if (!spawnColoredParticle(world, world.getBlockState(pos.below()).getBlock(), pos, random)) {
 			
 			BasicParticleType basicparticletype = isSignalFire ? ParticleTypes.CAMPFIRE_SIGNAL_SMOKE : ParticleTypes.CAMPFIRE_COSY_SMOKE;
-			world.addOptionalParticle(basicparticletype, true, (double)pos.getX() + 0.5D + random.nextDouble() / 3.0D * (double)(random.nextBoolean() ? 1 : -1), (double)pos.getY() + random.nextDouble() + random.nextDouble(), (double)pos.getZ() + 0.5D + random.nextDouble() / 3.0D * (double)(random.nextBoolean() ? 1 : -1), 0.0D, 0.07D, 0.0D);
+			world.addParticle(basicparticletype, true, (double)pos.getX() + 0.5D + random.nextDouble() / 3.0D * (double)(random.nextBoolean() ? 1 : -1), (double)pos.getY() + random.nextDouble() + random.nextDouble(), (double)pos.getZ() + 0.5D + random.nextDouble() / 3.0D * (double)(random.nextBoolean() ? 1 : -1), 0.0D, 0.07D, 0.0D);
 			
 		}
 		
@@ -307,7 +304,7 @@ public class ColoredCampfireBlock extends ContainerBlock implements IWaterLoggab
 			
 			if (isWool(block)) {
 				
-				world.addOptionalParticle(new ColoredCampfireCosySmokeParticleData(particle.getRed(), particle.getGreen(), particle.getBlue(), particle.getAlpha()), true, (double)pos.getX() + 0.5D + random.nextDouble() / 3.0D * (double)(random.nextBoolean() ? 1 : -1), (double)pos.getY() + random.nextDouble() + random.nextDouble(), (double)pos.getZ() + 0.5D + random.nextDouble() / 3.0D * (double)(random.nextBoolean() ? 1 : -1), 0.0D, 0.07D, 0.0D);
+				world.addParticle(new ColoredCampfireCosySmokeParticleData(particle.getRed(), particle.getGreen(), particle.getBlue(), particle.getAlpha()), true, (double)pos.getX() + 0.5D + random.nextDouble() / 3.0D * (double)(random.nextBoolean() ? 1 : -1), (double)pos.getY() + random.nextDouble() + random.nextDouble(), (double)pos.getZ() + 0.5D + random.nextDouble() / 3.0D * (double)(random.nextBoolean() ? 1 : -1), 0.0D, 0.07D, 0.0D);
 				
 				return true;
 				
@@ -315,7 +312,7 @@ public class ColoredCampfireBlock extends ContainerBlock implements IWaterLoggab
 				
 				if (random.nextFloat() < 0.2F) {
 					
-					world.addOptionalParticle(new ColoredCampfireSignalSmokeParticleData(particle.getRed(), particle.getGreen(), particle.getBlue(), particle.getAlpha()), true, (double)pos.getX() + 0.5D + random.nextDouble() / 3.0D * (double)(random.nextBoolean() ? 1 : -1), (double)pos.getY() + random.nextDouble() + random.nextDouble(), (double)pos.getZ() + 0.5D + random.nextDouble() / 3.0D * (double)(random.nextBoolean() ? 1 : -1), 0.0D, 0.07D, 0.0D);
+					world.addParticle(new ColoredCampfireSignalSmokeParticleData(particle.getRed(), particle.getGreen(), particle.getBlue(), particle.getAlpha()), true, (double)pos.getX() + 0.5D + random.nextDouble() / 3.0D * (double)(random.nextBoolean() ? 1 : -1), (double)pos.getY() + random.nextDouble() + random.nextDouble(), (double)pos.getZ() + 0.5D + random.nextDouble() / 3.0D * (double)(random.nextBoolean() ? 1 : -1), 0.0D, 0.07D, 0.0D);
 					
 				}
 				
@@ -323,7 +320,7 @@ public class ColoredCampfireBlock extends ContainerBlock implements IWaterLoggab
 				
 			} else if (isConcrete(block)) {
 				
-				world.addOptionalParticle(new ColoredCampfireSignalSmokeParticleData(particle.getRed(), particle.getGreen(), particle.getBlue(), particle.getAlpha()), true, (double)pos.getX() + 0.5D + random.nextDouble() / 3.0D * (double)(random.nextBoolean() ? 1 : -1), (double)pos.getY() + random.nextDouble() + random.nextDouble(), (double)pos.getZ() + 0.5D + random.nextDouble() / 3.0D * (double)(random.nextBoolean() ? 1 : -1), 0.0D, 0.07D, 0.0D);
+				world.addParticle(new ColoredCampfireSignalSmokeParticleData(particle.getRed(), particle.getGreen(), particle.getBlue(), particle.getAlpha()), true, (double)pos.getX() + 0.5D + random.nextDouble() / 3.0D * (double)(random.nextBoolean() ? 1 : -1), (double)pos.getY() + random.nextDouble() + random.nextDouble(), (double)pos.getZ() + 0.5D + random.nextDouble() / 3.0D * (double)(random.nextBoolean() ? 1 : -1), 0.0D, 0.07D, 0.0D);
 				
 				return true;
 				
@@ -331,7 +328,7 @@ public class ColoredCampfireBlock extends ContainerBlock implements IWaterLoggab
 				
 				if (random.nextFloat() < 0.2F) {
 					
-					world.addOptionalParticle(new ColoredCampfireCosySmokeParticleData(particle.getRed(), particle.getGreen(), particle.getBlue(), particle.getAlpha()), true, (double)pos.getX() + 0.5D + random.nextDouble() / 3.0D * (double)(random.nextBoolean() ? 1 : -1), (double)pos.getY() + random.nextDouble() + random.nextDouble(), (double)pos.getZ() + 0.5D + random.nextDouble() / 3.0D * (double)(random.nextBoolean() ? 1 : -1), 0.0D, 0.07D, 0.0D);
+					world.addParticle(new ColoredCampfireCosySmokeParticleData(particle.getRed(), particle.getGreen(), particle.getBlue(), particle.getAlpha()), true, (double)pos.getX() + 0.5D + random.nextDouble() / 3.0D * (double)(random.nextBoolean() ? 1 : -1), (double)pos.getY() + random.nextDouble() + random.nextDouble(), (double)pos.getZ() + 0.5D + random.nextDouble() / 3.0D * (double)(random.nextBoolean() ? 1 : -1), 0.0D, 0.07D, 0.0D);
 					
 				}
 				
@@ -339,7 +336,7 @@ public class ColoredCampfireBlock extends ContainerBlock implements IWaterLoggab
 				
 			} else {
 				
-				world.addOptionalParticle(new ColoredCampfireSignalSmokeParticleData(particle.getRed(), particle.getGreen(), particle.getBlue(), particle.getAlpha()), true, (double)pos.getX() + 0.5D + random.nextDouble() / 3.0D * (double)(random.nextBoolean() ? 1 : -1), (double)pos.getY() + random.nextDouble() + random.nextDouble(), (double)pos.getZ() + 0.5D + random.nextDouble() / 3.0D * (double)(random.nextBoolean() ? 1 : -1), 0.0D, 0.07D, 0.0D);
+				world.addParticle(new ColoredCampfireSignalSmokeParticleData(particle.getRed(), particle.getGreen(), particle.getBlue(), particle.getAlpha()), true, (double)pos.getX() + 0.5D + random.nextDouble() / 3.0D * (double)(random.nextBoolean() ? 1 : -1), (double)pos.getY() + random.nextDouble() + random.nextDouble(), (double)pos.getZ() + 0.5D + random.nextDouble() / 3.0D * (double)(random.nextBoolean() ? 1 : -1), 0.0D, 0.07D, 0.0D);
 				return true;
 				
 			}
@@ -846,16 +843,20 @@ public class ColoredCampfireBlock extends ContainerBlock implements IWaterLoggab
 			return new ColoredCampfireSmokeParticleData(0.23F, 0.23F, 0.23F, 0);
 			
 		}
+
+		 what the hell?
+		 -Laz
+
 		 */
 		
 	}
 	
-	public static boolean isSmokeyPos(World p_235474_0_, BlockPos p_235474_1_) {
+	public static boolean isSmokeyPos(World worldIn, BlockPos pos) {
 		
 		for (int i = 1; i <= 5; ++i) {
 			
-			BlockPos blockpos = p_235474_1_.down(i);
-			BlockState blockstate = p_235474_0_.getBlockState(blockpos);
+			BlockPos blockpos = pos.below(i);
+			BlockState blockstate = worldIn.getBlockState(blockpos);
 			
 			if (isLitCampfire(blockstate)) {
 				
@@ -863,11 +864,11 @@ public class ColoredCampfireBlock extends ContainerBlock implements IWaterLoggab
 				
 			}
 			
-			boolean flag = VoxelShapes.compare(VIRTUAL_FENCE_POST, blockstate.getCollisionShape(p_235474_0_, p_235474_1_, ISelectionContext.dummy()), IBooleanFunction.AND);
+			boolean flag = VoxelShapes.joinIsNotEmpty(VIRTUAL_FENCE_POST, blockstate.getCollisionShape(worldIn, pos, ISelectionContext.empty()), IBooleanFunction.AND);
 			
 			if (flag) {
 				
-				BlockState blockstate1 = p_235474_0_.getBlockState(blockpos.down());
+				BlockState blockstate1 = worldIn.getBlockState(blockpos.below());
 				
 				return isLitCampfire(blockstate1);
 				
@@ -881,43 +882,43 @@ public class ColoredCampfireBlock extends ContainerBlock implements IWaterLoggab
 	
 	public static boolean isLitCampfire(BlockState p_226915_0_) {
 		
-		return p_226915_0_.hasProperty(LIT) && p_226915_0_.is(BlockTags.CAMPFIRES) && p_226915_0_.get(LIT);
+		return p_226915_0_.hasProperty(LIT) && p_226915_0_.is(BlockTags.CAMPFIRES) && p_226915_0_.getValue(LIT);
 		
 	}
 	
 	@SuppressWarnings("deprecation")
 	public FluidState getFluidState(BlockState state) {
 		
-		return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : super.getFluidState(state);
+		return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
 		
 	}
 	
 	public BlockState rotate(BlockState state, Rotation rot) {
 		
-		return state.with(FACING, rot.rotate(state.get(FACING)));
+		return state.setValue(FACING, rot.rotate(state.getValue(FACING)));
 		
 	}
 	
 	@SuppressWarnings("deprecation")
 	public BlockState mirror(BlockState state, Mirror mirrorIn) {
 		
-		return state.rotate(mirrorIn.toRotation(state.get(FACING)));
+		return state.rotate(mirrorIn.getRotation(state.getValue(FACING)));
 		
 	}
 	
-	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
 		
 		builder.add(LIT, SIGNAL_FIRE, WATERLOGGED, FACING);
 		
 	}
 	
-	public TileEntity createNewTileEntity(IBlockReader worldIn) {
+	public TileEntity newBlockEntity(IBlockReader worldIn) {
 		
 		return new ColoredCampfireTileEntity();
 		
 	}
 	
-	public boolean allowsMovement(BlockState state, IBlockReader worldIn, BlockPos pos, PathType type) {
+	public boolean isPathfindable(BlockState state, IBlockReader worldIn, BlockPos pos, PathType type) {
 		
 		return false;
 		
@@ -929,7 +930,7 @@ public class ColoredCampfireBlock extends ContainerBlock implements IWaterLoggab
 			
 			return p_241469_0_.hasProperty(BlockStateProperties.WATERLOGGED) && p_241469_0_.hasProperty(BlockStateProperties.LIT);
 			
-		}) && !p_241470_0_.get(BlockStateProperties.WATERLOGGED) && !p_241470_0_.get(BlockStateProperties.LIT);
+		}) && !p_241470_0_.getValue(BlockStateProperties.WATERLOGGED) && !p_241470_0_.getValue(BlockStateProperties.LIT);
 		
 	}
 	
