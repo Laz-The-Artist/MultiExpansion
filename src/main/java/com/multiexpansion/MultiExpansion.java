@@ -19,8 +19,10 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.dispenser.IBlockSource;
 import net.minecraft.dispenser.OptionalDispenseBehavior;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
+import net.minecraft.entity.passive.BatEntity;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -36,8 +38,6 @@ import net.minecraft.world.gen.blockstateprovider.WeightedBlockStateProvider;
 import net.minecraft.world.gen.feature.BlockStateProvidingFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.OreFeatureConfig;
-import net.minecraft.world.gen.placement.CountRangeConfig;
-import net.minecraft.world.gen.placement.FrequencyConfig;
 import net.minecraft.world.gen.placement.Placement;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.DeferredWorkQueue;
@@ -79,17 +79,17 @@ public class MultiExpansion {
         });
 		
 		DispenserBlock.registerBehavior(Items.GLOWSTONE_DUST, new OptionalDispenseBehavior() {
-			
+
 			public ItemStack dispenseStack(IBlockSource source, ItemStack stack) {
 				
 				BlockPos blockpos = source.getPos().offset((Vector3i) DispenserBlock.getDispensePosition(source));
-				List<LivingEntity> list = source.getWorld().getEntitiesWithinAABB(LivingEntity.class, new AxisAlignedBB(blockpos), (target) -> {
+				List<LivingEntity> list = source.getLevel().getEntities(, new AxisAlignedBB(blockpos), (target) -> { //getEntities is dumb. Also maroon is not helping, like, at all.
 					
 					boolean hasGlowingEffect = false;
 					
-					for (EffectInstance effect : ((LivingEntity) target).getActivePotionEffects()) {
+					for (EffectInstance effect : ((LivingEntity) target).getActiveEffects()) {
 						
-						if (effect.getPotion() == Effects.GLOWING) {
+						if (effect.getEffect() == Effects.GLOWING) {
 							
 							hasGlowingEffect = true;
 							
@@ -99,7 +99,7 @@ public class MultiExpansion {
 					
 					if (!hasGlowingEffect) {
 						
-						((LivingEntity) target).addPotionEffect(new EffectInstance(Effects.GLOWING, 300));
+						((LivingEntity) target).addEffect(new EffectInstance(Effects.GLOWING, 300));
 						
 					}
 					
@@ -117,7 +117,7 @@ public class MultiExpansion {
 					
 				} else {
 					
-					return super.dispenseStack(source, stack);
+					return super.dispense(source, stack);
 					
 				}
 				
@@ -127,13 +127,13 @@ public class MultiExpansion {
 		
 		for (Biome biome : ForgeRegistries.BIOMES) {
 			
-			if (biome.getCategory() == Biome.Category.NETHER) {
+			if (biome.getBiomeCategory() == Biome.Category.NETHER) {
 				
-				biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Feature.ORE.withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NETHERRACK, MEBlocks.RUBY_ORE.get().getDefaultState(), 3)).withPlacement(Placement.COUNT_RANGE.configure(new CountRangeConfig(16, 10, 20, 128))));
+				biome.buildSurfaceAt(GenerationStage.Decoration.UNDERGROUND_DECORATION, Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NETHERRACK, MEBlocks.RUBY_ORE.get().defaultBlockState(), 3)).decorated(Placement.COUNT_RANGE.configure(new CountRangeConfig(16, 10, 20, 128)))); //Theres no COUNT_RANGE anymore, i dunno what should i do
 				
-				if (biome == Biomes.SOUL_SAND_VALLEY) {
+				if (biome.getRegistryName() == Biomes.SOUL_SAND_VALLEY.getRegistryName()) {
 					
-					biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, MEFeature.SOUL_SPROUTS.get().withConfiguration(new BlockStateProvidingFeatureConfig((new WeightedBlockStateProvider()).addWeightedBlockstate(MEBlocks.SOUL_SPROUT.get().getDefaultState(), 1).addWeightedBlockstate(Blocks.AIR.getDefaultState(), 15))).withPlacement(Placement.COUNT_HEIGHTMAP.configure(new FrequencyConfig(2))));
+					biome.generate(GenerationStage.Decoration.VEGETAL_DECORATION, MEFeature.SOUL_SPROUTS.get().configured(new BlockStateProvidingFeatureConfig((new WeightedBlockStateProvider()).add(MEBlocks.SOUL_SPROUT.get().defaultBlockState(), 1).add(Blocks.AIR.defaultBlockState(), 15))).decorated(Placement.COUNT_HEIGHTMAP.configure(new FrequencyConfig(2)))); //Again, COUNT_HEIGHTMAP is no more, and i have no idea what replaced it.
 					
 				}
 				
@@ -145,12 +145,12 @@ public class MultiExpansion {
 	
 	private void clientRegistries(final FMLClientSetupEvent event) {
 		
-		RenderTypeLookup.setRenderLayer(MEBlocks.GHAST_TEAR_CROP.get(), RenderType.getCutoutMipped());
-		RenderTypeLookup.setRenderLayer(MEBlocks.SOUL_SPROUT.get(), RenderType.getCutoutMipped());
-		RenderTypeLookup.setRenderLayer(MEBlocks.CAMPFIRE.get(), RenderType.getCutoutMipped());
-		RenderTypeLookup.setRenderLayer(MEBlocks.SOUL_CAMPFIRE.get(), RenderType.getCutoutMipped());
-		RenderTypeLookup.setRenderLayer(MEBlocks.REDSTONE_LANTERN.get(), RenderType.getCutoutMipped());
-		RenderTypeLookup.setRenderLayer(MEBlocks.AQUATIC_LANTERN.get(), RenderType.getCutoutMipped());
+		RenderTypeLookup.setRenderLayer(MEBlocks.GHAST_TEAR_CROP.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(MEBlocks.SOUL_SPROUT.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(MEBlocks.CAMPFIRE.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(MEBlocks.SOUL_CAMPFIRE.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(MEBlocks.REDSTONE_LANTERN.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(MEBlocks.AQUATIC_LANTERN.get(), RenderType.cutoutMipped());
 		
 		RenderingRegistry.registerEntityRenderingHandler(MEEntities.TINY_GHAST.get(), new TinyGhastRenderer.RenderFactory());
 		
