@@ -26,9 +26,9 @@ public class TinyGhastRenderer extends MobRenderer<TinyGhastEntity, GhastModel<T
 	}
 	
 	@Override
-	public ResourceLocation getEntityTexture(TinyGhastEntity entity) {
+	public ResourceLocation getTextureLocation(TinyGhastEntity entity) {
 		
-		return entity.isAttacking() ? GHAST_SHOOTING_TEXTURES : GHAST_TEXTURES;
+		return entity.isAutoSpinAttack() ? GHAST_SHOOTING_TEXTURES : GHAST_TEXTURES;
 		
 	}
 	

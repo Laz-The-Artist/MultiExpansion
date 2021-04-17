@@ -26,7 +26,7 @@ public class ColoredCampfireTileEntityRenderer extends TileEntityRenderer<Colore
 	
 	public void render(ColoredCampfireTileEntity tileEntityIn, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
 		
-		Direction direction = tileEntityIn.getBlockState().get(ColoredCampfireBlock.FACING);
+		Direction direction = tileEntityIn.getBlockState().getValue(ColoredCampfireBlock.FACING);
 		NonNullList<ItemStack> nonnulllist = tileEntityIn.getInventory();
 		
 		for(int i = 0; i < nonnulllist.size(); ++i) {
@@ -34,18 +34,16 @@ public class ColoredCampfireTileEntityRenderer extends TileEntityRenderer<Colore
 			ItemStack itemstack = nonnulllist.get(i);
 			
 			if (itemstack != ItemStack.EMPTY) {
-				
-				matrixStackIn.push();
+				matrixStackIn.pushPose();
 				matrixStackIn.translate(0.5D, 0.44921875D, 0.5D);
-				Direction direction1 = Direction.byHorizontalIndex((i + direction.getHorizontalIndex()) % 4);
-				float f = -direction1.getHorizontalAngle();
-				matrixStackIn.rotate(Vector3f.YP.rotationDegrees(f));
-				matrixStackIn.rotate(Vector3f.XP.rotationDegrees(90.0F));
+				Direction direction1 = Direction.from2DDataValue((i + direction.get2DDataValue()) % 4);
+				float f = -direction1.get2DDataValue();
+				matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(f));
+				matrixStackIn.mulPose(Vector3f.XP.rotationDegrees(90.0F));
 				matrixStackIn.translate(-0.3125D, -0.3125D, 0.0D);
 				matrixStackIn.scale(0.375F, 0.375F, 0.375F);
-				Minecraft.getInstance().getItemRenderer().renderItem(itemstack, ItemCameraTransforms.TransformType.FIXED, combinedLightIn, combinedOverlayIn, matrixStackIn, bufferIn);
-				matrixStackIn.pop();
-				
+				Minecraft.getInstance().getItemRenderer().renderStatic(itemstack, ItemCameraTransforms.TransformType.FIXED, combinedLightIn, combinedOverlayIn, matrixStackIn, bufferIn);
+				matrixStackIn.popPose();
 			}
 			
 		}
