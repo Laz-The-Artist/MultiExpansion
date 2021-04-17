@@ -30,7 +30,7 @@ public abstract class ColoredCampfireSmokeParticleData implements IParticleData 
 		
 	}
 	
-	public void write(PacketBuffer buffer) {
+	public void writeToNetwork(PacketBuffer buffer) {
 		
 		buffer.writeFloat(this.red);
 		buffer.writeFloat(this.green);
@@ -38,9 +38,13 @@ public abstract class ColoredCampfireSmokeParticleData implements IParticleData 
 		buffer.writeFloat(this.alpha);
 		
 	}
-	
-	@SuppressWarnings("deprecation")
-	public String getParameters() {
+
+	public interface IDeserializer<T extends IParticleData> {
+		T fromCommand(ParticleType<T> particleType, StringReader stringReader) throws CommandSyntaxException;
+		T fromNetwork(ParticleType<T> particleType, PacketBuffer packetBuffer);
+	}
+
+	public String writeToString() {
 		
 		return String.format(Locale.ROOT, "%s %.2f %.2f %.2f %.2f", Registry.PARTICLE_TYPE.getKey(this.getType()), this.red, this.green, this.blue, this.alpha);
 		

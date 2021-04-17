@@ -32,11 +32,10 @@ public class ColoredCampfireSignalSmokeParticleData extends ColoredCampfireSmoke
 		})).apply(p_239803_0_, ColoredCampfireSignalSmokeParticleData::new);
 		
 	});
-	
-	@SuppressWarnings("deprecation")
+
 	public static final IParticleData.IDeserializer<ColoredCampfireSmokeParticleData> DESERIALIZER = new IParticleData.IDeserializer<ColoredCampfireSmokeParticleData>() {
 		
-		public ColoredCampfireSmokeParticleData deserialize(ParticleType<ColoredCampfireSmokeParticleData> particleTypeIn, StringReader reader) throws CommandSyntaxException {
+		public ColoredCampfireSmokeParticleData fromCommand(ParticleType<ColoredCampfireSmokeParticleData> particleTypeIn, StringReader reader) throws CommandSyntaxException {
 			
 			reader.expect(' ');
 			float f = (float)reader.readDouble();
@@ -54,7 +53,7 @@ public class ColoredCampfireSignalSmokeParticleData extends ColoredCampfireSmoke
 			
 		}
 		
-		public ColoredCampfireSmokeParticleData read(ParticleType<ColoredCampfireSmokeParticleData> particleTypeIn, PacketBuffer buffer) {
+		public ColoredCampfireSmokeParticleData fromNetwork(ParticleType<ColoredCampfireSmokeParticleData> particleTypeIn, PacketBuffer buffer) {
 			
 			return new ColoredCampfireSignalSmokeParticleData(buffer.readFloat(), buffer.readFloat(), buffer.readFloat(), buffer.readFloat());
 			

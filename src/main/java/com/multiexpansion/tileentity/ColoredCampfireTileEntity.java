@@ -147,7 +147,7 @@ public class ColoredCampfireTileEntity extends TileEntity implements IClearable,
    }
 
    private CompoundNBT writeItems(CompoundNBT compound) {
-      super.write(compound);
+      super.writeItems(compound);
       ItemStackHelper.saveAllItems(compound, this.inventory, true);
       return compound;
    }

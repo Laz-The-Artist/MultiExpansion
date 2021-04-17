@@ -13,30 +13,29 @@ public class ColoredCampfireCosySmokeParticleData extends ColoredCampfireSmokePa
 	
 	public static final Codec<ColoredCampfireSmokeParticleData> CODEC = RecordCodecBuilder.create((p_239803_0_) -> {
 		
-		return p_239803_0_.group(Codec.FLOAT.fieldOf("r").forGetter((p_239807_0_) -> {
+		return p_239803_0_.group(Codec.FLOAT.fieldOf("r").forGetter((getter) -> {
 			
-			return p_239807_0_.getRed();
+			return getter.getRed();
 			
-		}), Codec.FLOAT.fieldOf("g").forGetter((p_239806_0_) -> {
+		}), Codec.FLOAT.fieldOf("g").forGetter((getter) -> {
 			
-			return p_239806_0_.getGreen();
+			return getter.getGreen();
 			
-		}), Codec.FLOAT.fieldOf("b").forGetter((p_239805_0_) -> {
+		}), Codec.FLOAT.fieldOf("b").forGetter((getter) -> {
 			
-			return p_239805_0_.getBlue();
+			return getter.getBlue();
 			
-		}), Codec.FLOAT.fieldOf("scale").forGetter((p_239804_0_) -> {
+		}), Codec.FLOAT.fieldOf("scale").forGetter((getter) -> {
 			
-			return p_239804_0_.getAlpha();
+			return getter.getAlpha();
 			
 		})).apply(p_239803_0_, ColoredCampfireCosySmokeParticleData::new);
 		
 	});
-	
-	@SuppressWarnings("deprecation")
+
 	public static final IParticleData.IDeserializer<ColoredCampfireSmokeParticleData> DESERIALIZER = new IParticleData.IDeserializer<ColoredCampfireSmokeParticleData>() {
-		
-		public ColoredCampfireSmokeParticleData deserialize(ParticleType<ColoredCampfireSmokeParticleData> particleTypeIn, StringReader reader) throws CommandSyntaxException {
+
+		public ColoredCampfireSmokeParticleData fromCommand(ParticleType<ColoredCampfireSmokeParticleData> particleTypeIn, StringReader reader) throws CommandSyntaxException {
 			
 			reader.expect(' ');
 			float f = (float)reader.readDouble();
@@ -54,7 +53,7 @@ public class ColoredCampfireCosySmokeParticleData extends ColoredCampfireSmokePa
 			
 		}
 		
-		public ColoredCampfireSmokeParticleData read(ParticleType<ColoredCampfireSmokeParticleData> particleTypeIn, PacketBuffer buffer) {
+		public ColoredCampfireSmokeParticleData fromNetwork(ParticleType<ColoredCampfireSmokeParticleData> particleTypeIn, PacketBuffer buffer) {
 			
 			return new ColoredCampfireCosySmokeParticleData(buffer.readFloat(), buffer.readFloat(), buffer.readFloat(), buffer.readFloat());
 			
