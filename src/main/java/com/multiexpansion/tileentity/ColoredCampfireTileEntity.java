@@ -38,8 +38,8 @@ public class ColoredCampfireTileEntity extends TileEntity implements IClearable,
    @Override
    public void tick() {
 	   
-      boolean flag = this.getBlockState().get(ColoredCampfireBlock.LIT);
-      boolean flag1 = this.world.isRemote;
+      boolean flag = this.getBlockState().getValue(ColoredCampfireBlock.LIT);
+      boolean flag1 = this.level.isClientSide;
       
       if (flag1) {
          if (flag) {
@@ -71,11 +71,11 @@ public class ColoredCampfireTileEntity extends TileEntity implements IClearable,
          if (!itemstack.isEmpty()) {
             if (this.cookingTimes[i] >= this.cookingTotalTimes[i]) {
                IInventory iinventory = new Inventory(itemstack);
-               ItemStack itemstack1 = this.world.getRecipeManager().getRecipe(IRecipeType.CAMPFIRE_COOKING, iinventory, this.world).map((p_213979_1_) -> {
-                  return p_213979_1_.getCraftingResult(iinventory);
+               ItemStack itemstack1 = this.level.getRecipeManager().getRecipeFor(IRecipeType.CAMPFIRE_COOKING, iinventory, this.level).map((p_213979_1_) -> {
+                  return p_213979_1_.assemble(iinventory);
                }).orElse(itemstack);
-               BlockPos blockpos = this.getPos();
-               InventoryHelper.spawnItemStack(this.world, (double)blockpos.getX(), (double)blockpos.getY(), (double)blockpos.getZ(), itemstack1);
+               BlockPos blockpos = this.getBlockPos();
+               InventoryHelper.dropItemStack(this.level, (double)blockpos.getX(), (double)blockpos.getY(), (double)blockpos.getZ(), itemstack1);
                this.inventory.set(i, ItemStack.EMPTY);
                this.inventoryChanged();
             }
@@ -85,26 +85,26 @@ public class ColoredCampfireTileEntity extends TileEntity implements IClearable,
    }
 
    private void addParticles() {
-      World world = this.getWorld();
+      World world = this.getLevel();
       if (world != null) {
-         BlockPos blockpos = this.getPos();
-         Random random = world.rand;
+         BlockPos blockpos = this.getBlockPos();
+         Random random = world.random;
          if (random.nextFloat() < 0.11F) {
             for(int i = 0; i < random.nextInt(2) + 2; ++i) {
-               ColoredCampfireBlock.spawnSmokeParticles(world, blockpos, this.getBlockState().get(ColoredCampfireBlock.SIGNAL_FIRE), false);
+               ColoredCampfireBlock.spawnSmokeParticles(world, blockpos, this.getBlockState().getValue(ColoredCampfireBlock.SIGNAL_FIRE), false);
             }
          }
 
-         int l = this.getBlockState().get(ColoredCampfireBlock.FACING).getHorizontalIndex();
+         int l = this.getBlockState().getValue(ColoredCampfireBlock.FACING).get2DDataValue();
          
          
          
          for(int j = 0; j < this.inventory.size(); ++j) {
             if (!this.inventory.get(j).isEmpty() && random.nextFloat() < 0.2F) {
-               Direction direction = Direction.byHorizontalIndex(Math.floorMod(j + l, 4));
-               double d0 = (double)blockpos.getX() + 0.5D - (double)((float)direction.getXOffset() * 0.3125F) + (double)((float)direction.rotateY().getXOffset() * 0.3125F);
+               Direction direction = Direction.from2DDataValue(Math.floorMod(j + l, 4));
+               double d0 = (double)blockpos.getX() + 0.5D - (double)((float)direction.getStepX() * 0.3125F) + (double)(direction.toYRot() * 0.3125F);
                double d1 = (double)blockpos.getY() + 0.5D;
-               double d2 = (double)blockpos.getZ() + 0.5D - (double)((float)direction.getZOffset() * 0.3125F) + (double)((float)direction.rotateY().getZOffset() * 0.3125F);
+               double d2 = (double)blockpos.getZ() + 0.5D - (double)((float)direction.getStepZ() * 0.3125F) + (double)(direction.toYRot() * 0.3125F);
 
                for(int k = 0; k < 4; ++k) {
                   world.addParticle(ParticleTypes.SMOKE, d0, d1, d2, 0.0D, 5.0E-4D, 0.0D);
@@ -147,7 +147,7 @@ public class ColoredCampfireTileEntity extends TileEntity implements IClearable,
    }
 
    private CompoundNBT writeItems(CompoundNBT compound) {
-      super.writeItems(compound);
+      super.save(compound);
       ItemStackHelper.saveAllItems(compound, this.inventory, true);
       return compound;
    }
@@ -159,19 +159,19 @@ public class ColoredCampfireTileEntity extends TileEntity implements IClearable,
    @Nullable
    @Override
    public SUpdateTileEntityPacket getUpdatePacket() {
-      return new SUpdateTileEntityPacket(pos, -1, writeItems(new CompoundNBT()));
+      return new SUpdateTileEntityPacket(this.getBlockPos(), -1, writeItems(new CompoundNBT()));
    }
    
    @Override
    public void onDataPacket(NetworkManager network, SUpdateTileEntityPacket packet){
-       CompoundNBT tag = packet.getNbtCompound();
+       CompoundNBT tag = packet.getTag();
        
-       load(this.getWorld().getBlockState(packet.getPos()), tag);
+       load(this.getLevel().getBlockState(packet.getPos()), tag);
        
    }
    
    public Optional<CampfireCookingRecipe> findMatchingRecipe(ItemStack itemStackIn) {
-      return this.inventory.stream().noneMatch(ItemStack::isEmpty) ? Optional.empty() : this.world.getRecipeManager().getRecipe(IRecipeType.CAMPFIRE_COOKING, new Inventory(itemStackIn), this.world);
+      return this.inventory.stream().noneMatch(ItemStack::isEmpty) ? Optional.empty() : this.level.getRecipeManager().getRecipeFor(IRecipeType.CAMPFIRE_COOKING, new Inventory(itemStackIn), this.level);
    }
 
    public boolean addItem(ItemStack itemStackIn, int cookTime) {
@@ -190,18 +190,18 @@ public class ColoredCampfireTileEntity extends TileEntity implements IClearable,
    }
 
    private void inventoryChanged() {
-      this.markDirty();
-      this.getWorld().notifyBlockUpdate(this.getPos(), this.getBlockState(), this.getBlockState(), 3);
+      this.setChanged();
+      this.getLevel().setBlock(this.getBlockPos(), this.getBlockState(), this.getBlockState(), 3); //i have no idea what that integer does nor how to replace that second getBlockState to get the correct integer needed
    }
 
-   public void clear() {
+   public void clearContent() {
       this.inventory.clear();
    }
 
    public void dropAllItems() {
-      if (this.world != null) {
-         if (!this.world.isRemote) {
-            InventoryHelper.dropItems(this.world, this.getPos(), this.getInventory());
+      if (this.level != null) {
+         if (!this.level.isClientSide) {
+            InventoryHelper.dropContents(this.level, this.getBlockPos(), this.getInventory());
          }
 
          this.inventoryChanged();
