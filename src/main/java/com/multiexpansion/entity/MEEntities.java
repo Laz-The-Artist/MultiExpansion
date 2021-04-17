@@ -13,6 +13,6 @@ public class MEEntities {
 	
 	public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITIES, MultiExpansion.MODID);
 	
-	public static final RegistryObject<EntityType<TinyGhastEntity>> TINY_GHAST = ENTITIES.register("tiny_ghast", () -> EntityType.Builder.<TinyGhastEntity>create(TinyGhastEntity::new, EntityClassification.MONSTER).immuneToFire().size(1F, 1F).build(MultiExpansion.MODID + ":tiny_ghast_id"));
+	public static final RegistryObject<EntityType<TinyGhastEntity>> TINY_GHAST = ENTITIES.register("tiny_ghast", () -> EntityType.Builder.<TinyGhastEntity>of(TinyGhastEntity::new, EntityClassification.MONSTER).fireImmune().sized(1F, 1F).build(MultiExpansion.MODID + ":tiny_ghast_id"));
 	
 }
