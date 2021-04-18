@@ -77,7 +77,7 @@ public class ColoredCampfireTileEntity extends TileEntity implements IClearable,
                BlockPos blockpos = this.getBlockPos();
                InventoryHelper.dropItemStack(this.level, (double)blockpos.getX(), (double)blockpos.getY(), (double)blockpos.getZ(), itemstack1);
                this.inventory.set(i, ItemStack.EMPTY);
-               this.inventoryChanged();
+               this.markUpdated();
             }
          }
       }
