@@ -13,7 +13,6 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.feature.BlockStateProvidingFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.structure.StructureManager;
 
 public class SoulSproutFeature extends Feature<BlockStateProvidingFeatureConfig> {
 	
@@ -22,22 +21,21 @@ public class SoulSproutFeature extends Feature<BlockStateProvidingFeatureConfig>
 		super(p_i231971_1_);
 		
 	}
-	
-	public boolean func_230362_a_(ISeedReader p_230362_1_, StructureManager p_230362_2_, ChunkGenerator p_230362_3_, Random p_230362_4_, BlockPos p_230362_5_, BlockStateProvidingFeatureConfig p_230362_6_) {
-		
-		return place(p_230362_1_, p_230362_4_, p_230362_5_, p_230362_6_, 8, 4);
-		
+
+	@Override
+	public boolean place(ISeedReader iSeedReader, ChunkGenerator chunkGenerator, Random random, BlockPos pos, BlockStateProvidingFeatureConfig blockStateProvifingFeatureConfig) {
+		return place(iSeedReader, random, pos,  blockStateProvifingFeatureConfig, 8, 4);
 	}
 	
-	public static boolean place(IWorld p_236325_0_, Random p_236325_1_, BlockPos p_236325_2_, BlockStateProvidingFeatureConfig p_236325_3_, int p_236325_4_, int p_236325_5_) {
+	public static boolean place(IWorld IworldIn, Random random, BlockPos pos, BlockStateProvidingFeatureConfig blockStateProvifingFeatureConfig, int p_236325_4_, int p_236325_5_) {
 		
-		for (Block block = p_236325_0_.getBlockState(p_236325_2_.down()).getBlock(); !(block == Blocks.SOUL_SAND || block == Blocks.SOUL_SOIL || block == MEBlocks.SOUL_SAND_FARMLAND.get()) && p_236325_2_.getY() > 0; block = p_236325_0_.getBlockState(p_236325_2_).getBlock()) {
+		for (Block block = IworldIn.getBlockState(pos.below()).getBlock(); !(block == Blocks.SOUL_SAND || block == Blocks.SOUL_SOIL || block == MEBlocks.SOUL_SAND_FARMLAND.get()) && pos.getY() > 0; block = IworldIn.getBlockState(pos).getBlock()) {
 			
-			p_236325_2_ = p_236325_2_.down();
+			pos = pos.below();
 			
 		}
 		
-		int i = p_236325_2_.getY();
+		int i = pos.getY();
 		
 		if (i >= 1 && i + 1 < 256) {
 			
@@ -45,12 +43,12 @@ public class SoulSproutFeature extends Feature<BlockStateProvidingFeatureConfig>
 			
 			for(int k = 0; k < p_236325_4_ * p_236325_4_; ++k) {
 				
-				BlockPos blockpos = p_236325_2_.add(p_236325_1_.nextInt(p_236325_4_) - p_236325_1_.nextInt(p_236325_4_), p_236325_1_.nextInt(p_236325_5_) - p_236325_1_.nextInt(p_236325_5_), p_236325_1_.nextInt(p_236325_4_) - p_236325_1_.nextInt(p_236325_4_));
-				BlockState blockstate = p_236325_3_.stateProvider.getBlockState(p_236325_1_, blockpos);
+				BlockPos blockpos = pos.offset(random.nextInt(p_236325_4_) - random.nextInt(p_236325_4_), random.nextInt(p_236325_5_) - random.nextInt(p_236325_5_), random.nextInt(p_236325_4_) - random.nextInt(p_236325_4_));
+				BlockState blockstate = blockStateProvifingFeatureConfig.stateProvider.getState(random, blockpos);
 				
-				if (p_236325_0_.isAirBlock(blockpos) && blockpos.getY() > 0 && blockstate.isValidPosition(p_236325_0_, blockpos)) {
+				if (IworldIn.isEmptyBlock(blockpos) && blockpos.getY() > 0 && blockstate.canSurvive(IworldIn, blockpos)) {
 					
-					p_236325_0_.setBlockState(blockpos, blockstate, 2);
+					IworldIn.setBlock(blockpos, blockstate, 2);
 					++j;
 					
 				}
