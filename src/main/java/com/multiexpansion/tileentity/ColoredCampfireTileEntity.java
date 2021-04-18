@@ -181,7 +181,7 @@ public class ColoredCampfireTileEntity extends TileEntity implements IClearable,
             this.cookingTotalTimes[i] = cookTime;
             this.cookingTimes[i] = 0;
             this.inventory.set(i, itemStackIn.split(1));
-            this.inventoryChanged();
+            this.markUpdated();
             return true;
          }
       }
@@ -189,9 +189,9 @@ public class ColoredCampfireTileEntity extends TileEntity implements IClearable,
       return false;
    }
 
-   private void inventoryChanged() {
+   private void markUpdated() {
       this.setChanged();
-      this.getLevel().setBlock(this.getBlockPos(), this.getBlockState(), this.getBlockState(), 3); //i have no idea what that integer does nor how to replace that second getBlockState to get the correct integer needed
+      this.getLevel().sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), 3);
    }
 
    public void clearContent() {
@@ -204,7 +204,7 @@ public class ColoredCampfireTileEntity extends TileEntity implements IClearable,
             InventoryHelper.dropContents(this.level, this.getBlockPos(), this.getInventory());
          }
 
-         this.inventoryChanged();
+         this.markUpdated();
       }
 
    }

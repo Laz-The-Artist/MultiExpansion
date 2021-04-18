@@ -11,6 +11,6 @@ public class METileEntityType {
 	
 	public static final DeferredRegister<TileEntityType<?>> TILE_ENTITIES = DeferredRegister.create(ForgeRegistries.TILE_ENTITIES, MultiExpansion.MODID);
 	
-	public static final RegistryObject<TileEntityType<ColoredCampfireTileEntity>> COLORED_CAMPFIRE = TILE_ENTITIES.register("colored_campfire", () -> TileEntityType.Builder.create(ColoredCampfireTileEntity::new, MEBlocks.CAMPFIRE.get(), MEBlocks.SOUL_CAMPFIRE.get()).build(null));
+	public static final RegistryObject<TileEntityType<ColoredCampfireTileEntity>> COLORED_CAMPFIRE = TILE_ENTITIES.register("colored_campfire", () -> TileEntityType.Builder.of(ColoredCampfireTileEntity::new, MEBlocks.CAMPFIRE.get(), MEBlocks.SOUL_CAMPFIRE.get()).build(null));
 	
 }
