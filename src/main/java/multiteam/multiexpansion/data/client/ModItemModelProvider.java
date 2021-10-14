@@ -30,6 +30,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         builder(itemGenerated, "oak_bark");
         builder(itemGenerated, "spruce_bark");
 
+        builder(itemGenerated, "emerald_apple");
+
     }
 
     private ItemModelBuilder builder(ModelFile itemGenerated, String name) {
