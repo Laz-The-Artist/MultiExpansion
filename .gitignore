@@ -23,17 +23,3 @@ run
 
 # Files from Forge MDK
 forge*changelog.txt
-src/main/resources/assets/multiexpansion/models/block/SpamJson_v1.0.0.jar
-src/main/resources/assets/multiexpansion/models/block/desktop.ini
-README.txt
-README.md
-LICENSE.txt
-gradlew
-gradle/wrapper/gradle-wrapper.properties
-gradle.properties
-forge-1.16.1-32.0.74-sources.jar
-forge-1.16.1-32.0.74-mdk.zip
-CREDITS.txt
-changelog.txt
-build.gradle
-.gitattributes
