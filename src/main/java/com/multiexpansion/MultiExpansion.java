@@ -83,7 +83,7 @@ public class MultiExpansion {
 			public ItemStack dispenseStack(IBlockSource source, ItemStack stack) {
 				
 				BlockPos blockpos = source.getPos().offset((Vector3i) DispenserBlock.getDispensePosition(source));
-				List<LivingEntity> list = source.getLevel().getEntities(, new AxisAlignedBB(blockpos), (target) -> { //getEntities is dumb. Also maroon is not helping, like, at all.
+				List<LivingEntity> list = source.getLevel().getEntities( , new AxisAlignedBB(blockpos), (target) -> { //getEntities is dumb. Also maroon is not helping, like, at all.
 					
 					boolean hasGlowingEffect = false;
 					
