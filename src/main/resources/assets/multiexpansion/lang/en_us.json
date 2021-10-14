@@ -2,6 +2,12 @@
     "BLOCKS":"MOD BLOCKS",
 
     "ITEMS":"MOD ITEMS",
+    "item.multiexpansion.acacia_bark": "Acacia Bark",
+    "item.multiexpansion.birch_bark": "Birch Bark",
+    "item.multiexpansion.dark_oak_bark": "Dark Oak Bark",
+    "item.multiexpansion.jungle_bark": "Jungle Bark",
+    "item.multiexpansion.oak_bark": "Oak Bark",
+    "item.multiexpansion.spruce_bark": "Spruce Bark",
 
     "ENTITIES":"MOD ENTITIES",
 

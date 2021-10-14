@@ -1,6 +1,7 @@
 package multiteam.multiexpansion;
 
 import multiteam.multicore_lib.setup.utilities.ItemGroupTool;
+import multiteam.multiexpansion.main.Registration;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
@@ -21,12 +22,15 @@ public class MultiExpansion
 {
     // Directly reference a log4j logger.
     private static final Logger LOGGER = LogManager.getLogger();
-    public static final String MOD_ID = "assets/multiexpansion";
+    public static final String MOD_ID = "multiexpansion";
 
     public static final ItemGroupTool ME_MAIN = new ItemGroupTool(MOD_ID + "_main_tab", () -> new ItemStack(Items.BOOK));
 
 
     public MultiExpansion() {
+
+        Registration.register();
+
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueueIMC);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::processIMC);

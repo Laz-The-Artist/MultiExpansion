@@ -23,7 +23,12 @@ public class ModItemModelProvider extends ItemModelProvider {
         ModelFile itemGenerated = getExistingFile(mcLoc("item/generated"));
 
         //Regular Items
-        //builder(itemGenerated, "clay_soldier");
+        builder(itemGenerated, "acacia_bark");
+        builder(itemGenerated, "birch_bark");
+        builder(itemGenerated, "dark_oak_bark");
+        builder(itemGenerated, "jungle_bark");
+        builder(itemGenerated, "oak_bark");
+        builder(itemGenerated, "spruce_bark");
 
     }
 

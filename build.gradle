@@ -58,7 +58,10 @@ minecraft {
 
             property 'forge.logging.console.level', 'debug'
 
-            args '--mod', 'multiexpansion', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+            args '--mod', 'multiexpansion', '--all',
+                    '--existing', file('src/main/resources/'),
+                    '-existing', file('src/generated/resources'),
+                    '--output', file('src/generated/resources/')
 
             mods {
                  {
