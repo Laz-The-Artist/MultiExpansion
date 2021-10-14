@@ -1,0 +1,3 @@
+- added barks for the 6 wood types
+- logs drop 4 barks when stripped
+- added crafting recipe to craft back stripped logs to normal logs via the new barks

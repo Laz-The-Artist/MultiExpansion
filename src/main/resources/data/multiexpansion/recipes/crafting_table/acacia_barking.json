@@ -1,0 +1,20 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        " # ",
+        "#S#",
+        " # "
+    ],
+    "key": {
+        "#": {
+            "item": "multiexpansion:acacia_bark"
+        },
+        "S": {
+            "item": "minecraft:stripped_acacia_log"
+        }
+    },
+    "result": {
+        "item": "minecraft:acacia_log",
+        "count": 1
+    }
+}
