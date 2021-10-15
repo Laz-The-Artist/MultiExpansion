@@ -16,7 +16,7 @@ public class EmeraldApple extends Item {
     public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity entity) {
         if(entity instanceof Player && !level.isClientSide){
             Player player = (Player) entity;
-            player.giveExperienceLevels(1);
+            player.giveExperienceLevels(2);
         }
         return super.finishUsingItem(stack, level, entity);
     }
