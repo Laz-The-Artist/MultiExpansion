@@ -16,7 +16,7 @@ public class ModItemModelProvider extends ItemModelProvider {
     @Override
     protected void registerModels() {
         //Blockitems
-        //withExistingParent("cabbage_bush", modLoc("block/cabbage_bush"));
+        withExistingParent("withered_bone_block", modLoc("block/withered_bone_block"));
 
 
         //Items
@@ -31,6 +31,9 @@ public class ModItemModelProvider extends ItemModelProvider {
         builder(itemGenerated, "spruce_bark");
 
         builder(itemGenerated, "emerald_apple");
+
+        builder(itemGenerated, "withered_bone");
+        builder(itemGenerated, "withered_bone_meal");
 
     }
 

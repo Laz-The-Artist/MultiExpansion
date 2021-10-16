@@ -1,0 +1,12 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "multiexpansion:withered_bone"
+        }
+    ],
+    "result": {
+        "item": "multiexpansion:withered_bone_meal",
+        "count": 3
+    }
+}

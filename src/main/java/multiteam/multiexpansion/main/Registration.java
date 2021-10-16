@@ -1,6 +1,7 @@
 package multiteam.multiexpansion.main;
 
 import multiteam.multiexpansion.MultiExpansion;
+import multiteam.multiexpansion.main.block.ModBlocks;
 import multiteam.multiexpansion.main.item.ModItems;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
@@ -24,7 +25,7 @@ public class Registration {
         ENTITY_TYPES.register(modeEventBus);
 
         ModItems.register();
-        //ModBlocks.register();
+        ModBlocks.register();
         //ModEntities.register();
     }
 
