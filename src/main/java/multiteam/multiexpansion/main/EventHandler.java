@@ -52,6 +52,16 @@ public class EventHandler {
                     Block.popResource(event.getWorld(), clickedPos, new ItemStack(ModItems.SPRUCE_BARK.get()));
                 }
             }
+            if(clickedBlock == Blocks.CRIMSON_STEM){
+                for (int i = 0; i < 4; i++){
+                    Block.popResource(event.getWorld(), clickedPos, new ItemStack(ModItems.CRIMSON_BARK.get()));
+                }
+            }
+            if(clickedBlock == Blocks.WARPED_STEM){
+                for (int i = 0; i < 4; i++){
+                    Block.popResource(event.getWorld(), clickedPos, new ItemStack(ModItems.WARPED_BARK.get()));
+                }
+            }
         }
 
     }

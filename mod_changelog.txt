@@ -1,3 +1,10 @@
-- added barks for the 6 wood types
+- added bark items for the 8 wood types
 - logs drop 4 barks when stripped
 - added crafting recipe to craft back stripped logs to normal logs via the new barks
+- added emerald apple item
+- added crafting recipe to craft emerald apple
+- added withered bone item
+- added withered bone block
+- added withered bone meal item
+- added crafting recipe to craft withered bone block from withered bone meal
+- added crafting recipe to craft withered bone meal from withered bone and block

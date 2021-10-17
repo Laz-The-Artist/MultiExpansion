@@ -29,6 +29,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         builder(itemGenerated, "jungle_bark");
         builder(itemGenerated, "oak_bark");
         builder(itemGenerated, "spruce_bark");
+        builder(itemGenerated, "crimson_bark");
+        builder(itemGenerated, "warped_bark");
 
         builder(itemGenerated, "emerald_apple");
 
