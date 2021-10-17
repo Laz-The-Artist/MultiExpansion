@@ -10,3 +10,5 @@
 - added crafting recipe to craft withered bone meal from withered bone and block
 - added ender pearl shard
 - added crafting recipes to craft ender pearl from ender pearl shards and visa versa
+- added cheese food item
+- added crafting recipe to craft cheese from milk

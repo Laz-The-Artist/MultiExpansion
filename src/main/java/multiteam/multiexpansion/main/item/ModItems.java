@@ -20,13 +20,16 @@ public class ModItems {
     public static final RegistryObject<Item> CRIMSON_BARK = Registration.ITEMS.register("crimson_bark", () -> new Item(new Item.Properties().tab(MultiExpansion.ME_MAIN)));
     public static final RegistryObject<Item> WARPED_BARK = Registration.ITEMS.register("warped_bark", () -> new Item(new Item.Properties().tab(MultiExpansion.ME_MAIN)));
 
-    public static final FoodProperties EMERALD_APPLE_PROP = (new FoodProperties.Builder()).nutrition(4).saturationMod(1.2F).effect(new MobEffectInstance(MobEffects.HERO_OF_THE_VILLAGE, 300, 0), 1.0F).alwaysEat().build();
-    public static final RegistryObject<Item> EMERALD_APPLE = Registration.ITEMS.register("emerald_apple", () -> new EmeraldApple(new Item.Properties().tab(MultiExpansion.ME_MAIN).food(EMERALD_APPLE_PROP).rarity(Rarity.RARE)));
+    public static final FoodProperties EMERALD_APPLE_PROPERTY = (new FoodProperties.Builder()).nutrition(4).saturationMod(1.2F).effect(new MobEffectInstance(MobEffects.HERO_OF_THE_VILLAGE, 300, 0), 1.0F).alwaysEat().build();
+    public static final RegistryObject<Item> EMERALD_APPLE = Registration.ITEMS.register("emerald_apple", () -> new EmeraldApple(new Item.Properties().tab(MultiExpansion.ME_MAIN).food(EMERALD_APPLE_PROPERTY).rarity(Rarity.RARE)));
 
     public static final RegistryObject<Item> WITHERED_BONE = Registration.ITEMS.register("withered_bone", () -> new Item(new Item.Properties().tab(MultiExpansion.ME_MAIN)));
     public static final RegistryObject<Item> WITHERED_BONE_MEAL = Registration.ITEMS.register("withered_bone_meal", () -> new WitheredBoneMeal(new Item.Properties().tab(MultiExpansion.ME_MAIN)));
 
     public static final RegistryObject<Item> ENDER_PEARL_SHARD = Registration.ITEMS.register("ender_pearl_shard", () -> new Item(new Item.Properties().tab(MultiExpansion.ME_MAIN)));
+
+    public static final FoodProperties CHEESE_PROPERTY = (new FoodProperties.Builder()).nutrition(5).saturationMod(0.3F).build();
+    public static final RegistryObject<Item> CHEESE = Registration.ITEMS.register("cheese", () -> new Item(new Item.Properties().tab(MultiExpansion.ME_MAIN).food(CHEESE_PROPERTY)));
 
 
     public static void register(){}
