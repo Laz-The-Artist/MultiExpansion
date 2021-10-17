@@ -35,6 +35,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         builder(itemGenerated, "withered_bone");
         builder(itemGenerated, "withered_bone_meal");
 
+        builder(itemGenerated, "ender_pearl_shard");
+
     }
 
     private ItemModelBuilder builder(ModelFile itemGenerated, String name) {

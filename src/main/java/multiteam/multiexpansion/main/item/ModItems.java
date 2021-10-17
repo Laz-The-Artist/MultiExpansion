@@ -24,6 +24,8 @@ public class ModItems {
     public static final RegistryObject<Item> WITHERED_BONE = Registration.ITEMS.register("withered_bone", () -> new Item(new Item.Properties().tab(MultiExpansion.ME_MAIN)));
     public static final RegistryObject<Item> WITHERED_BONE_MEAL = Registration.ITEMS.register("withered_bone_meal", () -> new WitheredBoneMeal(new Item.Properties().tab(MultiExpansion.ME_MAIN)));
 
+    public static final RegistryObject<Item> ENDER_PEARL_SHARD = Registration.ITEMS.register("ender_pearl_shard", () -> new Item(new Item.Properties().tab(MultiExpansion.ME_MAIN)));
+
 
     public static void register(){}
 
