@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "multiexpansion:block/ruby_block"
+    }
+  }
+}

@@ -17,6 +17,8 @@ public class ModItemModelProvider extends ItemModelProvider {
     protected void registerModels() {
         //Blockitems
         withExistingParent("withered_bone_block", modLoc("block/withered_bone_block"));
+        withExistingParent("ruby_block", modLoc("block/ruby_block"));
+        withExistingParent("ruby_ore", modLoc("block/ruby_ore"));
 
 
         //Items
@@ -40,6 +42,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         builder(itemGenerated, "ender_pearl_shard");
 
         builder(itemGenerated, "cheese");
+
+        builder(itemGenerated, "ruby");
 
     }
 

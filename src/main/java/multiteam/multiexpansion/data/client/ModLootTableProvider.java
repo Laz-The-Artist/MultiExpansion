@@ -4,6 +4,8 @@ package multiteam.multiexpansion.data.client;
 import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Pair;
 import multiteam.multiexpansion.main.Registration;
+import multiteam.multiexpansion.main.block.ModBlocks;
+import multiteam.multiexpansion.main.item.ModItems;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.loot.BlockLoot;
 import net.minecraft.data.loot.LootTableProvider;
@@ -44,11 +46,9 @@ public class ModLootTableProvider extends LootTableProvider {
     public static class ModBlockLootTables extends BlockLoot {
         @Override
         protected void addTables() {
-            //dropSelf(ModBlocks.CARDBOARD_BOX.get());
-            //dropSelf(ModBlocks.WITHER_CABBAGE.get());
-            //dropSelf(ModBlocks.ICEY_CABBAGE.get());
-            //dropSelf(ModBlocks.SUPER_CABBAGE.get());
-            //dropOther(ModBlocks.CABBAGE_BUSH.get(), ModItems.CABBAGE.get());
+            dropSelf(ModBlocks.WITHERED_BONE_BLOCK.get());
+            dropSelf(ModBlocks.RUBY_BLOCK.get());
+            dropOther(ModBlocks.RUBY_ORE.get(), ModItems.RUBY.get());
         }
 
         @Override

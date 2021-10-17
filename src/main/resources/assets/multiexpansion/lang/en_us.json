@@ -2,6 +2,9 @@
     "BLOCKS":"MOD BLOCKS",
     "block.multiexpansion.withered_bone_block": "Withered Bone Block",
 
+    "block.multiexpansion.ruby_block": "Block of Ruby",
+    "block.multiexpansion.ruby_ore": "Ruby Ore",
+
 
     "ITEMS":"MOD ITEMS",
     "item.multiexpansion.acacia_bark": "Acacia Bark",
@@ -21,6 +24,8 @@
     "item.multiexpansion.ender_pearl_shard": "Ender Pearl Shard",
 
     "item.multiexpansion.cheese": "Cheese",
+
+    "item.multiexpansion.ruby": "Ruby",
 
 
     "ENTITIES":"MOD ENTITIES",
