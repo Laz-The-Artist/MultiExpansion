@@ -21,3 +21,4 @@
 - added poisonous beetroot item
 - added poisonous melon slice item
 - made poisonous potato (vanilla item), poisonous carrot, poisonous beetroot and poisonous melon slice compostable
+- made glowstone dust and glow ink sac apply glow effect to mobs when right clicked with
