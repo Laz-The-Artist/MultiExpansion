@@ -22,3 +22,8 @@
 - added poisonous melon slice item
 - made poisonous potato (vanilla item), poisonous carrot, poisonous beetroot and poisonous melon slice compostable
 - made glowstone dust and glow ink sac apply glow effect to mobs when right clicked with
+- added nether rod block
+- added recipe to craft nether rod
+- added bat wing item
+- added potion of levitation (potion item for vanilla effect)
+- added brewing recipes for potion of levtation(s)

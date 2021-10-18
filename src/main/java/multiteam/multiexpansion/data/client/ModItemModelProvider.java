@@ -51,6 +51,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         builder(itemGenerated, "poisonous_beetroot");
         builder(itemGenerated, "poisonous_melon_slice");
 
+        builder(itemGenerated, "bat_wing");
+
     }
 
     private ItemModelBuilder builder(ModelFile itemGenerated, String name) {
