@@ -2,6 +2,7 @@ package multiteam.multiexpansion;
 
 import multiteam.multicore_lib.setup.utilities.ItemGroupTool;
 import multiteam.multiexpansion.main.Registration;
+import multiteam.multiexpansion.main.item.ModItems;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
@@ -39,7 +40,7 @@ public class MultiExpansion
     }
 
     private void setup(final FMLCommonSetupEvent event) {
-
+        ModItems.addComposterIngredients();
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event) {

@@ -7,7 +7,9 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.food.Foods;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Rarity;
+import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraftforge.fmllegacy.RegistryObject;
 
 public class ModItems {
@@ -40,7 +42,14 @@ public class ModItems {
     public static final RegistryObject<Item> POISONOUS_BEETROOT = Registration.ITEMS.register("poisonous_beetroot", () -> new Item(new Item.Properties().food(Foods.POISONOUS_POTATO).tab(MultiExpansion.ME_MAIN)));
     public static final RegistryObject<Item> POISONOUS_MELON_SLICE = Registration.ITEMS.register("poisonous_melon_slice", () -> new Item(new Item.Properties().food(Foods.POISONOUS_POTATO).tab(MultiExpansion.ME_MAIN)));
 
-
     public static void register(){}
+
+    public static void addComposterIngredients(){
+        ComposterBlock.COMPOSTABLES.put(Items.POISONOUS_POTATO.asItem(), 0.75F);
+
+        ComposterBlock.COMPOSTABLES.put(POISONOUS_CARROT.get().asItem(), 0.75F);
+        ComposterBlock.COMPOSTABLES.put(POISONOUS_BEETROOT.get().asItem(), 0.75F);
+        ComposterBlock.COMPOSTABLES.put(POISONOUS_MELON_SLICE.get().asItem(), 0.75F);
+    }
 
 }

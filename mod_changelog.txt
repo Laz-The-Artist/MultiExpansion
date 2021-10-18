@@ -17,3 +17,7 @@
 - added ruby ore block
 - added recipe to craft ruby block from rubies
 - added recipe to craft rubies from ruby block
+- added poisonous carrot item
+- added poisonous beetroot item
+- added poisonous melon slice item
+- made poisonous potato (vanilla item), poisonous carrot, poisonous beetroot and poisonous melon slice compostable
