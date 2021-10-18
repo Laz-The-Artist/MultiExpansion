@@ -45,6 +45,10 @@ public class ModItemModelProvider extends ItemModelProvider {
 
         builder(itemGenerated, "ruby");
 
+        builder(itemGenerated, "poisonous_carrot");
+        builder(itemGenerated, "poisonous_beetroot");
+        builder(itemGenerated, "poisonous_melon_slice");
+
     }
 
     private ItemModelBuilder builder(ModelFile itemGenerated, String name) {

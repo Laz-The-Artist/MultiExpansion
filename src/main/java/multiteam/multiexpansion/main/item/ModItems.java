@@ -5,6 +5,7 @@ import multiteam.multiexpansion.main.Registration;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.food.Foods;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import net.minecraftforge.fmllegacy.RegistryObject;
@@ -34,6 +35,10 @@ public class ModItems {
     public static final RegistryObject<Item> CHEESE = Registration.ITEMS.register("cheese", () -> new Item(new Item.Properties().tab(MultiExpansion.ME_MAIN).food(CHEESE_PROPERTY)));
 
     public static final RegistryObject<Item> RUBY = Registration.ITEMS.register("ruby", () -> new Item(new Item.Properties().tab(MultiExpansion.ME_MAIN)));
+
+    public static final RegistryObject<Item> POISONOUS_CARROT = Registration.ITEMS.register("poisonous_carrot", () -> new Item(new Item.Properties().food(Foods.POISONOUS_POTATO).tab(MultiExpansion.ME_MAIN)));
+    public static final RegistryObject<Item> POISONOUS_BEETROOT = Registration.ITEMS.register("poisonous_beetroot", () -> new Item(new Item.Properties().food(Foods.POISONOUS_POTATO).tab(MultiExpansion.ME_MAIN)));
+    public static final RegistryObject<Item> POISONOUS_MELON_SLICE = Registration.ITEMS.register("poisonous_melon_slice", () -> new Item(new Item.Properties().food(Foods.POISONOUS_POTATO).tab(MultiExpansion.ME_MAIN)));
 
 
     public static void register(){}

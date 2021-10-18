@@ -27,6 +27,10 @@
 
     "item.multiexpansion.ruby": "Ruby",
 
+    "item.multiexpansion.poisonous_carrot": "Poisonous Carrot",
+    "item.multiexpansion.poisonous_beetroot": "Poisonous Beetroot",
+    "item.multiexpansion.poisonous_melon_slice": "Poisonous Melon Slice",
+
 
     "ENTITIES":"MOD ENTITIES",
 
