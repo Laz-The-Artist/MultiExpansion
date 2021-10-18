@@ -49,6 +49,7 @@ public class ModLootTableProvider extends LootTableProvider {
             dropSelf(ModBlocks.WITHERED_BONE_BLOCK.get());
             dropSelf(ModBlocks.RUBY_BLOCK.get());
             dropOther(ModBlocks.RUBY_ORE.get(), ModItems.RUBY.get());
+            dropSelf(ModBlocks.NETHER_ROD.get());
         }
 
         @Override

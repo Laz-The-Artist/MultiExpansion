@@ -20,6 +20,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         withExistingParent("ruby_block", modLoc("block/ruby_block"));
         withExistingParent("ruby_ore", modLoc("block/ruby_ore"));
 
+        withExistingParent("nether_rod", modLoc("block/nether_rod"));
+
 
         //Items
         ModelFile itemGenerated = getExistingFile(mcLoc("item/generated"));
