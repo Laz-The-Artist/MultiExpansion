@@ -15,3 +15,5 @@
 - added ruby item
 - added ruby block
 - added ruby ore block
+- added recipe to craft ruby block from rubies
+- added recipe to craft rubies from ruby block
