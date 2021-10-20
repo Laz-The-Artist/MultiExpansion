@@ -30,6 +30,7 @@ public class ModPotions {
         addBrewingRecipe(ModPotions.LEVITATION.get(), Items.REDSTONE, ModPotions.LONG_LEVITATION_POTION.get());
     }
 
+    //TODO move to MultiCoreLib
     public static void addBrewingRecipe(Potion potionBase, Item itemIngredient, Potion potionOutput){
         BrewingRecipeRegistry.addRecipe(Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), potionBase)), Ingredient.of(itemIngredient), PotionUtils.setPotion(new ItemStack(Items.POTION), potionOutput));
     }

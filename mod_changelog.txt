@@ -27,3 +27,13 @@
 - added bat wing item
 - added potion of levitation (potion item for vanilla effect)
 - added brewing recipes for potion of levtation(s)
+- added red fox pelt item
+- added white fox pelt item
+- added ocelot pelt item
+- added panda pelt item
+- added polar bear pelt item
+- added brown llama fur item
+- added cream llama fur item
+- added gray llama fur item
+- added white llama fur item
+- added

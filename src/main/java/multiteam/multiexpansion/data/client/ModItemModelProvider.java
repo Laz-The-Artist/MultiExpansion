@@ -53,6 +53,16 @@ public class ModItemModelProvider extends ItemModelProvider {
 
         builder(itemGenerated, "bat_wing");
 
+        builder(itemGenerated, "red_fox_pelt");
+        builder(itemGenerated, "white_fox_pelt");
+        builder(itemGenerated, "ocelot_pelt");
+        builder(itemGenerated, "panda_pelt");
+        builder(itemGenerated, "polar_bear_pelt");
+        builder(itemGenerated, "brown_llama_fur");
+        builder(itemGenerated, "cream_llama_fur");
+        builder(itemGenerated, "gray_llama_fur");
+        builder(itemGenerated, "white_llama_fur");
+
     }
 
     private ItemModelBuilder builder(ModelFile itemGenerated, String name) {

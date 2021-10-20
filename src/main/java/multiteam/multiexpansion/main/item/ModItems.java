@@ -47,6 +47,17 @@ public class ModItems {
     //TODO bat wing needs to be added as drop for the bat
     public static final RegistryObject<Item> BAT_WING = Registration.ITEMS.register("bat_wing", () -> new Item(new Item.Properties().tab(MultiExpansion.ME_MAIN)));
 
+    //TODO add pelts as drop to their respective mobs
+    public static final RegistryObject<Item> RED_FOX_PELT = Registration.ITEMS.register("red_fox_pelt", () -> new Item(new Item.Properties().tab(MultiExpansion.ME_MAIN)));
+    public static final RegistryObject<Item> WHITE_FOX_PELT = Registration.ITEMS.register("white_fox_pelt", () -> new Item(new Item.Properties().tab(MultiExpansion.ME_MAIN)));
+    public static final RegistryObject<Item> OCELOT_PELT = Registration.ITEMS.register("ocelot_pelt", () -> new Item(new Item.Properties().tab(MultiExpansion.ME_MAIN)));
+    public static final RegistryObject<Item> PANDA_PELT = Registration.ITEMS.register("panda_pelt", () -> new Item(new Item.Properties().tab(MultiExpansion.ME_MAIN)));
+    public static final RegistryObject<Item> POLAR_BEAR_PELT = Registration.ITEMS.register("polar_bear_pelt", () -> new Item(new Item.Properties().tab(MultiExpansion.ME_MAIN)));
+    public static final RegistryObject<Item> BROWN_LLAMA_FUR = Registration.ITEMS.register("brown_llama_fur", () -> new Item(new Item.Properties().tab(MultiExpansion.ME_MAIN)));
+    public static final RegistryObject<Item> CREAM_LLAMA_FUR = Registration.ITEMS.register("cream_llama_fur", () -> new Item(new Item.Properties().tab(MultiExpansion.ME_MAIN)));
+    public static final RegistryObject<Item> GRAY_LLAMA_FUR = Registration.ITEMS.register("gray_llama_fur", () -> new Item(new Item.Properties().tab(MultiExpansion.ME_MAIN)));
+    public static final RegistryObject<Item> WHITE_LLAMA_FUR = Registration.ITEMS.register("white_llama_fur", () -> new Item(new Item.Properties().tab(MultiExpansion.ME_MAIN)));
+
 
     public static void register(){}
 
