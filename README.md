@@ -3,7 +3,7 @@
 ### MultiExpansion - for Forge 1.17.1 - by MultiTeam
 
 ## About
-MultiExpansion is basically a vanilla+ mod, with a lot of not actuallyy vanilla+ elements. But its actually hight quality i swear...
+MultiExpansion is basically a vanilla+ mod, with a lot of not actually vanilla+ elements. But its actually high quality i swear...
 
 ## Credits
 - LazTheArtist [Code - Art]
