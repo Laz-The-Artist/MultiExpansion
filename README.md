@@ -1,5 +1,5 @@
 
-![MultiExpansionLogo Logo](url)
+![MultiExpansionLogo Logo](https://raw.githubusercontent.com/Laz-The-Artist/MultiExpansion/0cd219df3d67fc105b782e501fbb15c9bfdfeea9/src/main/resources/logo.png)
 ### MultiExpansion - for Forge 1.17.1 - by MultiTeam
 
 ## About
