@@ -35,6 +35,16 @@
 
     "item.multiexpansion.bat_wing": "Bat Wing",
 
+    "item.multiexpansion.red_fox_pelt": "Red Fox Pelt",
+    "item.multiexpansion.white_fox_pelt": "White Fox Pelt",
+    "item.multiexpansion.ocelot_pelt": "Ocelot Pelt",
+    "item.multiexpansion.panda_pelt": "Panda Pelt",
+    "item.multiexpansion.polar_bear_pelt": "Polar Bear Pelt",
+    "item.multiexpansion.brown_llama_fur": "Brown Llama Fur",
+    "item.multiexpansion.cream_llama_fur": "Cream Llama Fur",
+    "item.multiexpansion.gray_llama_fur": "Gray Llama Fur",
+    "item.multiexpansion.white_llama_fur": "White Llama Fur",
+
 
     "ENTITIES":"MOD ENTITIES",
 
