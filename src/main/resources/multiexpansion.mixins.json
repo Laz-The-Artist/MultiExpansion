@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "package": "multiteam.multiexpansion.mixin",
+  "compatibilityLevel": "JAVA_16",
+  "refmap": "multiexpansion.refmap.json",
+  "client": [
+  ],
+  "mixins": [
+    "MixinItem",
+    "MixinItemEntity"
+  ],
+  "server": [
+  ],
+  "minVersion": "0.8"
+}

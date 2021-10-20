@@ -2,12 +2,17 @@ buildscript {
     repositories {
         maven { url = 'https://maven.minecraftforge.net' }
         mavenCentral()
+        maven {
+            url "https://repo.spongepowered.org/maven"
+        }
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
+        classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7-SNAPSHOT'
     }
 }
 apply plugin: 'net.minecraftforge.gradle'
+apply plugin: 'org.spongepowered.mixin'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
@@ -16,6 +21,10 @@ group = 'multiteam.multiexpansion' // http://maven.apache.org/guides/mini/guide-
 archivesBaseName = 'multiexpansion'
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(16)
+
+mixin {
+    add sourceSets.main, "multiexpansion.refmap.json"
+}
 
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
 minecraft {
@@ -26,6 +35,9 @@ minecraft {
     runs {
         client {
             workingDirectory project.file('run')
+
+            arg "-mixin.config=multiexpansion.mixins.json"
+
             property 'forge.logging.markers', 'REGISTRIES'
 
             property 'forge.logging.console.level', 'debug'
@@ -40,6 +52,8 @@ minecraft {
         server {
             workingDirectory project.file('run')
 
+            arg "-mixin.config=multiexpansion.mixins.json"
+
             property 'forge.logging.markers', 'REGISTRIES'
 
             property 'forge.logging.console.level', 'debug'
@@ -53,6 +67,8 @@ minecraft {
 
         data {
             workingDirectory project.file('run')
+
+            arg "-mixin.config=multiexpansion.mixins.json"
 
             property 'forge.logging.markers', 'REGISTRIES'
 
@@ -87,11 +103,17 @@ repositories {
         url = "https://modmaven.k-4u.nl"
     }
     maven { url "https://github.com/MultiTeamDevGroup/MultiTeam-Maven/raw/main/" }
+    maven {
+        name "Sponge Powered Maven"
+        url 'https://repo.spongepowered.org/maven'
+    }
 
 }
 
 dependencies {
     minecraft 'net.minecraftforge:forge:1.17.1-37.0.90'
+
+    annotationProcessor 'org.spongepowered:mixin:0.8.4:processor'
 
     runtimeOnly fg.deobf("mezz.jei:jei-1.17.1:8.1.0.19")
 
@@ -111,7 +133,8 @@ jar {
                 "Implementation-Title"    : project.name,
                 "Implementation-Version"  : project.jar.archiveVersion,
                 "Implementation-Vendor"   : "multiexpansionsareus",
-                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
+                "MixinConfigs": "multiexpansion.mixins.json",
         ])
     }
 }
