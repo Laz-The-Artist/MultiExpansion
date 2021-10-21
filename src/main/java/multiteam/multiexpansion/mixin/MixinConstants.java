@@ -6,4 +6,6 @@ import net.minecraft.world.food.FoodProperties;
 
 public final class MixinConstants {
 
+    public static final FoodProperties MOD_MULTIEXPANSION_SUGAR_FOOD = new FoodProperties.Builder().effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 100), 1f).build();
+
 }

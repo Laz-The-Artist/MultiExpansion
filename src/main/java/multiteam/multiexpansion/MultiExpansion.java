@@ -22,7 +22,7 @@ import org.apache.logging.log4j.Logger;
 @Mod(MultiExpansion.MOD_ID)
 public class MultiExpansion
 {
-    // Directly reference a log4j logger.
+
     private static final Logger LOGGER = LogManager.getLogger();
     public static final String MOD_ID = "multiexpansion";
 
