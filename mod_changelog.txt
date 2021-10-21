@@ -36,4 +36,4 @@
 - added cream llama fur item
 - added gray llama fur item
 - added white llama fur item
-- added
+- made so that the sugar item (vanilla) can be eaten and applies speed

@@ -14,6 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @SuppressWarnings("ConstantConditions")
 @Mixin(Item.class)
 public abstract class MixinItem extends net.minecraftforge.registries.ForgeRegistryEntry<Item> implements ItemLike, net.minecraftforge.common.extensions.IForgeItem {
+
     private static final FoodProperties MOD_MULTIEXPANSION_SUGAR_FOOD = new FoodProperties.Builder().effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 100), 1f).build();
 
     @Inject(at = @At("HEAD"), method = "isEdible", cancellable = true)
@@ -29,4 +30,5 @@ public abstract class MixinItem extends net.minecraftforge.registries.ForgeRegis
             cir.setReturnValue(MOD_MULTIEXPANSION_SUGAR_FOOD);
         }
     }
+
 }
