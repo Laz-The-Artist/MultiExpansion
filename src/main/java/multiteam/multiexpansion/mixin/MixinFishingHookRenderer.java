@@ -6,6 +6,7 @@ import com.mojang.math.Matrix3f;
 import com.mojang.math.Matrix4f;
 import com.mojang.math.Vector3f;
 import multiteam.multicore_lib.setup.utilities.MathF;
+import multiteam.multicore_lib.setup.utilities.RenderingTool;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -30,7 +31,7 @@ public abstract class MixinFishingHookRenderer extends EntityRenderer<FishingHoo
 
     private static final ResourceLocation TEXTURE_LOCATION = new ResourceLocation("textures/entity/fishing_hook.png");
     private static final ResourceLocation TEXTURE_LOCATION2 = new ResourceLocation("multiexpansion:textures/block/ruby_block.png");
-    private static final RenderType RENDER_TYPE = RenderType.entityCutout(TEXTURE_LOCATION2);
+    private static final RenderType RENDER_TYPE = RenderType.entityCutout(TEXTURE_LOCATION);
 
     public MixinFishingHookRenderer(EntityRendererProvider.Context context) {
         super(context);
@@ -52,13 +53,12 @@ public abstract class MixinFishingHookRenderer extends EntityRenderer<FishingHoo
             PoseStack.Pose posestack$pose = stack.last();
             Matrix4f matrix4f = posestack$pose.pose();
             Matrix3f matrix3f = posestack$pose.normal();
+
             VertexConsumer vertexconsumer = bufferSource.getBuffer(RENDER_TYPE);
 
-            Vector3f vec = MathF.BlockToFloatScaleVector3f(7, 14, 7);
+            Vector3f vec = MathF.BlockToFloatScaleVector3f(7, 20, 7);
 
-            cube(vertexconsumer, matrix4f, matrix3f, randomInt, MathF.BlockToFloatScaleVector3f(16, 16, 16), new Vector3f(-vec.x(), -vec.y(), -vec.z()));
-
-            //RenderingTool.buildMonochromeCube(vertexconsumer, stack, new Vector3f(0, 0, 1), MathF.BlockToFloatScaleVector3f(5, 5, 5), MathF.BlockToFloatScaleVector3f(0,0, 0));
+            texturedCube2(vertexconsumer, matrix4f, matrix3f, randomInt, MathF.BlockToFloatScaleVector3f(16, 16, 16), new Vector3f(-vec.x(), -vec.y(), -vec.z()), -MathF.BlockToFloatScale(6));
 
             stack.popPose();
             int i = player.getMainArm() == HumanoidArm.RIGHT ? 1 : -1;
@@ -114,30 +114,19 @@ public abstract class MixinFishingHookRenderer extends EntityRenderer<FishingHoo
         }
     }
 
-    private static void cube(VertexConsumer vertexconsumer, Matrix4f matrix4f, Matrix3f matrix3f, int randomInt, Vector3f size, Vector3f offset){
-        //back
-        plane(vertexconsumer, matrix4f, randomInt, new Vector3f(offset.x()+size.x(), offset.y(), offset.z()), offset, new Vector3f(offset.x(), offset.y()+size.y(), offset.z()), new Vector3f(offset.x()+size.x(), offset.y()+size.y(), offset.z()) , new Vector3f(0, 1, 0));
-        //right side
-        plane(vertexconsumer, matrix4f, randomInt, offset, new Vector3f(offset.x(), offset.y(), offset.z()+ size.z()), new Vector3f(offset.x(), offset.y()+size.y(), offset.z()+size.z()), new Vector3f(offset.x(), offset.y()+size.y(), offset.z()), new Vector3f(0, 1, 0));
-        //front
-        plane(vertexconsumer, matrix4f, randomInt, new Vector3f(offset.x(), offset.y(), offset.z()+size.z()), new Vector3f(offset.x()+size.x(), offset.y(), offset.z()+size.z()), new Vector3f(offset.x()+size.x(), offset.y()+size.y(), offset.z()+size.z()), new Vector3f(offset.x(), offset.y()+size.y(), offset.z()+size.z()), new Vector3f(0, 1, 0));
-        //left side (might not be oriented the right way)
-        plane(vertexconsumer, matrix4f, randomInt, new Vector3f(offset.x()+size.x(), offset.y(), offset.z()), new Vector3f(offset.x()+size.x(), offset.y()+size.y(), offset.z()), new Vector3f(offset.x()+size.x(), offset.y()+size.y(), offset.z()+size.z()), new Vector3f(offset.x()+size.x(), offset.y(), offset.z()+size.z()), new Vector3f(0, 1, 0));
-        //top
-        plane(vertexconsumer, matrix4f, randomInt, new Vector3f(offset.x(), offset.y()+size.y(), offset.z()), new Vector3f(offset.x(), offset.y()+size.y(), offset.z()+size.z()), new Vector3f(offset.x()+size.x(), offset.y()+size.y(), offset.z()+size.z()), new Vector3f(offset.x()+size.x(), offset.y()+size.y(), offset.z()), new Vector3f(0, 1, 0));
-        //bottom
-        plane(vertexconsumer, matrix4f,  randomInt, offset, new Vector3f(offset.x()+size.x(), offset.y(), offset.z()), new Vector3f(offset.x()+size.x(), offset.y(), offset.z()+size.z()), new Vector3f(offset.x(), offset.y(), offset.z()+size.z()), new Vector3f(0, -1, 0));
-    }
-
-    private static void plane(VertexConsumer vertexconsumer, Matrix4f matrix4f, int randomInt, Vector3f corner1Pos, Vector3f corner2Pos, Vector3f corner3Pos, Vector3f corner4Pos, Vector3f normal){
-        vertex(vertexconsumer, matrix4f, randomInt, corner1Pos,0, 1, normal);
-        vertex(vertexconsumer, matrix4f, randomInt, corner2Pos, 1, 1, normal);
-        vertex(vertexconsumer, matrix4f, randomInt, corner3Pos, 1, 0, normal);
-        vertex(vertexconsumer, matrix4f, randomInt, corner4Pos, 0, 0, normal);
-    }
-
-    private static void vertex(VertexConsumer consumer, Matrix4f matrix4F, int uv2_, Vector3f pos, float uvX, float uvY, Vector3f normal) {
-        consumer.vertex(matrix4F, pos.x(), pos.y(), pos.z()).color(255, 255, 255, 255).uv(uvX, uvY).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(uv2_).normal(normal.x(), normal.y(), normal.z()).endVertex();
+    private static void texturedCube2(VertexConsumer vertexconsumer, Matrix4f matrix4f, Matrix3f matrix3f, int randomInt, Vector3f size, Vector3f offset, float shrink) {
+        //back moves on -z
+        RenderingTool.texturedPlane(vertexconsumer, matrix4f, randomInt, new Vector3f(offset.x() + size.x(), offset.y(), offset.z()-shrink), new Vector3f(offset.x(), offset.y(), offset.z()-shrink), new Vector3f(offset.x(), offset.y() + size.y(), offset.z()-shrink), new Vector3f(offset.x() + size.x(), offset.y() + size.y(), offset.z()-shrink), new Vector3f(0.0F, 1.0F, 0.0F));
+        //right moves on -x
+        RenderingTool.texturedPlane(vertexconsumer, matrix4f, randomInt, new Vector3f(offset.x()-shrink, offset.y(), offset.z()), new Vector3f(offset.x()-shrink, offset.y(), offset.z() + size.z()), new Vector3f(offset.x()-shrink, offset.y() + size.y(), offset.z() + size.z()), new Vector3f(offset.x()-shrink, offset.y() + size.y(), offset.z()), new Vector3f(0.0F, 1.0F, 0.0F));
+        //front moves on +z
+        RenderingTool.texturedPlane(vertexconsumer, matrix4f, randomInt, new Vector3f(offset.x(), offset.y(), offset.z() + size.z()+shrink), new Vector3f(offset.x() + size.x(), offset.y(), offset.z() + size.z()+shrink), new Vector3f(offset.x() + size.x(), offset.y() + size.y(), offset.z() + size.z()+shrink), new Vector3f(offset.x(), offset.y() + size.y(), offset.z() + size.z()+shrink), new Vector3f(0.0F, 1.0F, 0.0F));
+        //left moves on +x
+        RenderingTool.texturedPlane(vertexconsumer, matrix4f, randomInt, new Vector3f(offset.x() + size.x()+shrink, offset.y(), offset.z()), new Vector3f(offset.x() + size.x()+shrink, offset.y() + size.y(), offset.z()), new Vector3f(offset.x() + size.x()+shrink, offset.y() + size.y(), offset.z() + size.z()), new Vector3f(offset.x() + size.x()+shrink, offset.y(), offset.z() + size.z()), new Vector3f(0.0F, 1.0F, 0.0F));
+        //top moves on +y
+        RenderingTool.texturedPlane(vertexconsumer, matrix4f, randomInt, new Vector3f(offset.x(), offset.y() + size.y()+shrink, offset.z()), new Vector3f(offset.x(), offset.y() + size.y()+shrink, offset.z() + size.z()), new Vector3f(offset.x() + size.x(), offset.y() + size.y()+shrink, offset.z() + size.z()), new Vector3f(offset.x() + size.x(), offset.y() + size.y()+shrink, offset.z()), new Vector3f(0.0F, 1.0F, 0.0F));
+        //bottom moves on -y
+        RenderingTool.texturedPlane(vertexconsumer, matrix4f, randomInt, new Vector3f(offset.x(), offset.y()-shrink, offset.z()), new Vector3f(offset.x() + size.x(), offset.y()-shrink, offset.z()), new Vector3f(offset.x() + size.x(), offset.y()-shrink, offset.z() + size.z()), new Vector3f(offset.x(), offset.y()-shrink, offset.z() + size.z()), new Vector3f(0.0F, -1.0F, 0.0F));
     }
 
     private static void stringVertex(float p_174119_, float p_174120_, float p_174121_, VertexConsumer p_174122_, PoseStack.Pose p_174123_, float p_174124_, float p_174125_) {
