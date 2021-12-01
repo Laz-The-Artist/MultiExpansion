@@ -1,6 +1,6 @@
 package multiteam.multiexpansion.main.block;
 
-import multiteam.multicore_lib.setup.utilities.RegistrationTool;
+import multiteam.multicore_lib.setup.utilities.generic.RegistrationTool;
 import multiteam.multiexpansion.MultiExpansion;
 import multiteam.multiexpansion.main.Registration;
 import net.minecraft.world.item.Item;

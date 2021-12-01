@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "multiexpansion:ruby_block",
+    "multiexpansion:ruby_ore",
+    "multiexpansion:withered_bone_block"
+  ]
+}

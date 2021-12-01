@@ -1,6 +1,6 @@
 package multiteam.multiexpansion;
 
-import multiteam.multicore_lib.setup.utilities.ItemGroupTool;
+import multiteam.multicore_lib.setup.utilities.generic.ItemGroupTool;
 import multiteam.multiexpansion.main.Registration;
 import multiteam.multiexpansion.main.item.ModItems;
 import multiteam.multiexpansion.main.potions.ModPotions;

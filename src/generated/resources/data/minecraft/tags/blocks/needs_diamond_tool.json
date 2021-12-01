@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "multiexpansion:ruby_block",
+    "multiexpansion:ruby_ore"
+  ]
+}

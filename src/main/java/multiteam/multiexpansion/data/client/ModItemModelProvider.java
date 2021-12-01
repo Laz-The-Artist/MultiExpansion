@@ -1,72 +1,61 @@
 package multiteam.multiexpansion.data.client;
 
-import multiteam.multiexpansion.MultiExpansion;
+import multiteam.multicore_lib.setup.utilities.data.ItemModelGenerator;
 import net.minecraft.data.DataGenerator;
-import net.minecraftforge.client.model.generators.ItemModelBuilder;
-import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
-public class ModItemModelProvider extends ItemModelProvider {
+public class ModItemModelProvider extends ItemModelGenerator {
 
-    public ModItemModelProvider(DataGenerator generator, ExistingFileHelper existingFileHelper) {
-        super(generator, MultiExpansion.MOD_ID, existingFileHelper);
+    public ModItemModelProvider(DataGenerator generator, String modId, ExistingFileHelper existingFileHelper) {
+        super(generator, modId, existingFileHelper);
     }
 
     @Override
     protected void registerModels() {
         //Blockitems
-        withExistingParent("withered_bone_block", modLoc("block/withered_bone_block"));
-        withExistingParent("ruby_block", modLoc("block/ruby_block"));
-        withExistingParent("ruby_ore", modLoc("block/ruby_ore"));
+        blockItem("withered_bone_block");
+        blockItem("ruby_block");
+        blockItem("ruby_ore");
 
-        withExistingParent("nether_rod", modLoc("block/nether_rod"));
+        blockItem("nether_rod");
 
-
-        //Items
-        ModelFile itemGenerated = getExistingFile(mcLoc("item/generated"));
 
         //Regular Items
-        builder(itemGenerated, "acacia_bark");
-        builder(itemGenerated, "birch_bark");
-        builder(itemGenerated, "dark_oak_bark");
-        builder(itemGenerated, "jungle_bark");
-        builder(itemGenerated, "oak_bark");
-        builder(itemGenerated, "spruce_bark");
-        builder(itemGenerated, "crimson_bark");
-        builder(itemGenerated, "warped_bark");
+        flatItem("acacia_bark");
+        flatItem("birch_bark");
+        flatItem("dark_oak_bark");
+        flatItem("jungle_bark");
+        flatItem("oak_bark");
+        flatItem("spruce_bark");
+        flatItem("crimson_bark");
+        flatItem("warped_bark");
 
-        builder(itemGenerated, "emerald_apple");
+        flatItem("emerald_apple");
 
-        builder(itemGenerated, "withered_bone");
-        builder(itemGenerated, "withered_bone_meal");
+        flatItem("withered_bone");
+        flatItem("withered_bone_meal");
 
-        builder(itemGenerated, "ender_pearl_shard");
+        flatItem("ender_pearl_shard");
 
-        builder(itemGenerated, "cheese");
+        flatItem("cheese");
 
-        builder(itemGenerated, "ruby");
+        flatItem("ruby");
 
-        builder(itemGenerated, "poisonous_carrot");
-        builder(itemGenerated, "poisonous_beetroot");
-        builder(itemGenerated, "poisonous_melon_slice");
+        flatItem("poisonous_carrot");
+        flatItem("poisonous_beetroot");
+        flatItem("poisonous_melon_slice");
 
-        builder(itemGenerated, "bat_wing");
+        flatItem("bat_wing");
 
-        builder(itemGenerated, "red_fox_pelt");
-        builder(itemGenerated, "white_fox_pelt");
-        builder(itemGenerated, "ocelot_pelt");
-        builder(itemGenerated, "panda_pelt");
-        builder(itemGenerated, "polar_bear_pelt");
-        builder(itemGenerated, "brown_llama_fur");
-        builder(itemGenerated, "cream_llama_fur");
-        builder(itemGenerated, "gray_llama_fur");
-        builder(itemGenerated, "white_llama_fur");
-
+        flatItem("red_fox_pelt");
+        flatItem("white_fox_pelt");
+        flatItem("ocelot_pelt");
+        flatItem("panda_pelt");
+        flatItem("polar_bear_pelt");
+        flatItem("brown_llama_fur");
+        flatItem("cream_llama_fur");
+        flatItem("gray_llama_fur");
+        flatItem("white_llama_fur");
     }
-
-    private ItemModelBuilder builder(ModelFile itemGenerated, String name) {
-        return getBuilder(name).parent(itemGenerated).texture("layer0", "item/"+name);
-    }
-
 }
