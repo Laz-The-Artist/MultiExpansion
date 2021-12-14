@@ -37,3 +37,5 @@
 - added gray llama fur item
 - added white llama fur item
 - made so that the sugar item (vanilla) can be eaten and applies speed
+- added recipe for converting pelts to leather
+- made ruby ore generate in the nether between y:128 and y:88

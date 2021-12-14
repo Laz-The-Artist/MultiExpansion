@@ -9,7 +9,8 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.Random;
 
-public class NetherRodBlock extends EndRodBlock {
+public class
+NetherRodBlock extends EndRodBlock {
 
     public NetherRodBlock(Properties properties) {
         super(properties);

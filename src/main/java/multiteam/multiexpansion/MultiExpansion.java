@@ -4,6 +4,7 @@ import multiteam.multicore_lib.setup.utilities.generic.ItemGroupTool;
 import multiteam.multiexpansion.main.Registration;
 import multiteam.multiexpansion.main.item.ModItems;
 import multiteam.multiexpansion.main.potions.ModPotions;
+import multiteam.multiexpansion.main.worldgen.ModOreGen;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
@@ -43,6 +44,7 @@ public class MultiExpansion
     private void setup(final FMLCommonSetupEvent event) {
         ModItems.addComposterIngredients();
         ModPotions.registerBrewingRecipes();
+        event.enqueueWork(ModOreGen::registerOres);
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event) {
