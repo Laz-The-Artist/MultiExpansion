@@ -6,7 +6,6 @@ import multiteam.multiexpansion.main.item.ModItems;
 import multiteam.multiexpansion.main.potions.ModPotions;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.PotionItem;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.eventbus.api.IEventBus;

@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[38,)"
+loaderVersion="[39,)"
 license="All rights reserved"
 [[mods]]
 modId="multiexpansion"
@@ -15,7 +15,7 @@ This is the latest iteration of the mod, but this time it will be made properly.
 [[dependencies.multiexpansion]]
     modId="forge"
     mandatory=true
-    versionRange="[38,)"
+    versionRange="[39,)"
     ordering="NONE"
     side="BOTH"
 [[dependencies.multiexpansion]]
@@ -23,4 +23,10 @@ This is the latest iteration of the mod, but this time it will be made properly.
     mandatory=true
     versionRange="[1.18,1.19)"
     ordering="NONE"
+    side="BOTH"
+[[dependencies.claysoldiers2]]
+    modId="multicore_lib"
+    mandatory=true
+    versionRange="[1.18-0.2.2.1,)"
+    ordering="AFTER"
     side="BOTH"

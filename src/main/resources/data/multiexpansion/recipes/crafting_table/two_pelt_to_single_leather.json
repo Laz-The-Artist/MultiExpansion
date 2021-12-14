@@ -1,0 +1,15 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "tag": "multiexpansion:pelt_equal_to_half_leather"
+        },
+        {
+            "tag": "multiexpansion:pelt_equal_to_half_leather"
+        }
+    ],
+    "result": {
+        "item": "minecraft:leather",
+        "count": 1
+    }
+}
