@@ -57,6 +57,11 @@ public class ModItems {
     public static final RegistryObject<Item> GRAY_LLAMA_FUR = Registration.ITEMS.register("gray_llama_fur", () -> new Item(new Item.Properties().tab(MultiExpansion.ME_MAIN)));
     public static final RegistryObject<Item> WHITE_LLAMA_FUR = Registration.ITEMS.register("white_llama_fur", () -> new Item(new Item.Properties().tab(MultiExpansion.ME_MAIN)));
 
+    public static final FoodProperties RAW_PARROT_MEAT_PROPERTY = (new FoodProperties.Builder()).nutrition(1).saturationMod(0.15F).effect(new MobEffectInstance(MobEffects.HUNGER, 400, 0), 0.2F).meat().build();
+    public static final FoodProperties COOKED_PARROT_MEAT_PROPERTY = (new FoodProperties.Builder()).nutrition(4).saturationMod(0.4F).meat().build();
+    public static final RegistryObject<Item> RAW_PARROT_MEAT = Registration.ITEMS.register("raw_parrot_meat", () -> new Item(new Item.Properties().tab(MultiExpansion.ME_MAIN).food(RAW_PARROT_MEAT_PROPERTY)));
+    public static final RegistryObject<Item> COOKED_PARROT_MEAT = Registration.ITEMS.register("cooked_parrot_meat", () -> new Item(new Item.Properties().tab(MultiExpansion.ME_MAIN).food(COOKED_PARROT_MEAT_PROPERTY)));
+
 
     public static void register(){}
 

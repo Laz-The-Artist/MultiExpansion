@@ -1,4 +1,4 @@
-package multiteam.multiexpansion.main;
+package multiteam.multiexpansion.main.event;
 
 import multiteam.multicore_lib.MultiCoreLib;
 import multiteam.multiexpansion.MultiExpansion;
@@ -26,7 +26,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 
 @Mod.EventBusSubscriber(modid = MultiExpansion.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
-public class EventHandler {
+public class EventHandlerForgeBus {
 
     @SubscribeEvent
     public static void playerRightClickBlockEvent(PlayerInteractEvent.RightClickBlock event){
@@ -106,6 +106,7 @@ public class EventHandler {
 
 
     }
+
 
 
 }

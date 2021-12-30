@@ -57,5 +57,8 @@ public class ModItemModelProvider extends ItemModelGenerator {
         flatItem("cream_llama_fur");
         flatItem("gray_llama_fur");
         flatItem("white_llama_fur");
+
+        flatItem("raw_parrot_meat");
+        flatItem("cooked_parrot_meat");
     }
 }
