@@ -1,9 +1,14 @@
 {
+  "type":"multiexpansion:addition_with_chance_to_block_loot",
   "conditions": [
     {
       "condition": "block_state_property",
-      "block": "minecraft:carrots"
+      "block": "minecraft:carrots",
+	  "properties": {
+            "age": "7"
+          }
     }
   ],
-  "addition": "multiexpansion:poisonous_carrot"
+  "addition": "multiexpansion:poisonous_carrot",
+  "chance": 2
 }
