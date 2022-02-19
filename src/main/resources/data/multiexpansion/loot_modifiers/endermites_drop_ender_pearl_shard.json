@@ -1,0 +1,13 @@
+{
+  "type":"multiexpansion:add_item_to_loot",
+  "conditions": [
+    {
+      "condition": "entity_properties",
+	  "entity": "this",
+		  "predicate": {
+			"type": "minecraft:endermite"
+		  }
+    }
+  ],
+  "addition": "multiexpansion:ender_pearl_shard"
+}
