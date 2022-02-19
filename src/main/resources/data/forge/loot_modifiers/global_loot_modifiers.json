@@ -5,6 +5,7 @@
 	"multiexpansion:pois_beetroot_drop",
 	"multiexpansion:pois_melon_drop",
 	"multiexpansion:withered_bone_instead_of_bone_drop",
-	"multiexpansion:endermites_drop_ender_pearl_shard"
+	"multiexpansion:endermites_drop_ender_pearl_shard",
+	"multiexpansion:bats_drop_wings"
   ]
 }

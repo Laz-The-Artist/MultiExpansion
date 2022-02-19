@@ -33,8 +33,7 @@ public class ReplaceItemLootModifier extends LootModifier {
             if(generatedLoot.get(i).getItem() == willBeReplaced){
                 ItemStack replacementStack = new ItemStack(replacement);
                 replacementStack.setCount(generatedLoot.get(i).getCount());
-                generatedLoot.add(replacementStack);
-                generatedLoot.remove(i);
+                generatedLoot.set(i ,replacementStack);
             }
         }
 

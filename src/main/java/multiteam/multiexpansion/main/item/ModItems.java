@@ -40,7 +40,6 @@ public class ModItems {
     public static final RegistryObject<Item> POISONOUS_BEETROOT = Registration.ITEMS.register("poisonous_beetroot", () -> new Item(new Item.Properties().food(Foods.POISONOUS_POTATO).tab(MultiExpansion.ME_MAIN)));
     public static final RegistryObject<Item> POISONOUS_MELON_SLICE = Registration.ITEMS.register("poisonous_melon_slice", () -> new Item(new Item.Properties().food(Foods.POISONOUS_POTATO).tab(MultiExpansion.ME_MAIN)));
 
-    //TODO bat wing needs to be added as drop for the bat
     public static final RegistryObject<Item> BAT_WING = Registration.ITEMS.register("bat_wing", () -> new Item(new Item.Properties().tab(MultiExpansion.ME_MAIN)));
 
     //TODO add pelts as drop to their respective mobs
