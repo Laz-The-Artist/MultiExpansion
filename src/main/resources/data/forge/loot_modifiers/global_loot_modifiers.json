@@ -15,6 +15,8 @@
 	"multiexpansion:brown_fur_drop",
 	"multiexpansion:cream_fur_drop",
 	"multiexpansion:gray_fur_drop",
-	"multiexpansion:white_fur_drop"
+	"multiexpansion:white_fur_drop",
+	"multiexpansion:parrots_drop_raw_meat",
+	"multiexpansion:parrots_drop_cooked_meat"
   ]
 }

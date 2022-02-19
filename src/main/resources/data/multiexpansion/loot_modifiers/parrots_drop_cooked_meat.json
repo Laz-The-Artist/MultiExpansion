@@ -1,0 +1,20 @@
+{
+  "type":"multiexpansion:add_item_with_chance_to_loot",
+  "conditions": [
+    {
+      "condition": "entity_properties",
+	  "entity": "this",
+		  "predicate": {
+			"type": "minecraft:parrot"
+		  }
+    },
+	{
+	  "condition": "damage_source_properties",
+          "predicate": {
+            "is_fire": true
+          }
+	}
+  ],
+  "addition": "multiexpansion:cooked_parrot_meat",
+  "chance": 40
+}
