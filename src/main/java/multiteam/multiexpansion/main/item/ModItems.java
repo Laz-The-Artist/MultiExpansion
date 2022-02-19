@@ -42,7 +42,6 @@ public class ModItems {
 
     public static final RegistryObject<Item> BAT_WING = Registration.ITEMS.register("bat_wing", () -> new Item(new Item.Properties().tab(MultiExpansion.ME_MAIN)));
 
-    //TODO add pelts as drop to their respective mobs
     public static final RegistryObject<Item> RED_FOX_PELT = Registration.ITEMS.register("red_fox_pelt", () -> new Item(new Item.Properties().tab(MultiExpansion.ME_MAIN)));
     public static final RegistryObject<Item> WHITE_FOX_PELT = Registration.ITEMS.register("white_fox_pelt", () -> new Item(new Item.Properties().tab(MultiExpansion.ME_MAIN)));
     public static final RegistryObject<Item> OCELOT_PELT = Registration.ITEMS.register("ocelot_pelt", () -> new Item(new Item.Properties().tab(MultiExpansion.ME_MAIN)));

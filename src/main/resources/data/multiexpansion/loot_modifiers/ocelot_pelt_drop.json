@@ -1,0 +1,14 @@
+{
+  "type":"multiexpansion:add_item_with_chance_to_loot",
+  "conditions": [
+    {
+      "condition": "entity_properties",
+          "entity": "this",
+          "predicate": {
+            "type": "minecraft:ocelot"
+          }
+    }
+  ],
+  "addition": "multiexpansion:ocelot_pelt",
+  "chance": 50
+}

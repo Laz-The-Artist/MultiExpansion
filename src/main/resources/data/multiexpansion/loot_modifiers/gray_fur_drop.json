@@ -1,0 +1,15 @@
+{
+  "type":"multiexpansion:replace_item_with",
+  "conditions": [
+    {
+      "condition": "entity_properties",
+          "entity": "this",
+          "predicate": {
+            "type": "minecraft:llama",
+			"nbt": "{Variant:3}"
+          }
+    }
+  ],
+  "willBeReplaced": "minecraft:leather",
+  "replacement": "multiexpansion:gray_llama_fur"
+}

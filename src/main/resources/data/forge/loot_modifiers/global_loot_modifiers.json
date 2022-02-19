@@ -6,6 +6,15 @@
 	"multiexpansion:pois_melon_drop",
 	"multiexpansion:withered_bone_instead_of_bone_drop",
 	"multiexpansion:endermites_drop_ender_pearl_shard",
-	"multiexpansion:bats_drop_wings"
+	"multiexpansion:bats_drop_wings",
+	"multiexpansion:white_fox_pelt_drop",
+	"multiexpansion:red_fox_pelt_drop",
+	"multiexpansion:ocelot_pelt_drop",
+	"multiexpansion:panda_pelt_drop",
+	"multiexpansion:polar_bear_pelt_drop",
+	"multiexpansion:brown_fur_drop",
+	"multiexpansion:cream_fur_drop",
+	"multiexpansion:gray_fur_drop",
+	"multiexpansion:white_fur_drop"
   ]
 }
