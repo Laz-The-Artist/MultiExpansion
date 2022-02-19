@@ -38,7 +38,6 @@ public class ModItems {
 
     public static final RegistryObject<Item> RUBY = Registration.ITEMS.register("ruby", () -> new Item(new Item.Properties().tab(MultiExpansion.ME_MAIN)));
 
-    //TODO make poisonous foods drop from crops randomly
     public static final RegistryObject<Item> POISONOUS_CARROT = Registration.ITEMS.register("poisonous_carrot", () -> new Item(new Item.Properties().food(Foods.POISONOUS_POTATO).tab(MultiExpansion.ME_MAIN)));
     public static final RegistryObject<Item> POISONOUS_BEETROOT = Registration.ITEMS.register("poisonous_beetroot", () -> new Item(new Item.Properties().food(Foods.POISONOUS_POTATO).tab(MultiExpansion.ME_MAIN)));
     public static final RegistryObject<Item> POISONOUS_MELON_SLICE = Registration.ITEMS.register("poisonous_melon_slice", () -> new Item(new Item.Properties().food(Foods.POISONOUS_POTATO).tab(MultiExpansion.ME_MAIN)));

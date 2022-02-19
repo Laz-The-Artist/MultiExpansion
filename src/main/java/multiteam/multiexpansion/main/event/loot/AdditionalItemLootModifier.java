@@ -14,11 +14,11 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class AdditionToBlockLootModifier extends LootModifier {
+public class AdditionalItemLootModifier extends LootModifier {
 
     private final Item addition;
 
-    protected AdditionToBlockLootModifier(LootItemCondition[] conditionsIn, Item addition) {
+    protected AdditionalItemLootModifier(LootItemCondition[] conditionsIn, Item addition) {
         super(conditionsIn);
         this.addition = addition;
     }
@@ -30,16 +30,16 @@ public class AdditionToBlockLootModifier extends LootModifier {
         return generatedLoot;
     }
 
-    public static class Serializer extends GlobalLootModifierSerializer<AdditionToBlockLootModifier>{
+    public static class Serializer extends GlobalLootModifierSerializer<AdditionalItemLootModifier>{
 
         @Override
-        public AdditionToBlockLootModifier read(ResourceLocation location, JsonObject object, LootItemCondition[] ailootcondition) {
+        public AdditionalItemLootModifier read(ResourceLocation location, JsonObject object, LootItemCondition[] ailootcondition) {
             Item addition = ForgeRegistries.ITEMS.getValue(new ResourceLocation((GsonHelper.getAsString(object, "addition"))));
-            return new AdditionToBlockLootModifier(ailootcondition, addition);
+            return new AdditionalItemLootModifier(ailootcondition, addition);
         }
 
         @Override
-        public JsonObject write(AdditionToBlockLootModifier instance) {
+        public JsonObject write(AdditionalItemLootModifier instance) {
             JsonObject json = makeConditions(instance.conditions);
             json.addProperty("addition", ForgeRegistries.ITEMS.getKey(instance.addition).toString());
             return json;

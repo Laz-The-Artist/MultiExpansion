@@ -14,12 +14,12 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class AdditionWithChanceToBlockLootModifier extends LootModifier {
+public class AdditionalItemWithChanceLootModifier extends LootModifier {
 
     private final Item addition;
     private final float chance;
 
-    protected AdditionWithChanceToBlockLootModifier(LootItemCondition[] conditionsIn, Item addition, float chance) {
+    protected AdditionalItemWithChanceLootModifier(LootItemCondition[] conditionsIn, Item addition, float chance) {
         super(conditionsIn);
         this.addition = addition;
         this.chance = chance;
@@ -34,17 +34,17 @@ public class AdditionWithChanceToBlockLootModifier extends LootModifier {
         return generatedLoot;
     }
 
-    public static class Serializer extends GlobalLootModifierSerializer<AdditionWithChanceToBlockLootModifier>{
+    public static class Serializer extends GlobalLootModifierSerializer<AdditionalItemWithChanceLootModifier>{
 
         @Override
-        public AdditionWithChanceToBlockLootModifier read(ResourceLocation location, JsonObject object, LootItemCondition[] ailootcondition) {
+        public AdditionalItemWithChanceLootModifier read(ResourceLocation location, JsonObject object, LootItemCondition[] ailootcondition) {
             Item addition = ForgeRegistries.ITEMS.getValue(new ResourceLocation((GsonHelper.getAsString(object, "addition"))));
             float chance = GsonHelper.getAsFloat(object, "chance");
-            return new AdditionWithChanceToBlockLootModifier(ailootcondition, addition, chance);
+            return new AdditionalItemWithChanceLootModifier(ailootcondition, addition, chance);
         }
 
         @Override
-        public JsonObject write(AdditionWithChanceToBlockLootModifier instance) {
+        public JsonObject write(AdditionalItemWithChanceLootModifier instance) {
             JsonObject json = makeConditions(instance.conditions);
             json.addProperty("addition", ForgeRegistries.ITEMS.getKey(instance.addition).toString());
             json.addProperty("chance", instance.chance);

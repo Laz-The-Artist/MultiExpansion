@@ -3,12 +3,12 @@
   "conditions": [
     {
       "condition": "block_state_property",
-      "block": "minecraft:carrots",
+      "block": "minecraft:beetroots",
 	  "properties": {
-            "age": "7"
+            "age": "3"
           }
     }
   ],
-  "addition": "multiexpansion:poisonous_carrot",
+  "addition": "multiexpansion:poisonous_beetroot",
   "chance": 2
 }

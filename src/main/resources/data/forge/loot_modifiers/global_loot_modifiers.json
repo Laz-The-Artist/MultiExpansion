@@ -1,6 +1,8 @@
 {
   "replace": false,
   "entries": [
-    "multiexpansion:pois_carrot_drop"
+    "multiexpansion:pois_carrot_drop",
+	"multiexpansion:pois_beetroot_drop",
+	"multiexpansion:pois_melon_drop"
   ]
 }
