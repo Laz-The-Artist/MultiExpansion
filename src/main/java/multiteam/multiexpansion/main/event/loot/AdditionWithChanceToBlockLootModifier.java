@@ -14,34 +14,40 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class AdditionToBlockLootModifier extends LootModifier {
+public class AdditionWithChanceToBlockLootModifier extends LootModifier {
 
     private final Item addition;
+    private final float chance;
 
-    protected AdditionToBlockLootModifier(LootItemCondition[] conditionsIn, Item addition) {
+    protected AdditionWithChanceToBlockLootModifier(LootItemCondition[] conditionsIn, Item addition, float chance) {
         super(conditionsIn);
         this.addition = addition;
+        this.chance = chance;
     }
 
     @NotNull
     @Override
     protected List<ItemStack> doApply(List<ItemStack> generatedLoot, LootContext context) {
-        generatedLoot.add(new ItemStack(addition));
+        if(context.getRandom().nextFloat(100) <= chance){
+            generatedLoot.add(new ItemStack(addition));
+        }
         return generatedLoot;
     }
 
-    public static class Serializer extends GlobalLootModifierSerializer<AdditionToBlockLootModifier>{
+    public static class Serializer extends GlobalLootModifierSerializer<AdditionWithChanceToBlockLootModifier>{
 
         @Override
-        public AdditionToBlockLootModifier read(ResourceLocation location, JsonObject object, LootItemCondition[] ailootcondition) {
+        public AdditionWithChanceToBlockLootModifier read(ResourceLocation location, JsonObject object, LootItemCondition[] ailootcondition) {
             Item addition = ForgeRegistries.ITEMS.getValue(new ResourceLocation((GsonHelper.getAsString(object, "addition"))));
-            return new AdditionToBlockLootModifier(ailootcondition, addition);
+            float chance = GsonHelper.getAsFloat(object, "chance");
+            return new AdditionWithChanceToBlockLootModifier(ailootcondition, addition, chance);
         }
 
         @Override
-        public JsonObject write(AdditionToBlockLootModifier instance) {
+        public JsonObject write(AdditionWithChanceToBlockLootModifier instance) {
             JsonObject json = makeConditions(instance.conditions);
             json.addProperty("addition", ForgeRegistries.ITEMS.getKey(instance.addition).toString());
+            json.addProperty("chance", instance.chance);
             return json;
         }
     }
