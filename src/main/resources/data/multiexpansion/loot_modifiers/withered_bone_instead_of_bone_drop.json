@@ -1,0 +1,14 @@
+{
+  "type":"multiexpansion:replace_item_with",
+  "conditions": [
+    {
+      "condition": "entity_properties",
+	  "entity": "this",
+		  "predicate": {
+			"type": "minecraft:wither_skeleton"
+		  }
+    }
+  ],
+  "willBeReplaced": "minecraft:bone",
+  "replacement": "multiexpansion:withered_bone"
+}

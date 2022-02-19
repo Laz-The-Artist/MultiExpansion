@@ -3,6 +3,7 @@
   "entries": [
     "multiexpansion:pois_carrot_drop",
 	"multiexpansion:pois_beetroot_drop",
-	"multiexpansion:pois_melon_drop"
+	"multiexpansion:pois_melon_drop",
+	"multiexpansion:withered_bone_instead_of_bone_drop"
   ]
 }
