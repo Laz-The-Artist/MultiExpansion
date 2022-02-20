@@ -4,6 +4,7 @@ import multiteam.multiexpansion.MultiExpansion;
 import multiteam.multiexpansion.main.block.ModBlocks;
 import multiteam.multiexpansion.main.item.ModItems;
 import multiteam.multiexpansion.main.potions.ModPotions;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.alchemy.Potion;
@@ -18,6 +19,7 @@ public class Registration {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MultiExpansion.MOD_ID);
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MultiExpansion.MOD_ID);
     public static final DeferredRegister<Potion> POTIONS = DeferredRegister.create(ForgeRegistries.POTIONS, MultiExpansion.MOD_ID);
+    public static final DeferredRegister<MobEffect> EFFECTS = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, MultiExpansion.MOD_ID);
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.ENTITIES, MultiExpansion.MOD_ID);
 
 
@@ -27,6 +29,7 @@ public class Registration {
         ITEMS.register(modeEventBus);
         POTIONS.register(modeEventBus);
         ENTITY_TYPES.register(modeEventBus);
+        EFFECTS.register(modeEventBus);
 
         ModItems.register();
         ModBlocks.register();
