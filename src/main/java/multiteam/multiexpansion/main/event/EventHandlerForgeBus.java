@@ -110,18 +110,4 @@ public class EventHandlerForgeBus {
 
     }
 
-    @SubscribeEvent
-    public static void chickenEggLayingEvent(EntityJoinWorldEvent event){
-
-        Entity entity = event.getEntity();
-        if(entity instanceof ItemEntity){
-            ItemEntity itemEntity = (ItemEntity) event.getEntity();
-            if(itemEntity.getItem().is(Items.EGG)){
-                System.out.println("EGGGG!!!");
-            }
-        }
-    }
-
-
-
 }
