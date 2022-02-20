@@ -1,14 +1,16 @@
 {
   "required": true,
   "package": "multiteam.multiexpansion.mixin",
-  "compatibilityLevel": "JAVA_16",
+  "compatibilityLevel": "JAVA_17",
   "refmap": "multiexpansion.refmap.json",
   "client": [
   ],
   "mixins": [
     "MixinFishingHookRenderer",
     "MixinItem",
-    "MixinItemEntity"
+    "MixinItemEntity",
+    "MixinEggItem",
+    "MixinChickenEntity"
   ],
   "server": [
   ],

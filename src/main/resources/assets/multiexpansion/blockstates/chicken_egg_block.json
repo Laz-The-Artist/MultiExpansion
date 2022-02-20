@@ -1,0 +1,72 @@
+{
+  "variants": {
+    "eggs=1": [
+      {
+        "model": "multiexpansion:block/egg_block_one_egg"
+      },
+      {
+        "model": "multiexpansion:block/egg_block_one_egg",
+        "y": 90
+      },
+      {
+        "model": "multiexpansion:block/egg_block_one_egg",
+        "y": 180
+      },
+      {
+        "model": "multiexpansion:block/egg_block_one_egg",
+        "y": 270
+      }
+    ],
+    "eggs=2": [
+      {
+        "model": "multiexpansion:block/egg_block_two_egg"
+      },
+      {
+        "model": "multiexpansion:block/egg_block_two_egg",
+        "y": 90
+      },
+      {
+        "model": "multiexpansion:block/egg_block_two_egg",
+        "y": 180
+      },
+      {
+        "model": "multiexpansion:block/egg_block_two_egg",
+        "y": 270
+      }
+    ],
+    "eggs=3": [
+      {
+        "model": "multiexpansion:block/egg_block_three_egg"
+      },
+      {
+        "model": "multiexpansion:block/egg_block_three_egg",
+        "y": 90
+      },
+      {
+        "model": "multiexpansion:block/egg_block_three_egg",
+        "y": 180
+      },
+      {
+        "model": "multiexpansion:block/egg_block_three_egg",
+        "y": 270
+      }
+    ],
+    "eggs=4": [
+      {
+        "model": "multiexpansion:block/egg_block_four_egg"
+      },
+      {
+        "model": "multiexpansion:block/egg_block_four_egg",
+        "y": 90
+      },
+      {
+        "model": "multiexpansion:block/egg_block_four_egg",
+        "y": 180
+      },
+      {
+        "model": "multiexpansion:block/egg_block_four_egg",
+        "y": 270
+      }
+    ]
+  }
+}

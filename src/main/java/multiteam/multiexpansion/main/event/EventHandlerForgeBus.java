@@ -10,7 +10,9 @@ import net.minecraft.world.effect.InstantenousMobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityEvent;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.ItemStack;
@@ -18,6 +20,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.item.ItemEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -105,6 +108,18 @@ public class EventHandlerForgeBus {
         }
 
 
+    }
+
+    @SubscribeEvent
+    public static void chickenEggLayingEvent(EntityJoinWorldEvent event){
+
+        Entity entity = event.getEntity();
+        if(entity instanceof ItemEntity){
+            ItemEntity itemEntity = (ItemEntity) event.getEntity();
+            if(itemEntity.getItem().is(Items.EGG)){
+                System.out.println("EGGGG!!!");
+            }
+        }
     }
 
 

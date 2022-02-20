@@ -17,10 +17,13 @@ public class ModBlocks {
     public static final RegistryObject<Block> WITHERED_BONE_BLOCK = RegistrationTool.registerWithItem("withered_bone_block", () -> new RotatedPillarBlock(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_BLACK).strength(2.0F).requiresCorrectToolForDrops().destroyTime(1).sound(SoundType.BONE_BLOCK)), new Item.Properties().tab(MultiExpansion.ME_MAIN), Registration.BLOCKS, Registration.ITEMS);
 
     public static final RegistryObject<Block> RUBY_BLOCK = RegistrationTool.registerWithItem("ruby_block", () -> new Block(BlockBehaviour.Properties.of(Material.METAL, MaterialColor.COLOR_RED).requiresCorrectToolForDrops().strength(2.0F).sound(SoundType.METAL)), new Item.Properties().tab(MultiExpansion.ME_MAIN), Registration.BLOCKS, Registration.ITEMS);
-    //TODO make ruby ore generate in nether high up in the ceiling
+
     public static final RegistryObject<Block> RUBY_ORE = RegistrationTool.registerWithItem("ruby_ore", () -> new Block(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.NETHER).requiresCorrectToolForDrops().strength(3.0F, 3.0F).sound(SoundType.NETHER_GOLD_ORE)), new Item.Properties().tab(MultiExpansion.ME_MAIN), Registration.BLOCKS, Registration.ITEMS);
 
     public static final RegistryObject<Block> NETHER_ROD = RegistrationTool.registerWithItem("nether_rod", () -> new NetherRodBlock(BlockBehaviour.Properties.of(Material.DECORATION).instabreak().lightLevel((state) -> {return 14;}).sound(SoundType.METAL).noOcclusion()), new Item.Properties().tab(MultiExpansion.ME_MAIN), Registration.BLOCKS, Registration.ITEMS);
+
+    public static final RegistryObject<Block> EGG_BLOCK = RegistrationTool.registerNoItem("chicken_egg_block", () -> new ChickenEggBlock(BlockBehaviour.Properties.of(Material.EGG).instabreak()), Registration.BLOCKS);
+
 
     public static void register(){}
 }
