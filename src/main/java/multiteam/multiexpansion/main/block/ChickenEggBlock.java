@@ -76,21 +76,24 @@ public class ChickenEggBlock extends Block {
     @Override
     public void randomTick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, Random random) {
         if (!serverLevel.isClientSide) {
-            if (random.nextInt(8) <= 1) {
+            if(serverLevel.getBlockState(blockPos.below()).is(Blocks.HAY_BLOCK)){
                 int eggCount = blockState.getValue(EGGS);
+                if (random.nextInt(8) <= 1) {
 
-                int i = 1;
-                if (random.nextInt(32) == 0) {
-                    i = 4;
+                    int i = 1;
+                    if (random.nextInt(32) == 0) {
+                        i = 4;
+                    }
+
+                    for(int j = 0; j < i; ++j) {
+                        Chicken chicken = EntityType.CHICKEN.create(serverLevel);
+                        chicken.setAge(-24000);
+                        chicken.moveTo(blockPos.getX(), blockPos.getY(), blockPos.getZ(), 0.0F, 0.0F);
+                        serverLevel.addFreshEntity(chicken);
+                    }
+
+
                 }
-
-                for(int j = 0; j < i; ++j) {
-                    Chicken chicken = EntityType.CHICKEN.create(serverLevel);
-                    chicken.setAge(-24000);
-                    chicken.moveTo(blockPos.getX(), blockPos.getY(), blockPos.getZ(), 0.0F, 0.0F);
-                    serverLevel.addFreshEntity(chicken);
-                }
-
                 if(eggCount > 1){
                     serverLevel.setBlockAndUpdate(blockPos, ModBlocks.EGG_BLOCK.get().defaultBlockState().setValue(EGGS, eggCount-1));
                 }else{
