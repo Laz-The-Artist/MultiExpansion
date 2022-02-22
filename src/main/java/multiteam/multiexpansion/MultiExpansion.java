@@ -1,10 +1,14 @@
 package multiteam.multiexpansion;
 
+import com.mojang.blaze3d.platform.ScreenManager;
 import multiteam.multicore_lib.setup.utilities.generic.ItemGroupTool;
 import multiteam.multiexpansion.main.Registration;
+import multiteam.multiexpansion.main.gui.ModContainers;
+import multiteam.multiexpansion.main.gui.screens.ArmorStandCustomizerScreen;
 import multiteam.multiexpansion.main.item.ModItems;
 import multiteam.multiexpansion.main.potions.ModPotions;
 import multiteam.multiexpansion.main.worldgen.ModOreGen;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
@@ -37,8 +41,14 @@ public class MultiExpansion
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueueIMC);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::processIMC);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
 
         MinecraftForge.EVENT_BUS.register(this);
+    }
+
+    private void doClientStuff(final FMLCommonSetupEvent event){
+
+        MenuScreens.register(ModContainers.ARMOR_STAND_CUSTOMIZER_CONTAINER.get(), ArmorStandCustomizerScreen::new);
     }
 
     private void setup(final FMLCommonSetupEvent event) {

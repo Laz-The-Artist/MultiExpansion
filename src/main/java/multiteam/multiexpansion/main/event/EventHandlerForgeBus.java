@@ -2,8 +2,12 @@ package multiteam.multiexpansion.main.event;
 
 import multiteam.multicore_lib.MultiCoreLib;
 import multiteam.multiexpansion.MultiExpansion;
+import multiteam.multiexpansion.main.gui.containers.ArmorStandCustomizerContainer;
+import multiteam.multiexpansion.main.gui.screens.ArmorStandCustomizerScreen;
 import multiteam.multiexpansion.main.item.ModItems;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.InstantenousMobEffect;
@@ -12,6 +16,8 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityEvent;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.animal.Chicken;
+import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.AxeItem;
@@ -108,6 +114,9 @@ public class EventHandlerForgeBus {
         }
 
 
+        if(level.isClientSide() && entityTarget instanceof Chicken){
+            Minecraft.getInstance().setScreen(new ArmorStandCustomizerScreen(new ArmorStandCustomizerContainer(10111, player.getInventory(), player), player.getInventory(), new TranslatableComponent("Armor Stand Configuration")));
+        }
     }
 
 }
