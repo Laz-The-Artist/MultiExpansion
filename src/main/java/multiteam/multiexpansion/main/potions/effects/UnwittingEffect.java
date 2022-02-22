@@ -50,6 +50,6 @@ public class UnwittingEffect extends MobEffect {
 
     @Override
     public boolean isDurationEffectTick(int duration, int amplifier) {
-        return duration % 100 == 0; //how is this equal to 5 seconds?
+        return duration % 50 == 0; //how is this equal to 5 seconds?
     }
 }
