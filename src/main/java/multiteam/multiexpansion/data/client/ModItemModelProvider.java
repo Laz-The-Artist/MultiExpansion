@@ -60,5 +60,7 @@ public class ModItemModelProvider extends ItemModelGenerator {
 
         flatItem("raw_parrot_meat");
         flatItem("cooked_parrot_meat");
+
+        flatItem("wrench");
     }
 }

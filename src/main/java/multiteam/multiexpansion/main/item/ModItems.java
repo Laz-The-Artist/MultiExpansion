@@ -57,6 +57,8 @@ public class ModItems {
     public static final RegistryObject<Item> RAW_PARROT_MEAT = Registration.ITEMS.register("raw_parrot_meat", () -> new Item(new Item.Properties().tab(MultiExpansion.ME_MAIN).food(RAW_PARROT_MEAT_PROPERTY)));
     public static final RegistryObject<Item> COOKED_PARROT_MEAT = Registration.ITEMS.register("cooked_parrot_meat", () -> new Item(new Item.Properties().tab(MultiExpansion.ME_MAIN).food(COOKED_PARROT_MEAT_PROPERTY)));
 
+    public static final RegistryObject<Item> WRENCH = Registration.ITEMS.register("wrench", () -> new Wrench(new Item.Properties().tab(MultiExpansion.ME_MAIN)));
+
 
     public static void register(){}
 
