@@ -2,12 +2,15 @@ package multiteam.multiexpansion.main.event;
 
 import multiteam.multicore_lib.MultiCoreLib;
 import multiteam.multiexpansion.MultiExpansion;
+import multiteam.multiexpansion.main.block.ModBlocks;
 import multiteam.multiexpansion.main.gui.containers.ArmorStandCustomizerContainer;
 import multiteam.multiexpansion.main.gui.screens.ArmorStandCustomizerScreen;
 import multiteam.multiexpansion.main.item.ModItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.InstantenousMobEffect;
@@ -20,9 +23,7 @@ import net.minecraft.world.entity.animal.Chicken;
 import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.AxeItem;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -52,45 +53,63 @@ public class EventHandlerForgeBus {
             if(clickedBlock == Blocks.ACACIA_LOG){
                 for (int i = 0; i < 4; i++){
                     Block.popResource(level, clickedPos, new ItemStack(ModItems.ACACIA_BARK.get()));
+                    handStack.hurtAndBreak(1, player, (a) -> {});
                 }
             }
             if(clickedBlock == Blocks.BIRCH_LOG){
                 for (int i = 0; i < 4; i++){
                     Block.popResource(level, clickedPos, new ItemStack(ModItems.BIRCH_BARK.get()));
+                    handStack.hurtAndBreak(1, player, (a) -> {});
                 }
             }
             if(clickedBlock == Blocks.DARK_OAK_LOG){
                 for (int i = 0; i < 4; i++){
                     Block.popResource(level, clickedPos, new ItemStack(ModItems.DARK_OAK_BARK.get()));
+                    handStack.hurtAndBreak(1, player, (a) -> {});
                 }
             }
             if(clickedBlock == Blocks.JUNGLE_LOG){
                 for (int i = 0; i < 4; i++){
                     Block.popResource(level, clickedPos, new ItemStack(ModItems.JUNGLE_BARK.get()));
+                    handStack.hurtAndBreak(1, player, (a) -> {});
                 }
             }
             if(clickedBlock == Blocks.OAK_LOG){
                 for (int i = 0; i < 4; i++){
                     Block.popResource(level, clickedPos, new ItemStack(ModItems.OAK_BARK.get()));
+                    handStack.hurtAndBreak(1, player, (a) -> {});
                 }
             }
             if(clickedBlock == Blocks.SPRUCE_LOG){
                 for (int i = 0; i < 4; i++){
                     Block.popResource(level, clickedPos, new ItemStack(ModItems.SPRUCE_BARK.get()));
+                    handStack.hurtAndBreak(1, player, (a) -> {});
                 }
             }
             if(clickedBlock == Blocks.CRIMSON_STEM){
                 for (int i = 0; i < 4; i++){
                     Block.popResource(level, clickedPos, new ItemStack(ModItems.CRIMSON_BARK.get()));
+                    handStack.hurtAndBreak(1, player, (a) -> {});
                 }
             }
             if(clickedBlock == Blocks.WARPED_STEM){
                 for (int i = 0; i < 4; i++){
                     Block.popResource(level, clickedPos, new ItemStack(ModItems.WARPED_BARK.get()));
+                    handStack.hurtAndBreak(1, player, (a) -> {});
                 }
             }
         }
 
+        //Soulsand tilling
+        if(!level.isClientSide() && handStack.getItem() instanceof HoeItem hoe){
+            if(hoe.getTier() == Tiers.GOLD || hoe.getTier() == Tiers.NETHERITE){
+                if(clickedBlock == Blocks.SOUL_SAND){
+                    level.setBlockAndUpdate(clickedPos, ModBlocks.TILLED_SOULSAND.get().defaultBlockState());
+                    handStack.hurtAndBreak(1, player, (a) -> {});
+                    level.playSound((Player) null, clickedPos, SoundEvents.HOE_TILL, SoundSource.BLOCKS, 1, 1);
+                }
+            }
+        }
     }
 
 
@@ -115,7 +134,7 @@ public class EventHandlerForgeBus {
 
 
         if(level.isClientSide() && entityTarget instanceof Chicken){
-            Minecraft.getInstance().setScreen(new ArmorStandCustomizerScreen(new ArmorStandCustomizerContainer(10111, player.getInventory(), player), player.getInventory(), new TranslatableComponent("Armor Stand Configuration")));
+            //Minecraft.getInstance().setScreen(new ArmorStandCustomizerScreen(new ArmorStandCustomizerContainer(10111, player.getInventory(), player), player.getInventory(), new TranslatableComponent("Armor Stand Configuration")));
         }
     }
 

@@ -3,11 +3,15 @@ package multiteam.multiexpansion.main.block;
 import multiteam.multicore_lib.setup.utilities.generic.RegistrationTool;
 import multiteam.multiexpansion.MultiExpansion;
 import multiteam.multiexpansion.main.Registration;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.registries.RegistryObject;
@@ -24,6 +28,12 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> EGG_BLOCK = RegistrationTool.registerNoItem("chicken_egg_block", () -> new ChickenEggBlock(BlockBehaviour.Properties.of(Material.EGG).instabreak()), Registration.BLOCKS);
 
+    public static final RegistryObject<Block> TILLED_SOULSAND = RegistrationTool.registerWithItem("tilled_soulsand", () -> new TilledSoulsand(BlockBehaviour.Properties.of(Material.SAND, MaterialColor.COLOR_BROWN).requiresCorrectToolForDrops().strength(0.5F).speedFactor(0.4F).sound(SoundType.SOUL_SAND).isRedstoneConductor(ModBlocks::always).isViewBlocking(ModBlocks::always).isSuffocating(ModBlocks::always).randomTicks()), new Item.Properties().tab(MultiExpansion.ME_MAIN), Registration.BLOCKS, Registration.ITEMS);
+
 
     public static void register(){}
+
+    public static boolean always(BlockState p_50775_, BlockGetter p_50776_, BlockPos p_50777_) {
+        return true;
+    }
 }

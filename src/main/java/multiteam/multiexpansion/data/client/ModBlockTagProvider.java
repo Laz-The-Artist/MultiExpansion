@@ -16,5 +16,6 @@ public class ModBlockTagProvider extends BlockTagGenerator {
         mineWithPickaxe(ModBlocks.RUBY_BLOCK.get(), RequiredToolLevel.DIAMOND);
         mineWithPickaxe(ModBlocks.RUBY_ORE.get(), RequiredToolLevel.DIAMOND);
         mineWithPickaxe(ModBlocks.WITHERED_BONE_BLOCK.get(), RequiredToolLevel.NONE);
+        mineWithShovel(ModBlocks.TILLED_SOULSAND.get(), RequiredToolLevel.NONE);
     }
 }

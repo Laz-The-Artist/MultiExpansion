@@ -7,7 +7,9 @@ import multiteam.multiexpansion.main.block.ModBlocks;
 import multiteam.multiexpansion.main.item.ModItems;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.LootTables;
 import net.minecraft.world.level.storage.loot.ValidationContext;
@@ -46,6 +48,8 @@ public class ModLootTableProvider extends LootTableGenerator {
             dropSelf(ModBlocks.RUBY_BLOCK.get());
             dropOther(ModBlocks.RUBY_ORE.get(), ModItems.RUBY.get());
             dropSelf(ModBlocks.NETHER_ROD.get());
+            dropOther(ModBlocks.EGG_BLOCK.get(), Items.EGG);
+            dropSelf(ModBlocks.TILLED_SOULSAND.get());
         }
 
     }

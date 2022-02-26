@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "moisture=0": {
+      "model": "multiexpansion:block/tilled_soulsand"
+    },
+    "moisture=1": {
+      "model": "multiexpansion:block/tilled_soulsand"
+    },
+    "moisture=2": {
+      "model": "multiexpansion:block/tilled_soulsand"
+    },
+    "moisture=3": {
+      "model": "multiexpansion:block/tilled_soulsand"
+    },
+    "moisture=4": {
+      "model": "multiexpansion:block/tilled_soulsand"
+    },
+    "moisture=5": {
+      "model": "multiexpansion:block/tilled_soulsand"
+    },
+    "moisture=6": {
+      "model": "multiexpansion:block/tilled_soulsand"
+    },
+    "moisture=7": {
+      "model": "multiexpansion:block/tilled_soulsand_moist"
+    }
+  }
+}

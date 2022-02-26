@@ -20,6 +20,8 @@ public class ModItemModelProvider extends ItemModelGenerator {
 
         blockItem("nether_rod");
 
+        blockItem("tilled_soulsand");
+
 
         //Regular Items
         flatItem("acacia_bark");

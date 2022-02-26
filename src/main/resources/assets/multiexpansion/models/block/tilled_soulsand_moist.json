@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/template_farmland",
+  "textures": {
+    "dirt": "multiexpansion:block/tilled_soulsand_moist_side",
+    "top": "multiexpansion:block/tilled_soulsand_moist_top"
+  }
+}

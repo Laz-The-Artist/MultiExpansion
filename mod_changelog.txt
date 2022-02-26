@@ -40,3 +40,10 @@
 - added recipe for converting pelts to leather
 - made ruby ore generate in the nether between y:128 and y:88
 - added raw and cooked parrot meat food item
+- added Placeable egg block (will only hatch on hay blocks)
+- Chickens now try to place egg block instead of dropping egg as item
+- Crouching while throwing an egg will instead place an egg block
+- added new effect and corresponding potion items named Unwitting Events
+- added Wrench item
+- added tilled soul sand block
+- right clicking on a soul sand block with a golden or netherite hoe will turn the soulsand into tilled soulsand

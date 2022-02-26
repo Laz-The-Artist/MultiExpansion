@@ -10,7 +10,8 @@
     "MixinItem",
     "MixinItemEntity",
     "MixinEggItem",
-    "MixinChickenEntity"
+    "MixinChickenEntity",
+    "MixinNetherWartBlock"
   ],
   "server": [
   ],
