@@ -31,7 +31,7 @@ public class MultiExpansion
     private static final Logger LOGGER = LogManager.getLogger();
     public static final String MOD_ID = "multiexpansion";
 
-    public static final ItemGroupTool ME_MAIN = new ItemGroupTool(MOD_ID + "_main_tab", () -> new ItemStack(Items.BOOK));
+    public static final ItemGroupTool ME_MAIN = new ItemGroupTool(MOD_ID + "_main_tab", () -> new ItemStack(ModItems.WRENCH.get()));
 
 
     public MultiExpansion() {
