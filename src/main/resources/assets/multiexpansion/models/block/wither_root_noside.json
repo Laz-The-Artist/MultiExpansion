@@ -1,0 +1,18 @@
+{
+	"credit": "Made with Blockbench",
+	"ambientocclusion": false,
+	"texture_size": [32, 32],
+	"textures": {
+		"particle": "multiexpansion:block/wither_root",
+		"texture": "multiexpansion:block/wither_root"
+	},
+	"elements": [
+		{
+			"from": [6, 6, 6],
+			"to": [10, 10, 10],
+			"faces": {
+				"north": {"uv": [11, 3, 13, 5], "texture": "#texture"}
+			}
+		}
+	]
+}

@@ -30,6 +30,7 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> TILLED_SOULSAND = RegistrationTool.registerWithItem("tilled_soulsand", () -> new TilledSoulsand(BlockBehaviour.Properties.of(Material.SAND, MaterialColor.COLOR_BROWN).requiresCorrectToolForDrops().strength(0.5F).speedFactor(0.4F).sound(SoundType.SOUL_SAND).isRedstoneConductor(ModBlocks::always).isViewBlocking(ModBlocks::always).isSuffocating(ModBlocks::always).randomTicks()), new Item.Properties().tab(MultiExpansion.ME_MAIN), Registration.BLOCKS, Registration.ITEMS);
 
+    public static final RegistryObject<Block> WITHER_ROOT_STEM = RegistrationTool.registerWithItem("wither_root_stem", () -> new WitherRoot(BlockBehaviour.Properties.of(Material.PLANT, MaterialColor.COLOR_BLACK).strength(0.1F).sound(SoundType.NETHER_SPROUTS).randomTicks()), new Item.Properties().tab(MultiExpansion.ME_MAIN), Registration.BLOCKS, Registration.ITEMS);
 
     public static void register(){}
 

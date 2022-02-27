@@ -1,0 +1,36 @@
+{
+	"credit": "Made with Blockbench",
+	"texture_size": [32, 32],
+	"textures": {
+		"0": "multiexpansion:block/wither_root",
+		"1": "multiexpansion:block/wither_root_eye_open",
+		"particle": "multiexpansion:block/wither_root"
+	},
+	"elements": [
+		{
+			"name": "stem",
+			"from": [6, 0, 6],
+			"to": [10, 4, 10],
+			"faces": {
+				"north": {"uv": [11, 6, 13, 8], "texture": "#0"},
+				"east": {"uv": [11, 6, 13, 8], "texture": "#0"},
+				"south": {"uv": [11, 6, 13, 8], "texture": "#0"},
+				"west": {"uv": [11, 6, 13, 8], "texture": "#0"},
+				"down": {"uv": [11, 3, 13, 5], "texture": "#0"}
+			}
+		},
+		{
+			"name": "eye",
+			"from": [4, 4, 4],
+			"to": [12, 12, 12],
+			"faces": {
+				"north": {"uv": [8, 8, 12, 12], "rotation": 90, "texture": "#1"},
+				"east": {"uv": [4, 12, 8, 16], "texture": "#1"},
+				"south": {"uv": [8, 8, 12, 12], "rotation": 90, "texture": "#1"},
+				"west": {"uv": [4, 4, 8, 8], "rotation": 180, "texture": "#1"},
+				"up": {"uv": [4, 8, 8, 12], "rotation": 270, "texture": "#1"},
+				"down": {"uv": [4, 0, 8, 4], "texture": "#1"}
+			}
+		}
+	]
+}

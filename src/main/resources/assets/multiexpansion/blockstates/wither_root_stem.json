@@ -1,0 +1,123 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "north": "true"
+      },
+      "apply": {
+        "model": "multiexpansion:block/wither_root_side"
+      }
+    },
+    {
+      "when": {
+        "east": "true"
+      },
+      "apply": {
+        "model": "multiexpansion:block/wither_root_side",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "south": "true"
+      },
+      "apply": {
+        "model": "multiexpansion:block/wither_root_side",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "west": "true"
+      },
+      "apply": {
+        "model": "multiexpansion:block/wither_root_side",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "up": "true"
+      },
+      "apply": {
+        "model": "multiexpansion:block/wither_root_side",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "down": "true"
+      },
+      "apply": {
+        "model": "multiexpansion:block/wither_root_side",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "north": "false"
+      },
+      "apply": [
+        {
+          "model": "multiexpansion:block/wither_root_noside"
+        }
+      ]
+    },
+    {
+      "when": {
+        "east": "false"
+      },
+      "apply": [
+        {
+          "model": "multiexpansion:block/wither_root_noside",
+          "y": 90
+        }
+      ]
+    },
+    {
+      "when": {
+        "south": "false"
+      },
+      "apply": [
+        {
+          "model": "multiexpansion:block/wither_root_noside",
+          "y": 180
+        }
+      ]
+    },
+    {
+      "when": {
+        "west": "false"
+      },
+      "apply": [
+        {
+          "model": "multiexpansion:block/wither_root_noside",
+          "y": 270
+        }
+      ]
+    },
+    {
+      "when": {
+        "up": "false"
+      },
+      "apply": [
+        {
+          "model": "multiexpansion:block/wither_root_noside",
+          "weight": 2,
+          "x": 270
+        }
+      ]
+    },
+    {
+      "when": {
+        "down": "false"
+      },
+      "apply": [
+        {
+          "model": "multiexpansion:block/wither_root_noside",
+          "x": 90
+        }
+      ]
+    }
+  ]
+}
