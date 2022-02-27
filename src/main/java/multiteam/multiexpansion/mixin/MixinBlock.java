@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class MixinBlock implements ItemLike, net.minecraftforge.common.extensions.IForgeBlock {
     @Inject(at = @At("HEAD"), method = "canSustainPlant", cancellable = true)
     public void canSustainPlant(BlockState state, BlockGetter world, BlockPos pos, Direction facing, IPlantable plantable, CallbackInfoReturnable<Boolean> cir) {
-        if (state.getBlock() == Blocks.SOUL_SAND) {
+        if (plantable.getPlant(world, pos.relative(facing)).getBlock() == Blocks.NETHER_WART) {
             if (equals(Blocks.SOUL_SAND)) {
                 cir.setReturnValue(false);
             }
