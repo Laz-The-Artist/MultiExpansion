@@ -8,6 +8,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BushBlock;
 import net.minecraft.world.level.block.NetherWartBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 
@@ -18,8 +19,11 @@ public class MixinNetherWartBlock extends BushBlock {
         super(p_51021_);
     }
 
+    /**
+     * @author Laz The Artist
+     */
     @Overwrite
-    protected boolean mayPlaceOn(BlockState blockstate, BlockGetter blockGetter, BlockPos blockPos) {
+    protected boolean mayPlaceOn(BlockState blockstate, @NotNull BlockGetter blockGetter, @NotNull BlockPos blockPos) {
         return blockstate.is(ModBlocks.TILLED_SOULSAND.get()) && !blockstate.is(Blocks.SOUL_SAND);
     }
 

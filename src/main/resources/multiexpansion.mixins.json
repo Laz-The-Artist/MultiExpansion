@@ -6,11 +6,12 @@
   "client": [
   ],
   "mixins": [
+    "MixinBlock",
+    "MixinChickenEntity",
+    "MixinEggItem",
     "MixinFishingHookRenderer",
     "MixinItem",
     "MixinItemEntity",
-    "MixinEggItem",
-    "MixinChickenEntity",
     "MixinNetherWartBlock"
   ],
   "server": [
