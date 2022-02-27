@@ -2,7 +2,6 @@ package multiteam.multiexpansion.mixin;
 
 import multiteam.multiexpansion.main.block.ModBlocks;
 import net.minecraft.core.BlockPos;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BushBlock;
@@ -21,6 +20,8 @@ public class MixinNetherWartBlock extends BushBlock {
 
     /**
      * @author Laz The Artist
+     * modifying the placment behavior of nether wart, so it can only be placed on our modded soil block
+     * doesn't work, still allows to be placed on soulsand
      */
     @Overwrite
     protected boolean mayPlaceOn(BlockState blockstate, @NotNull BlockGetter blockGetter, @NotNull BlockPos blockPos) {
