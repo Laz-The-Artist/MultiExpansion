@@ -2,26 +2,18 @@ package multiteam.multiexpansion.main.block;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.PipeBlock;
-import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.pathfinder.PathComputationType;
-import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.Random;
 
 public class WitherRoot extends PipeBlock {
 
@@ -67,22 +59,8 @@ public class WitherRoot extends PipeBlock {
         stateDefinition.add(NORTH, EAST, SOUTH, WEST, UP, DOWN);
     }
 
-
     public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
-        BlockState blockBelow = level.getBlockState(pos.below());
-
-        for(Direction direction : Direction.values()) {
-            BlockPos blockpos = pos.relative(direction);
-            BlockState relativeDirectionState = level.getBlockState(blockpos);
-            if (relativeDirectionState.is(this)) {
-                BlockState blockstate2 = level.getBlockState(blockpos.below());
-                if (blockstate2.is(this) || blockstate2.is(ModBlocks.TILLED_SOULSAND.get())) {
-                    return true;
-                }
-            }
-        }
-
-        return blockBelow.is(this) || blockBelow.is(ModBlocks.TILLED_SOULSAND.get());
+        return true;
     }
 
     public boolean isPathfindable(BlockState state, BlockGetter getter, BlockPos pos, PathComputationType computeType) {
